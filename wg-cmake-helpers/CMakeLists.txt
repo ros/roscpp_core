@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(wg-cmake-helpers)
 
-set(INSTALL_SUFFIX share/${PROJECT_NAME})
+set(INSTALL_SUFFIX share/cmake/${PROJECT_NAME})
 
 set(INFRA_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/${INSTALL_SUFFIX})
 
@@ -16,7 +16,8 @@ configure_file(wg-cmake-helpers-config.cmake.in
 install(
   FILES 
   ${CMAKE_CURRENT_BINARY_DIR}/wg-cmake-helpers-config.cmake
+  parse_arguments.cmake
   pkg-config.cmake.in
   pkg-config-version.cmake.in
-  DESTINATION share/wg-cmake-helpers
+  DESTINATION ${INSTALL_SUFFIX}
   )

@@ -1,4 +1,4 @@
-message("@PACKAGE@ config-version at version @PACKAGE_VERSION@")
+message("@PACKAGE_NAME@ config-version at version @PACKAGE_VERSION@")
 
 
 

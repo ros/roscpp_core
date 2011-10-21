@@ -13,13 +13,13 @@ CMAKE="cmake -DCMAKE_INSTALL_PREFIX=$INSTDIR -DCMAKE_PREFIX_PATH=$TOP/cmake"
 
 rm -rf $TOP/build
 
-PACKAGES="wg-cmake-helpers foo"
+PACKAGES="wg-cmake-helpers foo bar"
 
 for l in $PACKAGES
 do
     mkdir -p $BUILDDIR/$l
     cd $BUILDDIR/$l
     $CMAKE $TOP/$l
-    make
+    make VERBOSE=1
     make install
 done

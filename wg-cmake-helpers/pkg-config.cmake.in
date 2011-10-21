@@ -1,2 +1,13 @@
-message("@PACKAGE@ config at version @PACKAGE_VERSION@")
+message("@PACKAGE_NAME@ config at version @PACKAGE_VERSION@")
 
+set(@PACKAGE_NAME@_INCLUDE_DIRS @CMAKE_INSTALL_PREFIX@/@PACKAGE_INCLUDE_DIRS@)
+
+foreach(lib @PACKAGE_LIBRARIES@)
+  find_library(onelib ${lib}
+    PATHS @CMAKE_INSTALL_PREFIX@/lib
+    )
+  message("found: ${onelib}")
+  list(APPEND @PACKAGE_NAME@_LIBRARIES ${onelib})
+endforeach()
+
+message("libs: ${@PACKAGE_NAME@_LIBRARIES}")

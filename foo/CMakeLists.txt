@@ -14,4 +14,4 @@ install(DIRECTORY include/foo
   FILES_MATCHING PATTERN *.hpp
   )
 
-install_cmake_infrastructure(foo 1.3.1)
+install_cmake_infrastructure(foo VERSION 1.3.1 INCLUDE_DIRS include LIBRARIES foo)
