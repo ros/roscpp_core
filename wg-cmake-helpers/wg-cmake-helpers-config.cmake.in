@@ -1,0 +1,21 @@
+macro(install_cmake_infrastructure PACKAGE PACKAGE_VERSION)
+  message("install_cmake_infrastructure ${PACKAGE} at version ${PACKAGE_VERSION} in @CMAKE_INSTALL_PREFIX@")
+  set(pfx ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY})
+  set(PACKAGE ${PACKAGE})
+  set(PACKAGE_VERSION ${PACKAGE_VERSION})
+  configure_file(@INFRA_INSTALL_DIR@/pkg-config.cmake.in
+    ${pfx}/${PACKAGE}-config.cmake
+    @ONLY
+    )
+  configure_file(@INFRA_INSTALL_DIR@/pkg-config-version.cmake.in
+    ${pfx}/${PACKAGE}-config-version.cmake
+    @ONLY
+    )
+  install(FILES 
+    ${pfx}/${PACKAGE}-config.cmake
+    ${pfx}/${PACKAGE}-config-version.cmake
+    DESTINATION share/${PACKAGE}
+    )
+endmacro()
+
+

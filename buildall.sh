@@ -3,17 +3,22 @@
 TOP=$(cd dirname $0 ; pwd)
 
 INSTDIR=$TOP/inst
+rm -rf $INSTDIR
+BUILDDIR=$TOP/build
+rm -rf $BUILDDIR
 echo "INSTDIR=$INSTDIR"
 # INSTDIR=/tmp/ros/electric
 
-CMAKE="cmake -DCMAKE_INSTALL_PREFIX=$INSTDIR"
+CMAKE="cmake -DCMAKE_INSTALL_PREFIX=$INSTDIR -DCMAKE_PREFIX_PATH=$TOP/cmake"
 
 rm -rf $TOP/build
 
-for l in foo
+PACKAGES="wg-cmake-helpers foo"
+
+for l in $PACKAGES
 do
-    mkdir -p $TOP/build/$l
-    cd $TOP/build/$l
+    mkdir -p $BUILDDIR/$l
+    cd $BUILDDIR/$l
     $CMAKE $TOP/$l
     make
     make install
