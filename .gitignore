@@ -1,4 +1,6 @@
 ._*
 *.so
+*.pyc
+*.egg-info
 build/
 inst/

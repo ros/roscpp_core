@@ -1,6 +1,6 @@
 print "this is snake!"
 
 def slither():
-    print "slslslslslsldlsdflkpth!"
+    print "slslslslslsldlsdflkpth!  slither! snaaaaake!"
 
     
