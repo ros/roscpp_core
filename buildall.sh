@@ -13,7 +13,7 @@ CMAKE="cmake -DCMAKE_INSTALL_PREFIX=$INSTDIR -DCMAKE_PREFIX_PATH=$TOP/cmake"
 
 rm -rf $TOP/build
 
-PACKAGES="wg-cmake-helpers foo bar snake"
+PACKAGES="ros_cmake foo bar snake"
 
 for l in $PACKAGES
 do
@@ -21,5 +21,7 @@ do
     cd $BUILDDIR/$l
     $CMAKE $TOP/$l
     make VERBOSE=1
-    make install
+    make VERBOSE=1 install
 done
+
+ls -ltR $INSTDIR

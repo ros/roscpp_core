@@ -7,4 +7,8 @@ macro(wg_python)
       --install-dir ${CMAKE_BINARY_DIR}
       )
   endif()
+
+  install(CODE 
+    "execute_process(COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/setup.py install -f --install-layout=unix --prefix=${CMAKE_INSTALL_PREFIX})")
+
 endmacro()
