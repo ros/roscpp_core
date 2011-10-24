@@ -14,7 +14,6 @@ CMAKE="cmake -DCMAKE_INSTALL_PREFIX=$INSTDIR -DCMAKE_PREFIX_PATH=$TOP/cmake"
 rm -rf $TOP/build
 
 PACKAGES="ros_cmake foo bar snake"
-
 for l in $PACKAGES
 do
     mkdir -p $BUILDDIR/$l
@@ -24,7 +23,10 @@ do
     make VERBOSE=1 install
 done
 
-ls -ltR $INSTDIR
+# ls -ltR $INSTDIR
+
+export PYTHONPATH=$INSTDIR/lib/python2.6/site-packages
+python -c 'import snake ; print dir(snake)'
 
 # ssh://vcs@kforge.ros.org/rosrelease/gencpp
 # ssh://vcs@kforge.ros.org/rosrelease/genmsg

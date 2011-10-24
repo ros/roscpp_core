@@ -9,6 +9,8 @@ macro(wg_python)
   endif()
 
   install(CODE 
-    "execute_process(COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/setup.py install -f --install-layout=unix --prefix=${CMAKE_INSTALL_PREFIX})")
+    "execute_process(
+        COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/setup.py install --old-and-unmanageable --prefix ${CMAKE_INSTALL_PREFIX}
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})")
 
 endmacro()
