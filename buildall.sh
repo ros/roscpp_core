@@ -13,7 +13,7 @@ CMAKE="cmake -DCMAKE_INSTALL_PREFIX=$INSTDIR -DCMAKE_PREFIX_PATH=$TOP/cmake"
 
 rm -rf $TOP/build
 
-PACKAGES="ros_cmake foo bar snake"
+PACKAGES="ros_cmake foo bar snake simpleinstall"
 for l in $PACKAGES
 do
     mkdir -p $BUILDDIR/$l
