@@ -31,3 +31,10 @@ python -c 'import snake ; print dir(snake)'
 # ssh://vcs@kforge.ros.org/rosrelease/gencpp
 # ssh://vcs@kforge.ros.org/rosrelease/genmsg
 # ssh://vcs@kforge.ros.org/rosrelease/genpy
+
+
+# simpleinstall binary only
+# debuild -i -us -uc -b
+
+# dpkg --contents something_x.x.x.deb
+
