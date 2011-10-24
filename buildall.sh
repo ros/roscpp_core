@@ -6,6 +6,8 @@ INSTDIR=$TOP/inst
 rm -rf $INSTDIR
 BUILDDIR=$TOP/build
 rm -rf $BUILDDIR
+rm -f *.build *.deb *.changes
+
 echo "INSTDIR=$INSTDIR"
 # INSTDIR=/tmp/ros/electric
 
@@ -21,6 +23,11 @@ do
     $CMAKE $TOP/$l
     make VERBOSE=1
     make VERBOSE=1 install
+    
+    if [ -d $TOP/$l/debian ] ; then
+        cd $TOP/$l
+        debuild -i -uc -us -b
+    fi
 done
 
 # ls -ltR $INSTDIR
