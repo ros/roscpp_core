@@ -23,6 +23,9 @@ manually.
   * from a checkout 
   * ros_cmake should provide most of what you need
 
+* rosinstall file should set up the builds of all this
+* rosdeps yaml files should be available for tracking dependencies (e.g. python-setuptools, cmake)
+
 * use find_package(ros_gencpp ...) from my project which contains ros messages (quux_msgs)
 * use macros pulled in by this find_package to create message-building targets
 * generate code for these messages
