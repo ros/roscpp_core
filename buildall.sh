@@ -25,3 +25,7 @@ do
 done
 
 ls -ltR $INSTDIR
+
+# ssh://vcs@kforge.ros.org/rosrelease/gencpp
+# ssh://vcs@kforge.ros.org/rosrelease/genmsg
+# ssh://vcs@kforge.ros.org/rosrelease/genpy
