@@ -1,0 +1,5 @@
+simpleinstall (0.3.1-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Troy Straszheim <straszheim@unknown>  Mon, 24 Oct 2011 13:22:25 -0700
