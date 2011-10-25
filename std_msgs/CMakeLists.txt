@@ -9,6 +9,14 @@ find_package(gencpp)
 
 add_subdirectory(msg)
 
+install(DIRECTORY gen_msgs/include/std_msgs
+  DESTINATION include
+  FILES_MATCHING PATTERN *.h
+  # add dependency to quux_msgs_gencpp?                                                                                                                      
+  )
+
 install_cmake_infrastructure(${PROJECT_NAME}
-  VERSION 1.3.1
+  VERSION 0.0.1
+  MSG_DIRS msg
+  INCLUDE_DIRS include
   )

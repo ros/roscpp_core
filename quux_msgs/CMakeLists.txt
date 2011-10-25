@@ -10,6 +10,18 @@ find_package(std_msgs)
 
 # todo: will be set by find_package
 set(std_msgs_FOUND 1)
-set(std_msgs_MSG_INCLUDE_DIRS /u/mkjargaard/repositories/mkjargaard/dist-sandbox/std_msgs/msg)
 
 add_subdirectory(msg)
+
+install(DIRECTORY gen_msgs/include/quux_msgs
+  DESTINATION include
+  FILES_MATCHING PATTERN *.h
+  # add dependency to quux_msgs_gencpp?
+  )
+
+install_cmake_infrastructure(${PROJECT_NAME}
+  VERSION 0.0.1
+  MSG_DIRS msg
+  INCLUDE_DIRS include
+  )
+

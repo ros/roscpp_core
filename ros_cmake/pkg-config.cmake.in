@@ -15,3 +15,8 @@ message("libs: ${@PACKAGE_NAME@_LIBRARIES}")
 foreach(extra @PACKAGE_CFG_EXTRAS@)
   include(@PACKAGE_CMAKE_CONFIG_FILES_DIR@/${extra})
 endforeach()
+
+set(@PACKAGE_NAME@_MSG_INCLUDE_DIRS "")
+foreach(msg_dir @PACKAGE_MSG_DIRS@)
+  list(APPEND @PACKAGE_NAME@_MSG_INCLUDE_DIRS @CMAKE_CURRENT_BINARY_DIR@/${msg_dir})
+endforeach()
