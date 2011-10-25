@@ -2,7 +2,7 @@ include(@INFRA_INSTALL_DIR@/parse_arguments.cmake)
 include(@INFRA_INSTALL_DIR@/wg_python.cmake)
 
 macro(install_cmake_infrastructure PACKAGE_NAME)
-  parse_arguments(PACKAGE "VERSION;INCLUDE_DIRS;LIBRARIES" "" ${ARGN})
+  parse_arguments(PACKAGE "VERSION;INCLUDE_DIRS;LIBRARIES;CFG_EXTRAS" "" ${ARGN})
 
   message("install_cmake_infrastructure ${PACKAGE_NAME} at version ${PACKAGE_VERSION} in @CMAKE_INSTALL_PREFIX@")
   set(pfx ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY})
@@ -10,6 +10,17 @@ macro(install_cmake_infrastructure PACKAGE_NAME)
   set(PACKAGE_VERSION ${PACKAGE_VERSION})
   set(PACKAGE_INCLUDE_DIRS ${PACKAGE_INCLUDE_DIRS})
   set(PACKAGE_LIBRARIES ${PACKAGE_LIBRARIES})
+  set(PACKAGE_CFG_EXTRAS ${PACKAGE_CFG_EXTRAS})
+  set(PACKAGE_CMAKE_CONFIG_FILES_DIR ${CMAKE_INSTALL_PREFIX}/share/cmake/${PACKAGE_NAME})
+
+  message("Extras: ${PACKAGE_CFG_EXTRAS}")
+
+  foreach(extra ${PACKAGE_CFG_EXTRAS})
+    configure_file(${extra}.in
+      ${extra}
+      @ONLY
+      )
+  endforeach()
 
   configure_file(@INFRA_INSTALL_DIR@/pkg-config.cmake.in
     ${pfx}/${PACKAGE_NAME}-config.cmake
@@ -22,8 +33,10 @@ macro(install_cmake_infrastructure PACKAGE_NAME)
   install(FILES 
     ${pfx}/${PACKAGE_NAME}-config.cmake
     ${pfx}/${PACKAGE_NAME}-config-version.cmake
+    ${PACKAGE_CFG_EXTRAS}
     DESTINATION share/cmake/${PACKAGE_NAME}
     )
+  
 endmacro()
 
 

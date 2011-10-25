@@ -11,3 +11,7 @@ foreach(lib @PACKAGE_LIBRARIES@)
 endforeach()
 
 message("libs: ${@PACKAGE_NAME@_LIBRARIES}")
+
+foreach(extra @PACKAGE_CFG_EXTRAS@)
+  include(@PACKAGE_CMAKE_CONFIG_FILES_DIR@/${extra})
+endforeach()
