@@ -6,6 +6,8 @@ INSTDIR=$TOP/inst
 rm -rf $INSTDIR
 BUILDDIR=$TOP/build
 rm -rf $BUILDDIR
+rm -f *.build *.deb *.changes
+
 echo "INSTDIR=$INSTDIR"
 # INSTDIR=/tmp/ros/electric
 
@@ -21,6 +23,11 @@ do
     $CMAKE $TOP/$l
     make VERBOSE=1
     make VERBOSE=1 install
+    
+    if [ -d $TOP/$l/debian ] ; then
+        cd $TOP/$l
+        debuild -i -uc -us -b
+    fi
 done
 
 # ls -ltR $INSTDIR
@@ -31,3 +38,10 @@ python -c 'import snake ; print dir(snake)'
 # ssh://vcs@kforge.ros.org/rosrelease/gencpp
 # ssh://vcs@kforge.ros.org/rosrelease/genmsg
 # ssh://vcs@kforge.ros.org/rosrelease/genpy
+
+
+# simpleinstall binary only
+# debuild -i -us -uc -b
+
+# dpkg --contents something_x.x.x.deb
+
