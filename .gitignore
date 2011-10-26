@@ -10,3 +10,7 @@ obj-x86_64-linux-gnu/
 *.substvars
 *.debhelper.log
 *.build
+cmake_install.cmake
+Makefile
+CMakeCache.txt
+*~

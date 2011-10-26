@@ -8,11 +8,12 @@ find_package(genmsg) # todo: required?
 find_package(gencpp)
 
 add_subdirectory(msg)
+#generate_msg_cpp(${PROJECT_NAME}
+#  MESSAGES msg/String.msg)
 
 install(DIRECTORY gen_msgs/include/std_msgs
   DESTINATION include
   FILES_MATCHING PATTERN *.h
-  # add dependency to quux_msgs_gencpp?                                                                                                                      
   )
 
 install_cmake_infrastructure(${PROJECT_NAME}
