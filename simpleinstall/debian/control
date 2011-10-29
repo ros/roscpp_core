@@ -1,7 +1,7 @@
 Source: simpleinstall
-Section: unknown
+Section: misc
 Priority: extra
-Maintainer: Troy Straszheim <straszheim@unknown>
+Maintainer: Troy Straszheim <straszheim@willowgarage.com>
 Build-Depends: debhelper (>= 7), cmake
 Standards-Version: 3.8.3
 Homepage: <insert the upstream URL, if relevant>

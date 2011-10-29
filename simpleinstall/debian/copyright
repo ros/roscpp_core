@@ -1,6 +1,6 @@
 This work was packaged for Debian by:
 
-    Troy Straszheim <straszheim@unknown> on Mon, 24 Oct 2011 13:56:11 -0700
+    Troy Straszheim <straszheim@willowgarage.com> on Mon, 24 Oct 2011 13:56:11 -0700
 
 It was downloaded from:
 
@@ -36,7 +36,7 @@ Public License version 3 can be found in `/usr/share/common-licenses/GPL-3'.
 
 The Debian packaging is:
 
-    Copyright (C) 2011 Troy Straszheim <straszheim@unknown>
+    Copyright (C) 2011 Troy Straszheim <straszheim@willowgarage.com>
 
 # Please chose a license for your packaging work. If the program you package
 # uses a mainstream license, using the same license is the safest choice.
