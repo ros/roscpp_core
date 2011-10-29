@@ -1,5 +1,6 @@
 include(@INFRA_INSTALL_DIR@/parse_arguments.cmake)
 include(@INFRA_INSTALL_DIR@/wg_python.cmake)
+include(@INFRA_INSTALL_DIR@/debian-util.cmake)
 
 macro(install_cmake_infrastructure PACKAGE_NAME)
   parse_arguments(PACKAGE "VERSION;INCLUDE_DIRS;LIBRARIES;CFG_EXTRAS;MSG_DIRS" "" ${ARGN})

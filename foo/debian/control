@@ -8,6 +8,6 @@ Homepage: <insert the upstream URL, if relevant>
 
 Package: foo
 Architecture: any
-Depends: ${misc:Depends}
+Depends: debhelper (>= 7), cmake, gcc, make, rosbuild
 Description: <insert up to 60 chars description>
  <insert long description, indented with spaces>

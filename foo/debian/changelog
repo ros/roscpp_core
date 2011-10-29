@@ -1,3 +1,51 @@
+foo (0.0.0bazinga8) natty; urgency=low
+
+  *  more bazinga
+
+ -- Troy Straszheim <straszheim@willowgarage.com>  Sat, 29 Oct 2011 11:41:05 -0700
+
+foo (0.0.0bazinga7) natty; urgency=low
+
+  * this one with fewer distributions
+
+ -- Troy Straszheim <straszheim@willowgarage.com>  Sat, 29 Oct 2011 11:23:45 -0700
+
+foo (0.0.0bazinga6) lucid maverick natty; urgency=low
+
+  * now with multiple distros, hm.
+
+ -- Troy Straszheim <straszheim@willowgarage.com>  Sat, 29 Oct 2011 11:09:05 -0700
+
+foo (0.0.0bazinga5) lucid; urgency=low
+
+  * meh
+
+ -- Troy Straszheim <straszheim@willowgarage.com>  Sat, 29 Oct 2011 11:09:05 -0700
+
+foo (0.0.0bazinga4) lucid; urgency=low
+
+  * meh
+
+ -- Troy Straszheim <<straszheim@willowgarage.com>>  Sat, 29 Oct 2011 11:08:35 -0700
+
+foo (0.0.0bazinga3) lucid; urgency=low
+
+  * more bazinga
+
+ -- Troy Straszheim <straszheim@willowgarage.com> <straszheim@bad.willowgarage.com>  Sat, 29 Oct 2011 11:07:58 -0700
+
+foo (0.0.0bazinga2) lucid; urgency=low
+
+  *  herp derp 2
+
+ -- Troy Straszheim <straszheim@bad.willowgarage.com>  Sat, 29 Oct 2011 11:03:03 -0700
+
+foo (0.0.0bazinga1) lucid; urgency=low
+
+  * herp derp
+
+ -- Troy Straszheim <straszheim@bad.willowgarage.com>  Sat, 29 Oct 2011 11:02:55 -0700
+
 foo (0.0.0) natty; urgency=low
 
   * Initial Release.

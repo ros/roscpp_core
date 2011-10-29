@@ -10,3 +10,8 @@ add_subdirectory(src)
 # debuild -S to build source package
 # dput ppa:straszheim/ros ../simpleinstall_x.y.y_source.changes
 # dpkg-buildpackage will make a deb
+# DEBFULLNAME="Troy Straszheim" DEBEMAIL="straszheim@willowgarage.com" dch -l bazinga   (bazinga is suffix to be added to version number.  
+#                   trailing digits added automagically)
+
+# distros in changelog:  multiples don't be working.
+
