@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(ros_cmake)
+project(rosbuild)
 
 set(INSTALL_SUFFIX share/cmake/${PROJECT_NAME})
 
@@ -12,7 +12,7 @@ configure_file(${PROJECT_NAME}-config.cmake.in
   )
 
 install(
-  FILES 
+  FILES
   ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
 
   parse_arguments.cmake

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-find_package(ros_cmake)
+find_package(rosbuild)
 
 include_directories(include)
 
@@ -14,8 +14,8 @@ install(DIRECTORY include/foo
   FILES_MATCHING PATTERN *.hpp
   )
 
-install_cmake_infrastructure(foo 
-  VERSION 1.3.1 
-  INCLUDE_DIRS include 
+install_cmake_infrastructure(foo
+  VERSION 1.3.1
+  INCLUDE_DIRS include
   LIBRARIES foo)
 
