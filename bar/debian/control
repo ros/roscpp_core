@@ -1,12 +1,12 @@
-Source: foo
+Source: bar
 Section: misc
 Priority: extra
 Maintainer: Troy Straszheim <straszheim@willowgarage.com>
-Build-Depends: debhelper (>= 7), cmake, gcc, make, rosbuild
-Standards-Version: 6.1.10
+Build-Depends: debhelper (>= 7), cmake, gcc, make, rosbuild, foo
+Standards-Version: 7.0.3
 Homepage: <insert the upstream URL, if relevant>
 
-Package: foo
+Package: bar
 Architecture: any
 Depends: ${misc:Depends}
 Description: <insert up to 60 chars description>

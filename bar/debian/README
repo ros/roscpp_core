@@ -1,5 +1,6 @@
-rosbuild (3.1.9) natty; urgency=low
+The Debian Package bar
+----------------------------
 
-  * Initial Release.
+Comments regarding the Package
 
  -- Troy Straszheim <straszheim@willowgarage.com>  Mon, 24 Oct 2011 13:56:11 -0700

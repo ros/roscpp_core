@@ -18,4 +18,3 @@ install_cmake_infrastructure(foo
   VERSION 1.3.1
   INCLUDE_DIRS include
   LIBRARIES foo)
-

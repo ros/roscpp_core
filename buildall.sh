@@ -17,7 +17,12 @@ PPA="ppa:straszheim/ros"
 
 rm -rf $TOP/build
 
-PACKAGES="rosbuild foo" #  simpleinstall" #bar snake simpleinstall quux_msgs quux_user"
+PACKAGES="rosbuild foo bar" #  simpleinstall" #bar snake simpleinstall quux_msgs quux_user"
+
+for p in $PACKAGES
+do
+    sudo aptitude purge $p
+done
 
 #
 #  Local test
@@ -26,13 +31,13 @@ cd $TOP
 for p in $PACKAGES
 do
     echo $p
-    rm -f ${p}_?.?.?_*.deb
-    rm -f ${p}_?.?.?_*.upload
+    rm -f ${p}_?.?.*_*.deb
+    rm -f ${p}_?.?.*_*.upload
     pushd $TOP/$p
     dpkg-buildpackage -F
     debuild -S
     popd
-    sudo dpkg -i ${p}_?.?.?_*.deb
+    sudo dpkg -i ${p}_?.?.*_*.deb
     dput ppa:straszheim/ros $p*_source.changes
 done
 
