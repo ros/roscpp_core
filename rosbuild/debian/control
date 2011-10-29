@@ -3,7 +3,6 @@ Section: misc
 Priority: extra
 Maintainer: Troy Straszheim <straszheim@willowgarage.com>
 Build-Depends: debhelper (>= 7), cmake, gcc, make
-Standards-Version: 6.1.9
 Homepage: <insert the upstream URL, if relevant>
 
 Package: rosbuild

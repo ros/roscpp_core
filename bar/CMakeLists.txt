@@ -19,4 +19,4 @@ install(DIRECTORY include/bar
   FILES_MATCHING PATTERN *.hpp
   )
 
-install_cmake_infrastructure(bar VERSION 7.0.3 INCLUDE_DIRS include LIBRARIES bar)
+install_cmake_infrastructure(bar VERSION 0.0.0 INCLUDE_DIRS include LIBRARIES bar)
