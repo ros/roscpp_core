@@ -1,0 +1,22 @@
+message("@PACKAGE_NAME@ config at version @PACKAGE_VERSION@")
+
+set(@PACKAGE_NAME@_INCLUDE_DIRS @CMAKE_INSTALL_PREFIX@/@PACKAGE_INCLUDE_DIRS@)
+
+foreach(lib @PACKAGE_LIBRARIES@)
+  find_library(onelib ${lib}
+    PATHS @CMAKE_INSTALL_PREFIX@/lib
+    )
+  message("found: ${onelib}")
+  list(APPEND @PACKAGE_NAME@_LIBRARIES ${onelib})
+endforeach()
+
+message("libs: ${@PACKAGE_NAME@_LIBRARIES}")
+
+foreach(extra @PACKAGE_CFG_EXTRAS@)
+  include(@PACKAGE_CMAKE_CONFIG_FILES_DIR@/${extra})
+endforeach()
+
+set(@PACKAGE_NAME@_MSG_INCLUDE_DIRS "")
+foreach(msg_dir @PACKAGE_MSG_DIRS@)
+  list(APPEND @PACKAGE_NAME@_MSG_INCLUDE_DIRS @CMAKE_INSTALL_PREFIX@/share/msg/@PROJECT_NAME@)
+endforeach()

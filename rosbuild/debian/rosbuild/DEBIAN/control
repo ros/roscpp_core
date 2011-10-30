@@ -1,0 +1,10 @@
+Package: rosbuild
+Version: 2.0.1
+Architecture: all
+Maintainer: Troy Straszheim <straszheim@willowgarage.com>
+Installed-Size: 64
+Section: misc
+Priority: extra
+Homepage: <insert the upstream URL, if relevant>
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>

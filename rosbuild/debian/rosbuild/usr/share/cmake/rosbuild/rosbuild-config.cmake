@@ -1,11 +1,11 @@
-include(@INFRA_INSTALL_DIR@/parse_arguments.cmake)
-include(@INFRA_INSTALL_DIR@/wg_python.cmake)
-include(@INFRA_INSTALL_DIR@/debian-util.cmake)
+include(/usr/share/cmake/rosbuild/parse_arguments.cmake)
+include(/usr/share/cmake/rosbuild/wg_python.cmake)
+include(/usr/share/cmake/rosbuild/debian-util.cmake)
 
 macro(install_cmake_infrastructure PACKAGE_NAME)
   parse_arguments(PACKAGE "VERSION;INCLUDE_DIRS;LIBRARIES;CFG_EXTRAS;MSG_DIRS" "" ${ARGN})
 
-  message("install_cmake_infrastructure ${PACKAGE_NAME} at version ${PACKAGE_VERSION} in @CMAKE_INSTALL_PREFIX@")
+  message("install_cmake_infrastructure ${PACKAGE_NAME} at version ${PACKAGE_VERSION} in /usr")
   set(pfx ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY})
   set(PACKAGE_NAME ${PACKAGE_NAME})
   set(PACKAGE_VERSION ${PACKAGE_VERSION})
@@ -24,11 +24,11 @@ macro(install_cmake_infrastructure PACKAGE_NAME)
       )
   endforeach()
 
-  configure_file(@INFRA_INSTALL_DIR@/pkg-config.cmake.in
+  configure_file(/usr/share/cmake/rosbuild/pkg-config.cmake.in
     ${pfx}/${PACKAGE_NAME}-config.cmake
     @ONLY
     )
-  configure_file(@INFRA_INSTALL_DIR@/pkg-config-version.cmake.in
+  configure_file(/usr/share/cmake/rosbuild/pkg-config-version.cmake.in
     ${pfx}/${PACKAGE_NAME}-config-version.cmake
     @ONLY
     )
@@ -46,7 +46,7 @@ macro(em_expand CONTEXT_FILE CMAKE_TEMPLATE_FILE)
   get_filename_component(CMAKE_TEMPLATE_FILE_NOPATH ${CMAKE_TEMPLATE_FILE} NAME)
   configure_file(${CONTEXT_FILE} ${CMAKE_BINARY_DIR}/${CONTEXT_FILE_NOPATH}.py)
   execute_process(COMMAND
-    python @INFRA_INSTALL_PREFIX@/em_expander.py
+    python /em_expander.py
     ${CMAKE_CURRENT_BINARY_DIR}/${CONTEXT_FILE_NOPATH}.py
     ${CMAKE_TEMPLATE_FILE}
     ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_TEMPLATE_FILE_NOPATH}.out

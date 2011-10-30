@@ -1,0 +1,8 @@
+66db178297408e0ec1818446dd249bab  usr/share/cmake/rosbuild/debian-util.cmake
+1d67ab6be105d54baf6d1cf606d01c00  usr/share/cmake/rosbuild/parse_arguments.cmake
+abc30f2f64dbf927cc0ac9a418e7bddf  usr/share/cmake/rosbuild/pkg-config-version.cmake.in
+d6c3d0d51d48d92a1773be52c23720c2  usr/share/cmake/rosbuild/pkg-config.cmake.in
+c807ded296aa1ff8ef24fe915f9bd38e  usr/share/cmake/rosbuild/rosbuild-config.cmake
+f920c21e5338f0fa199307f94d0b66b4  usr/share/cmake/rosbuild/wg_python.cmake
+e4b284f4018eb993e2e5c26339930a49  usr/share/doc/rosbuild/changelog.gz
+a999a182b5aa597c2d658d3b4e8677e8  usr/share/doc/rosbuild/copyright
