@@ -32,13 +32,13 @@ macro(install_cmake_infrastructure PACKAGE_NAME)
     ${pfx}/${PACKAGE_NAME}-config-version.cmake
     @ONLY
     )
-  install(FILES 
+  install(FILES
     ${pfx}/${PACKAGE_NAME}-config.cmake
     ${pfx}/${PACKAGE_NAME}-config-version.cmake
     ${INSTALLABLE_CFG_EXTRAS}
     DESTINATION share/cmake/${PACKAGE_NAME}
     )
-  
+
 endmacro()
 
 macro(em_expand CONTEXT_FILE CMAKE_TEMPLATE_FILE)
@@ -54,11 +54,20 @@ macro(em_expand CONTEXT_FILE CMAKE_TEMPLATE_FILE)
   include(${CMAKE_BINARY_DIR}/${CMAKE_TEMPLATE_FILE_NOPATH})
 endmacro()
 
+macro(md5sum OUTVAR SOMETHING)
+  file(WRITE ${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/tmp.md5sum "${SOMETHING}")
+  execute_process(
+    COMMAND md5sum ${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/tmp.md5sum
+    COMMAND cut -b1-32
+    OUTPUT_VARIABLE ${OUTVAR}
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+endmacro()
 
 macro(execute_code_string CODE_STRING)
   string(RANDOM CODE_FILE_RND_COMPONENT)
-  set(TMP_CODE_FILE ${CMAKE_CURRENT_BINARY_DIR}/code_${CODE_FILE_RND_COMPONENT}.tmp)
+  md5sum(STRINGSUM ${CODE_STRING})
+  set(TMP_CODE_FILE ${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/code_${STRINGSUM}.tmp)
   file(WRITE ${TMP_CODE_FILE} "${CODE_STRING}")
   include(${TMP_CODE_FILE})
-  file(REMOVE ${TMP_CODE_FILE})
 endmacro()
+
