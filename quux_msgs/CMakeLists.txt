@@ -3,7 +3,7 @@ project(quux_msgs)
 
 set(CMAKE_FIND_ROOT_PATH /tmp/sandbox)
 
-find_package(ros_cmake)
+find_package(rosbuild)
 find_package(genmsg)
 find_package(std_msgs)
 
@@ -13,7 +13,9 @@ set(std_msgs_FOUND 1)
 #add_subdirectory(msg)
 generate_msgs(${PROJECT_NAME}
   MESSAGES msg/QuuxString.msg
-  DEPENDENCIES std_msgs)
+  DEPENDENCIES std_msgs
+  LANGS cpp
+  )
 
 install(DIRECTORY gen_msgs/include/quux_msgs
   DESTINATION include
