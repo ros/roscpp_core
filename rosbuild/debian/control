@@ -7,6 +7,6 @@ Homepage: <insert the upstream URL, if relevant>
 
 Package: rosbuild
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends} python-empy
 Description: <insert up to 60 chars description>
  <insert long description, indented with spaces>
