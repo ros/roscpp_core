@@ -18,26 +18,16 @@ function dodir {
     dpkg-buildpackage
     dh_clean -v
     cd ..
-    sudo dpkg -i $1*.deb
+    sudo dpkg -i $2*.deb
 }
 
-dodir rosbuild
-dodir foo
-dodir bar
-dodir genmsg
-dodir gencpp
+#dodir rosbuild rosbuild
+#dodir foo foo
+#dodir bar bar
+dodir genmsg ros-fuerte-genmsg
+dodir gencpp ros-fuerte-gencpp
 
-exit
-rm -f rosbuild*.deb
-cd rosbuild
-dpkg-buildpackage
-cd ..
-sudo dpkg -i rosbuild*.deb
-
-rm -f foo*.deb
-cd foo
-dpkg-buildpackage
-cd ..
+# dodir std_msgs std_msgs
 
 exit
 
