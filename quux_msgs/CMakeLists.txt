@@ -4,14 +4,16 @@ project(quux_msgs)
 set(CMAKE_FIND_ROOT_PATH /tmp/sandbox)
 
 find_package(ros_cmake)
-#find_package(genmsg)
-find_package(gencpp)
+find_package(genmsg)
 find_package(std_msgs)
 
 # todo: will be set by find_package
 set(std_msgs_FOUND 1)
 
-add_subdirectory(msg)
+#add_subdirectory(msg)
+generate_msgs(${PROJECT_NAME}
+  MESSAGES msg/QuuxString.msg
+  DEPENDENCIES std_msgs)
 
 install(DIRECTORY gen_msgs/include/quux_msgs
   DESTINATION include

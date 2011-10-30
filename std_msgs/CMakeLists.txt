@@ -4,17 +4,12 @@ project(std_msgs)
 set(CMAKE_FIND_ROOT_PATH /tmp/sandbox)
 
 find_package(ros_cmake)
-find_package(genmsg) # todo: required?
-find_package(gencpp)
+find_package(genmsg)
 
-add_subdirectory(msg)
-#generate_msg_cpp(${PROJECT_NAME}
-#  MESSAGES msg/String.msg)
-
-install(DIRECTORY gen_msgs/include/std_msgs
-  DESTINATION include
-  FILES_MATCHING PATTERN *.h
-  )
+#add_subdirectory(msg)
+generate_msgs(${PROJECT_NAME}
+  MESSAGES msg/String.msg
+  LANGS cpp)
 
 install_cmake_infrastructure(${PROJECT_NAME}
   VERSION 0.0.1

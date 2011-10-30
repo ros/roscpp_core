@@ -13,7 +13,9 @@ configure_file(${PROJECT_NAME}-config.cmake.in
 
 install(
   FILES 
-  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
+  ${PROJECT_NAME}-config.cmake
+  cmake/em.py
+  cmake/em_expander.py
 
   parse_arguments.cmake
   wg_python.cmake
