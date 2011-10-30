@@ -24,6 +24,8 @@ function dodir {
 dodir rosbuild
 dodir foo
 dodir bar
+dodir genmsg
+dodir gencpp
 
 exit
 rm -f rosbuild*.deb

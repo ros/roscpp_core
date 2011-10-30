@@ -15,7 +15,9 @@ macro(install_cmake_infrastructure PACKAGE_NAME)
   set(PACKAGE_CMAKE_CONFIG_FILES_DIR ${CMAKE_INSTALL_PREFIX}/share/cmake/${PACKAGE_NAME})
   set(PACKAGE_MSG_DIRS ${PACKAGE_MSG_DIRS})
 
+  set(INSTALLABLE_CFG_EXTRAS "")
   foreach(extra ${PACKAGE_CFG_EXTRAS})
+    list(APPEND INSTALLABLE_CFG_EXTRAS ${CMAKE_CURRENT_BINARY_DIR}/${extra})
     configure_file(${extra}.in
       ${extra}
       @ONLY
@@ -33,7 +35,7 @@ macro(install_cmake_infrastructure PACKAGE_NAME)
   install(FILES 
     ${pfx}/${PACKAGE_NAME}-config.cmake
     ${pfx}/${PACKAGE_NAME}-config-version.cmake
-    ${PACKAGE_CFG_EXTRAS}
+    ${INSTALLABLE_CFG_EXTRAS}
     DESTINATION share/cmake/${PACKAGE_NAME}
     )
   

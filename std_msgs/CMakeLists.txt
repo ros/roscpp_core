@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(std_msgs)
 
-set(CMAKE_FIND_ROOT_PATH /tmp/sandbox)
-
-find_package(ros_cmake)
+find_package(rosbuild)
 find_package(genmsg)
 
 #add_subdirectory(msg)
