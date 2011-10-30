@@ -39,4 +39,24 @@ macro(install_cmake_infrastructure PACKAGE_NAME)
   
 endmacro()
 
+macro(em_expand CONTEXT_FILE CMAKE_TEMPLATE_FILE)
+  get_filename_component(CONTEXT_FILE_NOPATH ${CONTEXT_FILE} NAME)
+  get_filename_component(CMAKE_TEMPLATE_FILE_NOPATH ${CMAKE_TEMPLATE_FILE} NAME)
+  configure_file(${CONTEXT_FILE} ${CMAKE_BINARY_DIR}/${CONTEXT_FILE_NOPATH}.py)
+  execute_process(COMMAND
+    python @INFRA_INSTALL_PREFIX@/em_expander.py
+    ${CMAKE_CURRENT_BINARY_DIR}/${CONTEXT_FILE_NOPATH}.py
+    ${CMAKE_TEMPLATE_FILE}
+    ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_TEMPLATE_FILE_NOPATH}.out
+    )
+  include(${CMAKE_BINARY_DIR}/${CMAKE_TEMPLATE_FILE_NOPATH})
+endmacro()
 
+
+macro(execute_code_string CODE_STRING)
+  string(RANDOM CODE_FILE_RND_COMPONENT)
+  set(TMP_CODE_FILE ${CMAKE_CURRENT_BINARY_DIR}/code_${CODE_FILE_RND_COMPONENT}.tmp)
+  file(WRITE ${TMP_CODE_FILE} "${CODE_STRING}")
+  include(${TMP_CODE_FILE})
+  file(REMOVE ${TMP_CODE_FILE})
+endmacro()
