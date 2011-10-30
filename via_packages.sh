@@ -8,21 +8,40 @@ BUILDDIR=$TOP/build
 rm -rf $BUILDDIR
 rm -f *.build *.deb *.changes
 
-echo "INSTDIR=$INSTDIR"
-# INSTDIR=/tmp/ros/electric
-
 #CMAKE="cmake -DCMAKE_INSTALL_PREFIX=$INSTDIR -DCMAKE_PREFIX_PATH=$TOP/cmake"
 CMAKE="cmake"
 PPA="ppa:straszheim/ros"
 
+function dodir {
+    rm -f $1*.deb
+    cd $1
+    dpkg-buildpackage
+    dh_clean -v
+    cd ..
+    sudo dpkg -i $1*.deb
+}
+
+dodir rosbuild
+dodir foo
+dodir bar
+
+exit
+rm -f rosbuild*.deb
+cd rosbuild
+dpkg-buildpackage
+cd ..
+sudo dpkg -i rosbuild*.deb
+
+rm -f foo*.deb
+cd foo
+dpkg-buildpackage
+cd ..
+
+exit
+
 rm -rf $TOP/build
 
 PACKAGES="rosbuild foo bar" #  simpleinstall" #bar snake simpleinstall quux_msgs quux_user"
-
-for p in $PACKAGES
-do
-    sudo aptitude -y purge $p
-done
 
 #
 #  Local test
@@ -34,8 +53,7 @@ do
     rm -f ${p}_?.?.*_*.deb
     rm -f ${p}_?.?.*_*.upload
     pushd $TOP/$p
-    dpkg-buildpackage -F
-    debuild -S
+    dpkg-buildpackage
     popd
     sudo dpkg -i ${p}_?.?.*_*.deb
     dput ppa:straszheim/ros $p*_source.changes
