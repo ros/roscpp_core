@@ -39,6 +39,13 @@ macro(install_cmake_infrastructure PACKAGE_NAME)
     DESTINATION share/cmake/${PACKAGE_NAME}
     )
 
+  if (IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/debian)
+    message(STATUS "${PROJECT_NAME}: Enabling deb target since directory 'debian' exists")
+    add_custom_target(${PROJECT_NAME}-deb
+      COMMAND dpkg-source -b ${CMAKE_CURRENT_SOURCE_DIR}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      )
+  endif()
 endmacro()
 
 macro(em_expand CONTEXT_FILE CMAKE_TEMPLATE_FILE)
@@ -70,4 +77,6 @@ macro(execute_code_string CODE_STRING)
   file(WRITE ${TMP_CODE_FILE} "${CODE_STRING}")
   include(${TMP_CODE_FILE})
 endmacro()
+
+
 
