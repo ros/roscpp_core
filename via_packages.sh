@@ -24,10 +24,9 @@ function dodir {
 #dodir rosbuild rosbuild
 #dodir foo foo
 #dodir bar bar
-dodir genmsg ros-fuerte-genmsg
-dodir gencpp ros-fuerte-gencpp
-
-# dodir std_msgs std_msgs
+#dodir genmsg ros-fuerte-genmsg
+#dodir gencpp ros-fuerte-gencpp
+dodir std_msgs std-msgs
 
 exit
 
