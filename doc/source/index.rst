@@ -193,3 +193,71 @@ TODO
   able to do this.
 
 
+questions
+---------
+
+why does release upload a tarball which is then made into .dsc
+
+yaml associated with this contains info used in generation of control files
+
+
+
+three repos:  shadow, shadow-fixed, and public
+
+shadow builds everytime there is a release
+
+when things look stableish, shadow-fixed is triggered to attempt a rebuild of everything
+
+shadow-fixed
+
+a release:
+
+https://code.ros.org/svn/release/download/stacks/object_recognition/object_recognition-0.1.5/
+
+examine "libeigen3-dev=3.0.1-1+ros4~lucid"
+
+
+* run my release script
+ * .distro file gets checked in: you have commit access: https://code.ros.org/svn/release/trunk/distros/electric.rosdistro
+ * creates local repo branches
+ * uploads tarball and yaml file (after this point, everything proceed from this tarball)
+ * creates test-on-commit-to-dev-branch jobs (by cronjob looking at .distro files)
+ * triggers hudson job to build debians (debbuilder).  first source debians then automatically binaries.
+
+
+
+
+farm
+----
+
+spin up a jenkins and a deb repo with a script (reproducable)
+one parameter:  what repo
+spawn n slaves with that same parameter
+
+monitoring/autorepair of storm machines (300 line script)
+
+packages.ros.org is a redirect to the 'live' repo: has no state.  can
+test against behind the scenes repo and roll out with a
+link-switch/other-simple-operation
+
+proper stripping of debug symbols in .debs
+
+job-per-deb.  current system is job-per-architecture, parameterized:  
+
+not electric-lucid-amd64 but also *-*-*-stack.  use jenkins to chain
+through them i.e. if *-*-*-ros_com succeeds then the next guy is
+triggered.
+
+it doesn't now...   easy to add:  
+
+there is  job generation package  this uses hudson/jenkins API to configure jobs
+
+http://www.ros.org/doc/unstable/api/job_generation/html/files.html
+
+
+
+
+spin up new jenkins
+go over to job generation, populate the jenkins
+
+
