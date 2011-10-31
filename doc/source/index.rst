@@ -82,3 +82,114 @@ rosbuild2 currently makes .deb-per-package... not .deb-per-stack.  :(
 
 -debug and non-debug packages.
 
+Dependency types
+----------------
+
+Times when you have to think about dependencies:
+
+* Making debian source packages ``.dsc``
+
+  * These are actually pretty light, (basically just ``debuild -S``
+    but if we are going to automate some of this, there will be
+    extras).  
+
+* Making debian binary packages ``.deb``
+
+  * Everything you build against must be listedn in ``Build-Depends``
+    in control file and (therefore) also installable via dpkg.
+
+* Building
+
+  TWO STEPS:  configure (cmake) time, and make time.
+
+  * Everything you build against/with (important distinction:
+    "against" implies that it is installed, "with" implies that it is
+    in the same buildspace") must have cmake find_package()
+    infrastructure.
+
+  * Q: what if I depend on e.g. std_msgs, which is installed on the
+    system, and I am building with "pascal" in ROS_LANGS.  
+
+* Installing
+
+* Running
+
+  * from build dir
+  * from installed dir
+
+* Testing 
+
+  * Locally on developer's box
+  * On CI farm (jenkins)
+  * after installation
+
+Dependency graph
+----------------
+
+.. rubric:: Legend
+
+.. graphviz::
+
+     digraph legend {
+           rankdir=LR
+           node [shape=box, style=filled, color="#aaaaff"] "environment variable";
+           node [shape=box, style=filled, color="#aaffaa"] "system ROS packages";
+           node [shape=box, style=filled, color="#ffaaaa"] "developer ROS packages";
+           node [shape=box, style=filled, color="#ffffaa"] "debian packages";
+     }
+
+.. rubric:: buildtime
+
+
+.. graphviz:: 
+
+   digraph ros_build_mechanisms {
+
+        rankdir=BT
+
+        // environment variables:  build parameters
+	node [shape = box, style=filled, color="#aaaaff"]; ROS_LANGS
+
+        // packages        
+	node [shape = box, style=filled, color="#aaffaa"]; rosbuild genmsg gencpp genpy;
+
+        node [shape = box, style=filled, color="#ffffaa"]; cmake python
+        node [shape = box, style=filled, color="#ffaaaa"]; roscpp std_msgs geometry_msgs
+
+        rosbuild -> cmake;
+        rosbuild -> python;
+
+        genmsg-> ROS_LANGS;
+        genmsg -> rosbuild;
+        ROS_LANGS -> genpy [style=dotted];
+        ROS_LANGS -> gencpp [style=dotted];
+
+        gencpp -> rosbuild;
+        genpy -> rosbuild;
+        std_msgs -> genmsg;     
+        std_msgs -> rosbuild;     
+
+        geometry_msgs -> genmsg;     
+        geometry_msgs -> rosbuild;     
+
+        roscpp -> rosbuild;
+
+        quux_msgs -> genmsg;
+        quux_msgs -> std_msgs;
+        quux_nodes -> quux_msgs;
+        quux_nodes -> rosbuild;
+        quux_nodes -> roscpp;
+        
+   }
+
+
+
+TODO
+----
+
+* take rospkg, walk manifest.xml files, generate dot dependency graph
+  of ros-electric-* at the stack and package levels.  Install
+  ros-electric- from debians and operate on them.  rospkg should be
+  able to do this.
+
+
