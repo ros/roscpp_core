@@ -1,4 +1,11 @@
 
+SCRATCH
+-------
+
+evolving docs for new build stuff
+
+
+
 workflow
 --------
 
