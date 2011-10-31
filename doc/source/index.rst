@@ -126,7 +126,10 @@ Times when you have to think about dependencies:
 Dependency graph
 ----------------
 
-.. rubric:: Legend
+Legend
+------
+
+
 
 .. graphviz::
 
@@ -138,8 +141,8 @@ Dependency graph
            node [shape=box, style=filled, color="#ffffaa"] "debian packages";
      }
 
-.. rubric:: buildtime
-
+Buildtime
+---------
 
 .. graphviz:: 
 
@@ -182,7 +185,29 @@ Dependency graph
         
    }
 
+On the farm
+-----------
 
+.. graphviz::
+
+   digraph ros_end_to_end {
+   
+   job_generation [ label="job_generation \n(https://code.ros.org/svn/ros/stacks/ros_release/trunk/job_generation/)"];
+   rosdistro_file [ label=".rosdistro \n(https://code.ros.org/svn/release/trunk/distros/electric.rosdistro)"];
+
+   each_stack [ label="each stack" ];
+   dependee_stack0 [ label="dependee stack0" ];
+   dependee_stack1 [ label="dependee stack1" ];
+   "ros-electric deb repo" -> each_stack;
+   each_stack -> dependee_stack0;
+   each_stack -> dependee_stack1;
+   "ros-electric deb repo" -> rosdistro_file;
+   "ros-electric deb repo" -> hudson_jobs;
+   hudson_jobs -> job_generation;
+   job_generation -> rosdistro_file;
+   hudson_jobs -> hudson_helper;
+   
+   }
 
 TODO
 ----
@@ -260,4 +285,4 @@ http://www.ros.org/doc/unstable/api/job_generation/html/files.html
 spin up new jenkins
 go over to job generation, populate the jenkins
 
-
+* NOTE:  openni, gazebo leaking:   https://code.ros.org/svn/ros/stacks/ros_release/trunk/job_generation/scripts/generate_openni.py
