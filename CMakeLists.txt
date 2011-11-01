@@ -1,26 +1,25 @@
 cmake_minimum_required(VERSION 2.8)
 
+set(ROS_LANGS cpp CACHE STRING "ros languages") 
+
 set(CMAKE_INSTALL_PREFIX /tmp/sandbox2)
 set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_INSTALL_PREFIX})
 
-message(STATUS 'rosbuild')
+message(STATUS "============== rosbuild ========================================")
 add_subdirectory(rosbuild)
 
-message(STATUS 'genmsg')
-add_subdirectory(genmsg)
-
-message(STATUS 'gencpp')
-add_subdirectory(gencpp)
-
-message(STATUS 'std_msgs')
-add_subdirectory(std_msgs)
-
-message(STATUS 'foo')
-add_subdirectory(foo)
-
-message(STATUS 'bar')
-add_subdirectory(bar)
-
-message(STATUS 'quux_msgs')
-add_subdirectory(quux_msgs)
-
+#foreach(proj ${ROS_LANGS})
+#  message(STATUS "============== gen${proj} ========================================")
+#  add_subdirectory(gen${proj})
+#endforeach() 
+    
+foreach(proj 
+    genmsg
+    gencpp
+    std_msgs
+    foo
+    bar
+    quux_msgs)
+  message(STATUS "============== ${proj} ========================================")
+  add_subdirectory(${proj})
+endforeach()

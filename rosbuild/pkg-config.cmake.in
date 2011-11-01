@@ -1,26 +1,34 @@
-message("Using @PACKAGE_NAME@ @PKG_LOCATION@")
-message("@PACKAGE_NAME@ config at version @PACKAGE_VERSION@")
+message("**********************************************************************")
+if (NOT @PACKAGE_NAME@_FOUND)
+  message("Using @PACKAGE_NAME@ @PKG_LOCATION@")
+  message("@PACKAGE_NAME@ config at version @PACKAGE_VERSION@")
 
-#todo, need to handle more than one include dir?
-set(@PACKAGE_NAME@_INCLUDE_DIRS @PKG_INCLUDE_PREFIX@/@PACKAGE_INCLUDE_DIRS@)
+  #todo, need to handle more than one include dir?
+  set(@PACKAGE_NAME@_INCLUDE_DIRS @PKG_INCLUDE_PREFIX@/@PACKAGE_INCLUDE_DIRS@)
 
-foreach(lib @PACKAGE_LIBRARIES@)
-  if(@PACKAGE_NAME@_SOURCE_DIR)
-    set(onelib ${lib})
-  else()
-    find_library(onelib ${lib}
-      PATHS @PKG_LIB_PREFIX@/lib
-      )
-    message("found: ${onelib}")
+  if (@PACKAGE_NAME@_SOURCE_DIR)
+    message("Setting PYTHON_PATH for @PACKAGE_NAME@ to @PACKAGE_PYTHON_PATH@")
+    set(@PACKAGE_NAME@_PYTHON_PATH @PACKAGE_PYTHON_PATH@)
   endif()
-  
-  list(APPEND @PACKAGE_NAME@_LIBRARIES ${onelib})
-endforeach()
 
-foreach(extra @PACKAGE_CFG_EXTRAS@)
-  include(@PKG_CMAKE_DIR@/${extra})
-endforeach()
+  foreach(lib @PACKAGE_LIBRARIES@)
+    if(@PACKAGE_NAME@_SOURCE_DIR)
+      set(onelib ${lib})
+    else()
+      find_library(onelib ${lib}
+        PATHS @PKG_LIB_PREFIX@/lib
+        )
+      message("found: ${onelib}")
+    endif()
+    
+    list(APPEND @PACKAGE_NAME@_LIBRARIES ${onelib})
+  endforeach()
 
-set(@PACKAGE_NAME@_MSG_INCLUDE_DIRS @PKG_MSG_DIRS@)
+  foreach(extra @PACKAGE_CFG_EXTRAS@)
+    include(@PKG_CMAKE_DIR@/${extra})
+  endforeach()
 
-set(@PACKAGE_NAME@_FOUND 1)
+  set(@PACKAGE_NAME@_MSG_INCLUDE_DIRS @PKG_MSG_DIRS@)
+
+  set(@PACKAGE_NAME@_FOUND TRUE)
+endif()
