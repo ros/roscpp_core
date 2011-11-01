@@ -8,7 +8,7 @@ find_package(std_msgs)
 generate_msgs(${PROJECT_NAME}
   MESSAGES msg/QuuxString.msg
   DEPENDENCIES std_msgs
-  LANGS cpp)
+  )
 
 install_cmake_infrastructure(${PROJECT_NAME}
   VERSION 0.0.1

@@ -19,7 +19,8 @@ foreach(proj
     std_msgs
     foo
     bar
-    quux_msgs)
+    quux_msgs
+    quux_user)
   message(STATUS "============== ${proj} ========================================")
   add_subdirectory(${proj})
 endforeach()
