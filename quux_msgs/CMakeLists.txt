@@ -15,4 +15,3 @@ install_cmake_infrastructure(${PROJECT_NAME}
   MSG_DIRS msg
   INCLUDE_DIRS include
   )
-

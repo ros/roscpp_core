@@ -286,3 +286,17 @@ spin up new jenkins
 go over to job generation, populate the jenkins
 
 * NOTE:  openni, gazebo leaking:   https://code.ros.org/svn/ros/stacks/ros_release/trunk/job_generation/scripts/generate_openni.py
+
+
+
+INTERFACES
+----------
+
+3rd party libraries get installed on the system.  If necessary, extra
+cmake 'infrastructure' (e.g. the stuff that makes find_package work)
+gets installed on top of it.... that is, all of the idiosyncrasies of
+the build platform are hidden behind there.  As one is able to push
+cmake-infrastructure changes upstream, this set of hacks will
+contract: as new versions/3rdparty dependencies come online, it will
+expand.
+
