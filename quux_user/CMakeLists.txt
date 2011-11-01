@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 project(quux_user)
 
-set(CMAKE_FIND_ROOT_PATH /tmp/sandbox)
+# set(CMAKE_FIND_ROOT_PATH /tmp/sandbox)
 
-find_package(ros_cmake)
-#find_package(genmsg)
+find_package(rosbuild)
+find_package(genmsg)
 find_package(gencpp)
 find_package(std_msgs)
 find_package(quux_msgs)
