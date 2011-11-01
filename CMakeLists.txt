@@ -15,6 +15,12 @@ add_subdirectory(gencpp)
 message(STATUS 'std_msgs')
 add_subdirectory(std_msgs)
 
+message(STATUS 'foo')
+add_subdirectory(foo)
+
+message(STATUS 'bar')
+add_subdirectory(bar)
+
 message(STATUS 'quux_msgs')
 add_subdirectory(quux_msgs)
 
