@@ -1,3 +1,4 @@
+message("Using @PROJECT_NAME@ @PKG_LOCATION@")
 include(@INFRA_INSTALL_DIR@/parse_arguments.cmake)
 include(@INFRA_INSTALL_DIR@/wg_python.cmake)
 include(@INFRA_INSTALL_DIR@/debian-util.cmake)
@@ -15,26 +16,60 @@ macro(install_cmake_infrastructure PACKAGE_NAME)
   set(PACKAGE_CMAKE_CONFIG_FILES_DIR ${CMAKE_INSTALL_PREFIX}/share/cmake/${PACKAGE_NAME})
   set(PACKAGE_MSG_DIRS ${PACKAGE_MSG_DIRS})
 
-  set(INSTALLABLE_CFG_EXTRAS "")
+
+  # in source
+  set(PKG_INCLUDE_PREFIX ${CMAKE_CURRENT_SOURCE_DIR})
+  set(PKG_LIB_PREFIX ${CMAKE_CURRENT_BINARY_DIR})
+  set(PKG_MSG_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/msg)
+  set(PKG_CMAKE_DIR ${CMAKE_CURRENT_BINARY_DIR}/cmake)
+  set(PKG_BIN_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/scripts ${CMAKE_CURRENT_BINARY_DIR}/bin)
+  set(PKG_LOCATION "from source (${CMAKE_CURRENT_SOURCE_DIR})")
+
   foreach(extra ${PACKAGE_CFG_EXTRAS})
-    list(APPEND INSTALLABLE_CFG_EXTRAS ${CMAKE_CURRENT_BINARY_DIR}/${extra})
     configure_file(${extra}.in
-      ${extra}
+      cmake/${extra}
       @ONLY
       )
   endforeach()
 
   configure_file(@INFRA_INSTALL_DIR@/pkg-config.cmake.in
-    ${pfx}/${PACKAGE_NAME}-config.cmake
+    cmake/${PACKAGE_NAME}-config.cmake
     @ONLY
     )
   configure_file(@INFRA_INSTALL_DIR@/pkg-config-version.cmake.in
-    ${pfx}/${PACKAGE_NAME}-config-version.cmake
+    cmake/${PACKAGE_NAME}-config-version.cmake
     @ONLY
     )
+
+  # installable
+  set(PKG_INCLUDE_PREFIX ${CMAKE_INSTALL_PREFIX})
+  set(PKG_LIB_PREFIX ${CMAKE_INSTALL_PREFIX})
+  set(PKG_MSG_DIRS ${CMAKE_INSTALL_PREFIX}/share/msg/${PACKAGE_NAME})
+  set(PKG_CMAKE_DIR ${CMAKE_INSTALL_PREFIX}/share/cmake/${PACKAGE_NAME})
+  set(PKG_BIN_DIRS ${CMAKE_INSTALL_PREFIX}/bin)
+  set(PKG_LOCATION "installed (${CMAKE_INSTALL_PREFIX})")
+
+  set(INSTALLABLE_CFG_EXTRAS "")
+  foreach(extra ${PACKAGE_CFG_EXTRAS})
+    list(APPEND INSTALLABLE_CFG_EXTRAS ${CMAKE_CURRENT_BINARY_DIR}/cmake_install/${extra})
+    configure_file(${extra}.in
+      cmake_install/${extra}
+      @ONLY
+      )
+  endforeach()
+
+  configure_file(@INFRA_INSTALL_DIR@/pkg-config.cmake.in
+    cmake_install/${PACKAGE_NAME}-config.cmake
+    @ONLY
+    )
+  configure_file(@INFRA_INSTALL_DIR@/pkg-config-version.cmake.in
+    cmake_install/${PACKAGE_NAME}-config-version.cmake
+    @ONLY
+    )
+
   install(FILES
-    ${pfx}/${PACKAGE_NAME}-config.cmake
-    ${pfx}/${PACKAGE_NAME}-config-version.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/cmake_install/${PACKAGE_NAME}-config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/cmake_install/${PACKAGE_NAME}-config-version.cmake
     ${INSTALLABLE_CFG_EXTRAS}
     DESTINATION share/cmake/${PACKAGE_NAME}
     )
@@ -71,7 +106,6 @@ macro(md5sum OUTVAR SOMETHING)
 endmacro()
 
 macro(execute_code_string CODE_STRING)
-  string(RANDOM CODE_FILE_RND_COMPONENT)
   md5sum(STRINGSUM ${CODE_STRING})
   set(TMP_CODE_FILE ${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/code_${STRINGSUM}.tmp)
   file(WRITE ${TMP_CODE_FILE} "${CODE_STRING}")
