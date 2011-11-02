@@ -4,10 +4,12 @@ include_directories(include)
 
 find_package(cpp_common)
 include_directories(${cpp_common_INCLUDE_DIRS})
+
 # include(${CMAKE_CURRENT_BINARY_DIR}/package.cmake)
 # 
 # rosbuild_add_boost_directories()
 # 
+
 add_library(${PROJECT_NAME}
   src/time.cpp src/rate.cpp src/duration.cpp)
 # 

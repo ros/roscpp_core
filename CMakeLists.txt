@@ -17,8 +17,8 @@ add_subdirectory(rosbuild)
 foreach(proj 
     genmsg
     gencpp
-    rostime
     cpp_common
+    rostime
     roscpp_traits
     roscpp_serialization
     std_msgs
