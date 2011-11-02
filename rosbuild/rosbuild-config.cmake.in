@@ -89,19 +89,18 @@ endmacro()
 
 find_program(EMPY_EXECUTABLE empy)
 
-macro(em_expand CONTEXT_FILE CMAKE_TEMPLATE_FILE)
-  get_filename_component(CONTEXT_FILE_NOPATH ${CONTEXT_FILE} NAME)
-  get_filename_component(CMAKE_TEMPLATE_FILE_NOPATH ${CMAKE_TEMPLATE_FILE} NAME)
-  configure_file(${CONTEXT_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${CONTEXT_FILE_NOPATH}.py)
+macro(em_expand CONTEXT_FILE_IN CONTEXT_FILE_OUT EM_FILE_IN CMAKE_FILE_OUT)
+  configure_file(${CONTEXT_FILE_IN} ${CONTEXT_FILE_OUT})
+  message(STATUS "Expanding ${EM_FILE_IN}")
   execute_process(COMMAND
     ${EMPY_EXECUTABLE}
     -F ${rosbuild_SOURCE_DIR}/empy_cmake.py
-    -F ${CMAKE_CURRENT_BINARY_DIR}/${CONTEXT_FILE_NOPATH}.py
-    -o ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_TEMPLATE_FILE_NOPATH}.cmake
-    ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_TEMPLATE_FILE}
+    -F ${CONTEXT_FILE_OUT}
+    -o ${CMAKE_FILE_OUT}
+    ${EM_FILE_IN}
     )
-  message(STATUS "*** including ${CMAKE_BINARY_DIR}/${CMAKE_TEMPLATE_FILE_NOPATH}")
-  include(${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_TEMPLATE_FILE_NOPATH}.cmake)
+  message(STATUS "*** including ${CMAKE_FILE_OUT}")
+  include(${CMAKE_FILE_OUT})
 endmacro()
 
 macro(md5sum OUTVAR SOMETHING)
