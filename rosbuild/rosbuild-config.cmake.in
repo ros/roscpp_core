@@ -2,17 +2,7 @@ message("Using @PROJECT_NAME@ @PKG_LOCATION@")
 include(@INFRA_INSTALL_DIR@/parse_arguments.cmake)
 include(@INFRA_INSTALL_DIR@/wg_python.cmake)
 include(@INFRA_INSTALL_DIR@/debian-util.cmake)
-
-function(shell arg1)
-  set(msg "${arg1}")
-  foreach(arg ${ARGN})
-    set(msg "${msg} ${arg}")
-  endforeach()
-  message(STATUS ">>> ${msg}")
-  execute_process(COMMAND ${arg1} ${ARGN}
-    RESULT_VARIABLE res)
-  message(STATUS "<<< ${res}")
-endfunction()
+include(@INFRA_INSTALL_DIR@/shell.cmake)
 
 macro(install_cmake_infrastructure PACKAGE_NAME)
   parse_arguments(PACKAGE 

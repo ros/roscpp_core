@@ -31,6 +31,7 @@ install(
   parse_arguments.cmake
   wg_python.cmake
   debian-util.cmake
+  shell.cmake
 
   pkg-config.cmake.in
   pkg-config-version.cmake.in

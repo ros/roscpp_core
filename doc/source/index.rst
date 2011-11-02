@@ -300,3 +300,31 @@ cmake-infrastructure changes upstream, this set of hacks will
 contract: as new versions/3rdparty dependencies come online, it will
 expand.
 
+
+
+Jenkins
+-------
+
+got it from the jenkins website.  need to::
+
+  % sudo su - jenkins
+  jenkins@bsq:~$ git config --global user.name "Jenkins"
+  jenkins@bsq:~$ git config --global user.email "straszheim@willowgarage.com"
+
+turn on the firewall:
+
+  ufw allow from 157.22.9.14 # gw.willowgarage.com
+  ufw allow from 50.28.28.128
+  ufw enable
+
+install python-empy
+
+.. TODO::
+
+  stop gnome
+
+
+Test this scenario
+------------------
+     
+breaking rosbuild installed on system... build against rosbuild in source
