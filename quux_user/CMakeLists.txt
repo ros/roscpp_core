@@ -15,6 +15,12 @@ include_directories(${rostime_INCLUDE_DIRS})
 find_package(cpp_common)
 include_directories(${cpp_common_INCLUDE_DIRS})
 
+find_package(roscpp_traits)
+include_directories(${roscpp_traits_INCLUDE_DIRS})
+
+find_package(roscpp_serialization)
+include_directories(${roscpp_serialization_INCLUDE_DIRS})
+
 assert(gencpp_INCLUDE_DIRS)
 include_directories(${gencpp_INCLUDE_DIRS})
 

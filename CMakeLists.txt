@@ -19,6 +19,8 @@ foreach(proj
     gencpp
     rostime
     cpp_common
+    roscpp_traits
+    roscpp_serialization
     std_msgs
     foo
     bar

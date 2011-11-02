@@ -1,0 +1,33 @@
+<package>
+  <description brief="roscpp_traits">
+
+roscpp_traits contains the message traits code as described in
+<a href="http://www.ros.org/wiki/roscpp/Overview/MessagesTraits">MessagesTraits</a>.
+
+This package is a component of <a href="http://www.ros.org/wiki/roscpp">roscpp</a>.
+
+  </description>
+  <author>Josh Faust</author>
+  <license>BSD</license>
+  <review status="Doc reviewed" notes="2011-01-12"/>
+  <url>http://ros.org/wiki/roscpp_traits</url>
+  
+  <depend package="cpp_common"/>
+
+  <export>
+    <cpp cflags="-I${prefix}/include"/>
+  </export>
+
+  <rosbuild2>
+    <depend package="cpp_common"/>
+
+    <export>
+      <include_dir>${roscpp_traits_SOURCE_DIR}/include</include_dir>
+    </export>
+
+    <msgs></msgs>
+
+  </rosbuild2>
+</package>
+
+
