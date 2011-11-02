@@ -17,8 +17,8 @@ foreach(proj
     genmsg
     gencpp
     std_msgs
-    foo
-    bar
+#    foo
+#    bar
     quux_msgs
     quux_user)
   message(STATUS "============== ${proj} ========================================")
