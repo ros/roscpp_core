@@ -3,10 +3,16 @@ include(@INFRA_INSTALL_DIR@/parse_arguments.cmake)
 include(@INFRA_INSTALL_DIR@/wg_python.cmake)
 include(@INFRA_INSTALL_DIR@/debian-util.cmake)
 
-macro(shell)
-  message(STATUS ${ARGN})
-  execute_process(COMMAND ${ARGN})
-endmacro()
+function(shell arg1)
+  set(msg "${arg1}")
+  foreach(arg ${ARGN})
+    set(msg "${msg} ${arg}")
+  endforeach()
+  message(STATUS ">>> ${msg}")
+  execute_process(COMMAND ${arg1} ${ARGN}
+    RESULT_VARIABLE res)
+  message(STATUS "<<< ${res}")
+endfunction()
 
 macro(install_cmake_infrastructure PACKAGE_NAME)
   parse_arguments(PACKAGE 
@@ -103,7 +109,7 @@ macro(em_expand CONTEXT_FILE CMAKE_TEMPLATE_FILE)
   get_filename_component(CONTEXT_FILE_NOPATH ${CONTEXT_FILE} NAME)
   get_filename_component(CMAKE_TEMPLATE_FILE_NOPATH ${CMAKE_TEMPLATE_FILE} NAME)
   configure_file(${CONTEXT_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${CONTEXT_FILE_NOPATH}.py)
-  shell(ls -l ${CMAKE_CURRENT_BINARY_DIR})
+  shell(/bin/ls -l ${CMAKE_CURRENT_BINARY_DIR})
   shell(${EMPY_EXECUTABLE}
     -F ${rosbuild_SOURCE_DIR}/empy_cmake.py
     -F ${CMAKE_CURRENT_BINARY_DIR}/${CONTEXT_FILE_NOPATH}.py
