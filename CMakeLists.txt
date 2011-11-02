@@ -17,10 +17,10 @@ foreach(proj
     genmsg
     gencpp
     std_msgs
-#    foo
-#    bar
-    quux_msgs)
-#    quux_user)
+    foo
+    bar
+    quux_msgs
+    quux_user)
   message(STATUS "============== ${proj} ========================================")
   add_subdirectory(${proj})
 endforeach()

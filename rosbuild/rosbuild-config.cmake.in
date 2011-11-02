@@ -102,24 +102,3 @@ macro(em_expand CONTEXT_FILE_IN CONTEXT_FILE_OUT EM_FILE_IN CMAKE_FILE_OUT)
   message(STATUS "*** including ${CMAKE_FILE_OUT}")
   include(${CMAKE_FILE_OUT})
 endmacro()
-
-macro(md5sum OUTVAR SOMETHING)
-  file(WRITE ${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/tmp.md5sum "${SOMETHING}")
-  execute_process(
-    COMMAND md5sum ${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/tmp.md5sum
-    COMMAND cut -b1-32
-    OUTPUT_VARIABLE ${OUTVAR}
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-endmacro()
-
-macro(execute_code_string CODE_STRING)
-  md5sum(STRINGSUM ${CODE_STRING})
-  set(TMP_CODE_FILE ${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/code_${STRINGSUM}.tmp)
-  message("WRITING CODE TO ${TMP_CODE_FILE}")
-  file(WRITE ${TMP_CODE_FILE} "${CODE_STRING}")
-  message("INCLUDING ${TMP_CODE_FILE}")
-  include(${TMP_CODE_FILE})
-endmacro()
-
-
-
