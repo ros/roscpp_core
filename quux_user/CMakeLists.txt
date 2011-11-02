@@ -38,5 +38,6 @@ include_directories(${std_msgs_INCLUDE_DIRS} ${quux_msgs_INCLUDE_DIRS})
 
 add_executable(quux_user-exec 
   src/main.cpp
-  src/serialization.cpp
   )
+
+target_link_libraries(quux_user-exec ${roscpp_serialization_LIBRARIES})
