@@ -4,12 +4,12 @@ project(rosbuild)
 
 set(INSTALL_SUFFIX share/cmake/${PROJECT_NAME})
 
-# in source, do we even want this to be possible? :)
-set(INFRA_INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR})
-set(PKG_LOCATION "from Source")
+# in source, do we even want this to be possible for rosbuild? :)
+set(INFRA_INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+set(PKG_LOCATION "Source")
 
-configure_file(${PROJECT_NAME}-config.cmake.in
-  ${PROJECT_NAME}-config.cmake
+configure_file(cmake/${PROJECT_NAME}-config.cmake.in
+  cmake/${PROJECT_NAME}-config.cmake
   @ONLY
   )
 
@@ -17,7 +17,7 @@ configure_file(${PROJECT_NAME}-config.cmake.in
 set(INFRA_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/${INSTALL_SUFFIX})
 set(PKG_LOCATION "Installed")
 
-configure_file(${PROJECT_NAME}-config.cmake.in
+configure_file(cmake/${PROJECT_NAME}-config.cmake.in
   cmake_install/${PROJECT_NAME}-config.cmake
   @ONLY
   )
@@ -26,13 +26,11 @@ install(
   FILES
   ${CMAKE_CURRENT_BINARY_DIR}/cmake_install/${PROJECT_NAME}-config.cmake
 
-  cmake/em_expander.py
+  cmake/parse_arguments.cmake
+  cmake/wg_python.cmake
+  cmake/debian-util.cmake
 
-  parse_arguments.cmake
-  wg_python.cmake
-  debian-util.cmake
-
-  pkg-config.cmake.in
-  pkg-config-version.cmake.in
+  cmake/pkg-config.cmake.in
+  cmake/pkg-config-version.cmake.in
   DESTINATION ${INSTALL_SUFFIX}
   )
