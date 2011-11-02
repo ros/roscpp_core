@@ -102,3 +102,12 @@ macro(em_expand CONTEXT_FILE_IN CONTEXT_FILE_OUT EM_FILE_IN CMAKE_FILE_OUT)
   message(STATUS "*** including ${CMAKE_FILE_OUT}")
   include(${CMAKE_FILE_OUT})
 endmacro()
+
+
+function(assert VAR)
+  if (NOT ${VAR})
+    message(FATAL_ERROR "Assertion failed: ${VAR} (== ${${VAR}}")
+  endif()
+  message(STATUS "assert(${VAR}) okay (== ${${VAR}})")
+endfunction()
+  

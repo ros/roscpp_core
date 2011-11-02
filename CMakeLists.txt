@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
+set(ROSBUILD TRUE CACHE BOOL   "Yes, we are building under the new rosbuild")
 set(ROS_LANGS cpp CACHE STRING "ros languages") 
 
 set(CMAKE_INSTALL_PREFIX /tmp/sandbox2)
@@ -16,6 +17,8 @@ add_subdirectory(rosbuild)
 foreach(proj 
     genmsg
     gencpp
+    rostime
+    cpp_common
     std_msgs
     foo
     bar
