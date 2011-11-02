@@ -94,7 +94,7 @@ macro(em_expand CONTEXT_FILE_IN CONTEXT_FILE_OUT EM_FILE_IN CMAKE_FILE_OUT)
   message(STATUS "Expanding ${EM_FILE_IN}")
   execute_process(COMMAND
     ${EMPY_EXECUTABLE}
-    -F ${rosbuild_SOURCE_DIR}/empy_cmake.py
+    -F ${rosbuild_SOURCE_DIR}/cmake/empy_cmake.py
     -F ${CONTEXT_FILE_OUT}
     -o ${CMAKE_FILE_OUT}
     ${EM_FILE_IN}
