@@ -3,6 +3,11 @@ include(@INFRA_INSTALL_DIR@/parse_arguments.cmake)
 include(@INFRA_INSTALL_DIR@/wg_python.cmake)
 include(@INFRA_INSTALL_DIR@/debian-util.cmake)
 
+macro(shell)
+  message(STATUS ${ARGN})
+  execute_process(COMMAND ${ARGN})
+endmacro()
+
 macro(install_cmake_infrastructure PACKAGE_NAME)
   parse_arguments(PACKAGE 
     "VERSION;INCLUDE_DIRS;LIBRARIES;CFG_EXTRAS;MSG_DIRS;PYTHON_PATH" 
@@ -88,13 +93,18 @@ macro(install_cmake_infrastructure PACKAGE_NAME)
 endmacro()
 
 find_program(EMPY_EXECUTABLE empy)
+if(NOT EMPY_EXECUTABLE)
+  message(FATAL_ERROR 
+    "Can't find python executable 'empy':  http://www.alcyone.com/software/empy/ "
+    "You need to install python-empy")
+endif()
 
 macro(em_expand CONTEXT_FILE CMAKE_TEMPLATE_FILE)
   get_filename_component(CONTEXT_FILE_NOPATH ${CONTEXT_FILE} NAME)
   get_filename_component(CMAKE_TEMPLATE_FILE_NOPATH ${CMAKE_TEMPLATE_FILE} NAME)
   configure_file(${CONTEXT_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${CONTEXT_FILE_NOPATH}.py)
-  execute_process(COMMAND
-    ${EMPY_EXECUTABLE}
+  shell(ls -l ${CMAKE_CURRENT_BINARY_DIR})
+  shell(${EMPY_EXECUTABLE}
     -F ${rosbuild_SOURCE_DIR}/empy_cmake.py
     -F ${CMAKE_CURRENT_BINARY_DIR}/${CONTEXT_FILE_NOPATH}.py
     -o ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_TEMPLATE_FILE_NOPATH}.cmake
@@ -121,6 +131,4 @@ macro(execute_code_string CODE_STRING)
   message("INCLUDING ${TMP_CODE_FILE}")
   include(${TMP_CODE_FILE})
 endmacro()
-
-
 
