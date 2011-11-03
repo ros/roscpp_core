@@ -106,7 +106,7 @@ if (NOT @PACKAGE_NAME@_FOUND)
     log(2 "Expanding ${EM_FILE_IN}")
     shell(
       ${EMPY_EXECUTABLE}
-      -F @PKG_CMAKE_SRC_DIR@/empy_cmake.py
+      -F @INFRA_INSTALL_DIR@/empy_cmake.py
       -F ${CONTEXT_FILE_OUT}
       -o ${CMAKE_FILE_OUT}
       ${EM_FILE_IN}
