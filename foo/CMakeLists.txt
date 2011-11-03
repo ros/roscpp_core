@@ -6,10 +6,6 @@ include_directories(include)
 
 add_library(foo SHARED src/lib.cpp)
 
-install(TARGETS foo
-  LIBRARY DESTINATION lib
-  )
-
 install(DIRECTORY include/foo
   DESTINATION include
   FILES_MATCHING PATTERN *.hpp

@@ -87,6 +87,15 @@ if (NOT @PACKAGE_NAME@_FOUND)
       DESTINATION share/cmake/${PACKAGE_NAME}
       )
 
+    # install libraries
+    if(PACKAGE_LIBRARIES)
+      install(TARGETS ${PACKAGE_LIBRARIES}
+	LIBRARY DESTINATION lib
+	ARCHIVE DESTINATION lib
+	)
+    endif()
+
+
     if (IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/debian)
       log(1 "${PROJECT_NAME}: Enabling deb target since directory 'debian' exists")
       safe_execute_process(COMMAND /bin/mkdir -p ${CMAKE_BINARY_DIR}/debs)
