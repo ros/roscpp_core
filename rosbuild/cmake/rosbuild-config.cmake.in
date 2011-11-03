@@ -34,7 +34,7 @@ if (NOT @PACKAGE_NAME@_FOUND)
     set(PKG_LOCATION "Source")
 
     foreach(extra ${PACKAGE_CFG_EXTRAS})
-      configure_file(${extra}.in
+      configure_file(cmake/${extra}.in
 	cmake/${extra}
 	@ONLY
 	)
@@ -60,7 +60,7 @@ if (NOT @PACKAGE_NAME@_FOUND)
     set(INSTALLABLE_CFG_EXTRAS "")
     foreach(extra ${PACKAGE_CFG_EXTRAS})
       list(APPEND INSTALLABLE_CFG_EXTRAS ${CMAKE_CURRENT_BINARY_DIR}/cmake_install/${extra})
-      configure_file(${extra}.in
+      configure_file(cmake/${extra}.in
 	cmake_install/${extra}
 	@ONLY
 	)
