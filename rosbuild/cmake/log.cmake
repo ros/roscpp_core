@@ -1,0 +1,5 @@
+function(LOG ARG_LEVEL ARG_MSG)
+  if(ARG_LEVEL > ROS_LOG_LEVEL)
+    message(STATUS "*${ARG_LEVEL}* ${ARG_MSG}")
+  endif()
+endfunction()
