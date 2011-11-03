@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 set(ROSBUILD TRUE CACHE BOOL   "Yes, we are building under the new rosbuild")
 set(ROS_LANGS cpp CACHE STRING "ros languages") 
 
-set(CMAKE_INSTALL_PREFIX /tmp/sandbox2)
+#set(CMAKE_INSTALL_PREFIX /tmp/sandbox2)
 set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_INSTALL_PREFIX})
 
 message(STATUS "============== rosbuild ========================================")
