@@ -5,7 +5,7 @@ set(ROS_LANGS cpp CACHE STRING "ros languages")
 
 #set(CMAKE_INSTALL_PREFIX /tmp/sandbox2)
 set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_INSTALL_PREFIX})
-set(ROS_LOG_LEVEL 9)
+set(ROSBUILD_LOG 9)
 
 foreach(proj 
     rosbuild

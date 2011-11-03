@@ -5,11 +5,11 @@
 # 3 Also Print True Assert Statements
 
 function(LOG ARG_LEVEL ARG_MSG)
-  if(NOT ROS_LOG_LEVEL)
-    set(ROS_LOG_LEVEL 0)
+  if(NOT ROSBUILD_LOG)
+    set(ROSBUILD_LOG 0)
   endif()
 
-  if(NOT ARG_LEVEL GREATER ${ROS_LOG_LEVEL})
+  if(NOT ARG_LEVEL GREATER ${ROSBUILD_LOG})
     message(STATUS "*${ARG_LEVEL}* ${ARG_MSG}")
   endif()
 endfunction()
