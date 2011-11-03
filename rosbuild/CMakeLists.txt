@@ -26,10 +26,12 @@ install(
   FILES
   ${CMAKE_CURRENT_BINARY_DIR}/cmake_install/${PROJECT_NAME}-config.cmake
 
+  cmake/log.cmake
+  cmake/assert.cmake
   cmake/parse_arguments.cmake
   cmake/wg_python.cmake
   cmake/debian-util.cmake
-  cmake/log.cmake
+  cmake/safe_execute_process.cmake
 
   cmake/pkg-config.cmake.in
   cmake/pkg-config-version.cmake.in
