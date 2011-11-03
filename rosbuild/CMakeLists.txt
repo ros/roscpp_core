@@ -31,6 +31,7 @@ install(
   cmake/debian-util.cmake
   cmake/log.cmake
   cmake/shell.cmake
+  cmake/empy_cmake.py
 
   cmake/pkg-config.cmake.in
   cmake/pkg-config-version.cmake.in
