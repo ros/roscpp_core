@@ -71,14 +71,14 @@ optional packagess for other langs would be ros-DISTRO-STACK-LANG e.g. ros-fuert
 scenarios
 ---------
 
-one buildspace, with packages that generate cpp only, py only, both, and e.g. ${ROS_GENLANGS} + lua 
+one buildspace, with packages that generate cpp only, py only, both, and e.g. ${ROS_GENLANGS} + lua
 (can write a dummy lua generator for testing purposes)
 
 
 open questions
 ==============
 
-rosbuild2 currently makes .deb-per-package... not .deb-per-stack.  :(   
+rosbuild2 currently makes .deb-per-package... not .deb-per-stack.  :(
 
 -debug and non-debug packages.
 
@@ -91,7 +91,7 @@ Times when you have to think about dependencies:
 
   * These are actually pretty light, (basically just ``debuild -S``
     but if we are going to automate some of this, there will be
-    extras).  
+    extras).
 
 * Making debian binary packages ``.deb``
 
@@ -108,7 +108,7 @@ Times when you have to think about dependencies:
     infrastructure.
 
   * Q: what if I depend on e.g. std_msgs, which is installed on the
-    system, and I am building with "pascal" in ROS_LANGS.  
+    system, and I am building with "pascal" in ROS_LANGS.
 
 * Installing
 
@@ -117,7 +117,7 @@ Times when you have to think about dependencies:
   * from build dir
   * from installed dir
 
-* Testing 
+* Testing
 
   * Locally on developer's box
   * On CI farm (jenkins)
@@ -144,7 +144,7 @@ Legend
 Buildtime
 ---------
 
-.. graphviz:: 
+.. graphviz::
 
    digraph ros_build_mechanisms {
 
@@ -153,7 +153,7 @@ Buildtime
         // environment variables:  build parameters
 	node [shape = box, style=filled, color="#aaaaff"]; ROS_LANGS
 
-        // packages        
+        // packages
 	node [shape = box, style=filled, color="#aaffaa"]; rosbuild genmsg gencpp genpy;
 
         node [shape = box, style=filled, color="#ffffaa"]; cmake python
@@ -169,11 +169,11 @@ Buildtime
 
         gencpp -> rosbuild;
         genpy -> rosbuild;
-        std_msgs -> genmsg;     
-        std_msgs -> rosbuild;     
+        std_msgs -> genmsg;
+        std_msgs -> rosbuild;
 
-        geometry_msgs -> genmsg;     
-        geometry_msgs -> rosbuild;     
+        geometry_msgs -> genmsg;
+        geometry_msgs -> rosbuild;
 
         roscpp -> rosbuild;
 
@@ -182,7 +182,7 @@ Buildtime
         quux_nodes -> quux_msgs;
         quux_nodes -> rosbuild;
         quux_nodes -> roscpp;
-        
+
    }
 
 On the farm
@@ -191,7 +191,7 @@ On the farm
 .. graphviz::
 
    digraph ros_end_to_end {
-   
+
    job_generation [ label="job_generation \n(https://code.ros.org/svn/ros/stacks/ros_release/trunk/job_generation/)"];
    rosdistro_file [ label=".rosdistro \n(https://code.ros.org/svn/release/trunk/distros/electric.rosdistro)"];
 
@@ -206,7 +206,7 @@ On the farm
    hudson_jobs -> job_generation;
    job_generation -> rosdistro_file;
    hudson_jobs -> hudson_helper;
-   
+
    }
 
 TODO
@@ -267,13 +267,13 @@ link-switch/other-simple-operation
 
 proper stripping of debug symbols in .debs
 
-job-per-deb.  current system is job-per-architecture, parameterized:  
+job-per-deb.  current system is job-per-architecture, parameterized:
 
 not electric-lucid-amd64 but also *-*-*-stack.  use jenkins to chain
 through them i.e. if *-*-*-ros_com succeeds then the next guy is
 triggered.
 
-it doesn't now...   easy to add:  
+it doesn't now...   easy to add:
 
 there is  job generation package  this uses hudson/jenkins API to configure jobs
 
@@ -287,7 +287,8 @@ go over to job generation, populate the jenkins
 
 * NOTE:  openni, gazebo leaking:   https://code.ros.org/svn/ros/stacks/ros_release/trunk/job_generation/scripts/generate_openni.py
 
-
+had to install schroot, sbuild on cloudbox
+rdiff, rdiff-backup
 
 INTERFACES
 ----------
@@ -299,4 +300,24 @@ the build platform are hidden behind there.  As one is able to push
 cmake-infrastructure changes upstream, this set of hacks will
 contract: as new versions/3rdparty dependencies come online, it will
 expand.
+
+
+
+
+build farm
+----------
+
+possibilities around lvm, btrfs, loopback devices
+
+dd if=/dev/zero of=8G.zeros bs=1024M count=8
+
+losetup -a # shows status
+losetup /dev/loop0 8G.zeros
+fdisk /dev/loop0 #
+mkfs.btrfs /dev/loop0
+mkdir /mnt/distro
+mount /dev/loop0 /mnt/distro
+debootstrap --variant=buildd --arch=amd64 distro /mnt/distro
+umount /mnt/distro
+losetup -d /dev/loop0
 

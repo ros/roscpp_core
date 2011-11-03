@@ -3,24 +3,19 @@ if (NOT @PACKAGE_NAME@_FOUND)
   include(@INFRA_INSTALL_DIR@/log.cmake)
   log(1 "rosbuild (@PKG_LOCATION@) (@INFRA_INSTALL_DIR@)")
 
+  include(@INFRA_INSTALL_DIR@/log.cmake)
+  include(@INFRA_INSTALL_DIR@/assert.cmake)
+  include(@INFRA_INSTALL_DIR@/safe_execute_process.cmake)
   include(@INFRA_INSTALL_DIR@/parse_arguments.cmake)
   include(@INFRA_INSTALL_DIR@/wg_python.cmake)
   include(@INFRA_INSTALL_DIR@/debian-util.cmake)
-  include(@INFRA_INSTALL_DIR@/shell.cmake)
 
-  find_program(EMPY_EXECUTABLE empy)
-  if(NOT EMPY_EXECUTABLE)
-    message(FATAL_ERROR 
-      "Can't find python executable 'empy':  http://www.alcyone.com/software/empy/ "
-      "You need to install python-empy")
-  endif()
-  
   macro(install_cmake_infrastructure PACKAGE_NAME)
-    parse_arguments(PACKAGE 
-      "VERSION;INCLUDE_DIRS;LIBRARIES;CFG_EXTRAS;MSG_DIRS;PYTHON_PATH" 
-      "" 
+    parse_arguments(PACKAGE
+      "VERSION;INCLUDE_DIRS;LIBRARIES;CFG_EXTRAS;MSG_DIRS;PYTHONPATH"
+      ""
       ${ARGN})
-    
+
     log(2 "install_cmake_infrastructure ${PACKAGE_NAME} at version ${PACKAGE_VERSION} in @CMAKE_INSTALL_PREFIX@")
     set(pfx ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY})
     set(PACKAGE_NAME ${PACKAGE_NAME})
@@ -30,8 +25,8 @@ if (NOT @PACKAGE_NAME@_FOUND)
     set(PACKAGE_CFG_EXTRAS ${PACKAGE_CFG_EXTRAS})
     set(PACKAGE_CMAKE_CONFIG_FILES_DIR ${CMAKE_INSTALL_PREFIX}/share/cmake/${PACKAGE_NAME})
     set(PACKAGE_MSG_DIRS ${PACKAGE_MSG_DIRS})
-    set(PACKAGE_PYTHON_PATH ${PACKAGE_PYTHON_PATH})
-    
+    set(PACKAGE_PYTHONPATH ${PACKAGE_PYTHONPATH})
+
 
     # in source
     set(PKG_INCLUDE_PREFIX ${CMAKE_CURRENT_SOURCE_DIR})
@@ -94,17 +89,25 @@ if (NOT @PACKAGE_NAME@_FOUND)
 
     if (IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/debian)
       log(1 "${PROJECT_NAME}: Enabling deb target since directory 'debian' exists")
+      safe_execute_process(COMMAND /bin/mkdir -p ${CMAKE_BINARY_DIR}/debs)
       add_custom_target(${PROJECT_NAME}-deb
 	COMMAND dpkg-source -b ${CMAKE_CURRENT_SOURCE_DIR}
-	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/debs
 	)
+      add_dependencies(debs ${PROJECT_NAME}-deb)
     endif()
   endmacro()
-  
+
+  find_program(EMPY_EXECUTABLE empy)
+  if (NOT EMPY_EXECUTABLE)
+    message(FATAL_ERROR "Unable to find executable 'empy'... try installing package 'python-empy'")
+  endif()
+
   macro(em_expand CONTEXT_FILE_IN CONTEXT_FILE_OUT EM_FILE_IN CMAKE_FILE_OUT)
     configure_file(${CONTEXT_FILE_IN} ${CONTEXT_FILE_OUT})
     log(2 "Expanding ${EM_FILE_IN}")
-    shell(
+    safe_execute_process(COMMAND
+      /usr/bin/env PYTHONPATH=${genmsg_PYTHONPATH}
       ${EMPY_EXECUTABLE}
       -F @INFRA_INSTALL_DIR@/empy_cmake.py
       -F ${CONTEXT_FILE_OUT}
@@ -115,13 +118,6 @@ if (NOT @PACKAGE_NAME@_FOUND)
     include(${CMAKE_FILE_OUT})
   endmacro()
 
-  function(assert VAR)
-    if (NOT ${VAR})
-      message(FATAL_ERROR "Assertion failed: ${VAR} (== ${${VAR}}")
-    endif()
-    log(3 "assert(${VAR}) okay (== ${${VAR}})")
-  endfunction()
-
   function(find_program_required ARG_VAR ARG_PROGRAM_NAME)
     parse_arguments(ARG "PATHS" "" ${ARGN})
     find_program(${ARG_VAR} ${ARG_PROGRAM_NAME} PATHS ${ARG_PATHS})
@@ -131,5 +127,5 @@ if (NOT @PACKAGE_NAME@_FOUND)
       log(1 "${ARG_PROGRAM_NAME} was found at ${${ARG_VAR}}")
     endif()
   endfunction()
-  
+
 endif()

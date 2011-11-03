@@ -8,6 +8,7 @@ find_package(genmsg)
 find_package(gencpp)
 find_package(std_msgs)
 find_package(quux_msgs)
+include_directories(${quux_msgs_INCLUDE_DIRS})
 
 find_package(rostime)
 include_directories(${rostime_INCLUDE_DIRS})
@@ -28,15 +29,7 @@ include_directories(${gencpp_INCLUDE_DIRS})
 # todo: will be set by find_package
 include_directories(${std_msgs_INCLUDE_DIRS} ${quux_msgs_INCLUDE_DIRS})
 
-
-# Manual ROS deps
-#include_directories(/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/include)
-#include_directories(/opt/ros/electric/stacks/ros_comm/utilities/rostime/include)
-#include_directories(/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/include)
-# include_directories(/opt/ros/electric/stacks/ros_comm/utilities/cpp_common/include)
-#include_directories(/opt/ros/electric/stacks/ros_comm/tools/rosconsole/include)
-
-add_executable(quux_user-exec 
+add_executable(quux_user-exec
   src/main.cpp
   )
 
