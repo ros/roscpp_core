@@ -1,4 +1,5 @@
 message("Using @PROJECT_NAME@ @PKG_LOCATION@")
+include(@INFRA_INSTALL_DIR@/log.cmake)
 include(@INFRA_INSTALL_DIR@/parse_arguments.cmake)
 include(@INFRA_INSTALL_DIR@/wg_python.cmake)
 include(@INFRA_INSTALL_DIR@/debian-util.cmake)
@@ -9,7 +10,7 @@ macro(install_cmake_infrastructure PACKAGE_NAME)
     "" 
     ${ARGN})
 
-  message("install_cmake_infrastructure ${PACKAGE_NAME} at version ${PACKAGE_VERSION} in @CMAKE_INSTALL_PREFIX@")
+  log(2 "install_cmake_infrastructure ${PACKAGE_NAME} at version ${PACKAGE_VERSION} in @CMAKE_INSTALL_PREFIX@")
   set(pfx ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY})
   set(PACKAGE_NAME ${PACKAGE_NAME})
   set(PACKAGE_VERSION ${PACKAGE_VERSION})
@@ -91,7 +92,7 @@ find_program(EMPY_EXECUTABLE empy)
 
 macro(em_expand CONTEXT_FILE_IN CONTEXT_FILE_OUT EM_FILE_IN CMAKE_FILE_OUT)
   configure_file(${CONTEXT_FILE_IN} ${CONTEXT_FILE_OUT})
-  message(STATUS "Expanding ${EM_FILE_IN}")
+  log(2 "Expanding ${EM_FILE_IN}")
   execute_process(COMMAND
     ${EMPY_EXECUTABLE}
     -F ${rosbuild_SOURCE_DIR}/cmake/empy_cmake.py
@@ -99,15 +100,14 @@ macro(em_expand CONTEXT_FILE_IN CONTEXT_FILE_OUT EM_FILE_IN CMAKE_FILE_OUT)
     -o ${CMAKE_FILE_OUT}
     ${EM_FILE_IN}
     )
-  message(STATUS "*** including ${CMAKE_FILE_OUT}")
+  log(2 STATUS "*** including ${CMAKE_FILE_OUT}")
   include(${CMAKE_FILE_OUT})
 endmacro()
-
 
 function(assert VAR)
   if (NOT ${VAR})
     message(FATAL_ERROR "Assertion failed: ${VAR} (== ${${VAR}}")
   endif()
-  message(STATUS "assert(${VAR}) okay (== ${${VAR}})")
+  log(3 STATUS "assert(${VAR}) okay (== ${${VAR}})")
 endfunction()
   

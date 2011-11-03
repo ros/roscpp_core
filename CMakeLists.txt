@@ -5,16 +5,10 @@ set(ROS_LANGS cpp CACHE STRING "ros languages")
 
 #set(CMAKE_INSTALL_PREFIX /tmp/sandbox2)
 set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_INSTALL_PREFIX})
+set(ROS_LOG_LEVEL 9)
 
-message(STATUS "============== rosbuild ========================================")
-add_subdirectory(rosbuild)
-
-#foreach(proj ${ROS_LANGS})
-#  message(STATUS "============== gen${proj} ========================================")
-#  add_subdirectory(gen${proj})
-#endforeach() 
-    
 foreach(proj 
+    rosbuild
     genmsg
     gencpp
     cpp_common
