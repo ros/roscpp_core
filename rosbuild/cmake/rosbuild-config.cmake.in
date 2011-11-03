@@ -6,6 +6,14 @@ if (NOT @PACKAGE_NAME@_FOUND)
   include(@INFRA_INSTALL_DIR@/parse_arguments.cmake)
   include(@INFRA_INSTALL_DIR@/wg_python.cmake)
   include(@INFRA_INSTALL_DIR@/debian-util.cmake)
+  include(@INFRA_INSTALL_DIR@/shell.cmake)
+
+  find_program(EMPY_EXECUTABLE empy)
+  if(NOT EMPY_EXECUTABLE)
+    message(FATAL_ERROR 
+      "Can't find python executable 'empy':  http://www.alcyone.com/software/empy/ "
+      "You need to install python-empy")
+  endif()
   
   macro(install_cmake_infrastructure PACKAGE_NAME)
     parse_arguments(PACKAGE 
@@ -92,13 +100,12 @@ if (NOT @PACKAGE_NAME@_FOUND)
 	)
     endif()
   endmacro()
-
-  find_program(EMPY_EXECUTABLE empy)
-
+  
   macro(em_expand CONTEXT_FILE_IN CONTEXT_FILE_OUT EM_FILE_IN CMAKE_FILE_OUT)
     configure_file(${CONTEXT_FILE_IN} ${CONTEXT_FILE_OUT})
     log(2 "Expanding ${EM_FILE_IN}")
-    execute_process(COMMAND
+    #PKG_CMAKE_SRC_DIR
+    shell(
       ${EMPY_EXECUTABLE}
       -F ${rosbuild_SOURCE_DIR}/cmake/empy_cmake.py
       -F ${CONTEXT_FILE_OUT}

@@ -30,6 +30,7 @@ install(
   cmake/wg_python.cmake
   cmake/debian-util.cmake
   cmake/log.cmake
+  cmake/shell.cmake
 
   cmake/pkg-config.cmake.in
   cmake/pkg-config-version.cmake.in
