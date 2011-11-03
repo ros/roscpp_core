@@ -104,10 +104,9 @@ if (NOT @PACKAGE_NAME@_FOUND)
   macro(em_expand CONTEXT_FILE_IN CONTEXT_FILE_OUT EM_FILE_IN CMAKE_FILE_OUT)
     configure_file(${CONTEXT_FILE_IN} ${CONTEXT_FILE_OUT})
     log(2 "Expanding ${EM_FILE_IN}")
-    #PKG_CMAKE_SRC_DIR
     shell(
       ${EMPY_EXECUTABLE}
-      -F ${rosbuild_SOURCE_DIR}/cmake/empy_cmake.py
+      -F @PKG_CMAKE_SRC_DIR@/empy_cmake.py
       -F ${CONTEXT_FILE_OUT}
       -o ${CMAKE_FILE_OUT}
       ${EM_FILE_IN}
