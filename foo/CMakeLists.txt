@@ -6,10 +6,10 @@ include_directories(include)
 
 add_library(foo SHARED src/lib.cpp)
 
-install(DIRECTORY include/foo
-  DESTINATION include
-  FILES_MATCHING PATTERN *.hpp
-  )
+#install(DIRECTORY include/foo
+#  DESTINATION include
+#  FILES_MATCHING PATTERN *.hpp
+#  )
 
 install_cmake_infrastructure(foo
   VERSION 0.0.0
