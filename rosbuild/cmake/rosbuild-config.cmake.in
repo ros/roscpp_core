@@ -107,7 +107,7 @@ if (NOT @PACKAGE_NAME@_FOUND)
     configure_file(${CONTEXT_FILE_IN} ${CONTEXT_FILE_OUT})
     log(2 "Expanding ${EM_FILE_IN}")
     safe_execute_process(COMMAND
-      /usr/bin/env PYTHONPATH=${genmsg_PYTHONPATH}
+      /usr/bin/env PYTHONPATH=${genmsg_PYTHONPATH}:$PYTHONPATH
       ${EMPY_EXECUTABLE}
       -F @INFRA_INSTALL_DIR@/empy_cmake.py
       -F ${CONTEXT_FILE_OUT}
