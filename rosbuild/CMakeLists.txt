@@ -29,6 +29,7 @@ install(
   cmake/parse_arguments.cmake
   cmake/wg_python.cmake
   cmake/debian-util.cmake
+  cmake/log.cmake
 
   cmake/pkg-config.cmake.in
   cmake/pkg-config-version.cmake.in
