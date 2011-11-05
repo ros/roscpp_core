@@ -1,4 +1,5 @@
 if (NOT @PACKAGE_NAME@_FOUND)
+  set(@PACKAGE_NAME@_FOUND)
 
   include(@INFRA_INSTALL_DIR@/log.cmake)
   log(1 "rosbuild (@PKG_LOCATION@) (@INFRA_INSTALL_DIR@)")
@@ -143,6 +144,14 @@ if (NOT @PACKAGE_NAME@_FOUND)
     else()
       log(1 "${ARG_PROGRAM_NAME} was found at ${${ARG_VAR}}")
     endif()
+  endfunction()
+
+  function(find_the_goods)
+    em_expand(
+      @INFRA_INSTALL_DIR@/generate-context.in
+      ${CMAKE_CURRENT_BINARY_DIR}/cmake/generate-context.py
+      @INFRA_INSTALL_DIR@/generate.cmake.em
+      ${CMAKE_CURRENT_BINARY_DIR}/cmake/generate.cmake)
   endfunction()
 
 endif()
