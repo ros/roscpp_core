@@ -1,0 +1,37 @@
+- git:
+    uri: 'git://github.com/straszheim/gencpp.git'
+    local-name: gencpp
+    version: master
+
+- git:
+    uri: 'git://github.com/straszheim/genmsg.git'
+    local-name: genmsg
+    version: master
+
+- git:
+    uri: 'git://github.com/straszheim/rosbuild.git'
+    local-name: rosbuild
+    version: master
+
+- git:
+    uri: 'git://github.com/straszheim/dist-sandbox.git'
+    local-name: dist-sanbox
+    version: master
+    
+- svn:
+    uri: 'https://code.ros.org/svn/ros/stacks/ros_comm/trunk/'
+    local-name: ros_comm
+
+- svn:
+    uri: 'https://code.ros.org/svn/ros/stacks/ros/trunk/'
+    local-name: ros
+
+- svn:
+    uri: 'https://code.ros.org/svn/ros-pkg/stacks/common_msgs/trunk'
+    local-name: common_msgs
+
+
+
+
+
+  
