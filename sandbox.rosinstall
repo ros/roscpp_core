@@ -15,7 +15,7 @@
 
 - git:
     uri: 'git://github.com/straszheim/dist-sandbox.git'
-    local-name: dist-sanbox
+    local-name: dist-sandbox
     version: master
     
 - svn:

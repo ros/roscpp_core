@@ -1,27 +1,23 @@
 cmake_minimum_required(VERSION 2.8)
+find_package(rosbuild)
+find_package(genmsg)
 
-set(ROSBUILD TRUE CACHE BOOL   "Yes, we are building under the new rosbuild")
-set(ROS_LANGS cpp CACHE STRING "ros languages")
+message(STATUS "dist sandbox!  whee!")
 
-#set(CMAKE_INSTALL_PREFIX /tmp/sandbox2)
-set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_INSTALL_PREFIX})
-set(ROSBUILD_LOG 9)
+foreach(subdir
 
-add_custom_target(debs)
-
-foreach(proj
-    rosbuild
-    genmsg
-    gencpp
     cpp_common
     rostime
     roscpp_traits
     roscpp_serialization
     std_msgs
+
+
+    quux_msgs
+    quux_user
     foo
     bar
-    quux_msgs
-    quux_user)
-  message(STATUS "============== ${proj} ========================================")
-  add_subdirectory(${proj})
+    )
+  message("distsandbox: ${subdir}")
+  add_subdirectory(${subdir})
 endforeach()
