@@ -10,8 +10,15 @@ include_directories(${cpp_common_INCLUDE_DIRS})
 # rosbuild_add_boost_directories()
 # 
 
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED
   src/time.cpp src/rate.cpp src/duration.cpp)
+
+install(TARGETS ${PROJECT_NAME}
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  )
+
 # 
 # rosbuild_link_boost(${PROJECT_NAME} date_time thread) 
 # 
