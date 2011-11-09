@@ -10,7 +10,7 @@
 
 - git:
     uri: 'git://github.com/straszheim/catkin.git'
-    local-name: rosbuild
+    local-name: catkin
     version: master
 
 - git:
