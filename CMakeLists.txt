@@ -12,11 +12,6 @@ foreach(subdir
     roscpp_serialization
     std_msgs
 
-
-    quux_msgs
-    quux_user
-    foo
-    bar
     )
   message("distsandbox: ${subdir}")
   add_subdirectory(${subdir})
