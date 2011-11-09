@@ -14,8 +14,8 @@
     version: master
 
 - git:
-    uri: 'git://github.com/straszheim/dist-sandbox.git'
-    local-name: dist-sandbox
+    uri: 'git://github.com/straszheim/roscpp_core.git'
+    local-name: roscpp_core
     version: master
     
 - svn:
