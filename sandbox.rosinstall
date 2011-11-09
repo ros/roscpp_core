@@ -35,6 +35,10 @@
     uri: 'https://code.ros.org/svn/ros-pkg/stacks/common_msgs/trunk'
     local-name: common_msgs
 
+- git:
+    uri: 'git://github.com/mkjaergaard/catkin_test.git'
+    local-name: catkin_test
+    version: master
 
 
 
