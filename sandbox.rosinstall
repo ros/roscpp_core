@@ -9,6 +9,11 @@
     version: master
 
 - git:
+    uri: 'git://github.com/straszheim/ros-std-msgs.git'
+    local-name: std_msgs
+    version: master
+
+- git:
     uri: 'git://github.com/straszheim/catkin.git'
     local-name: catkin
     version: master
