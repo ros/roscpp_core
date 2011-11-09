@@ -1,5 +1,5 @@
 project(cpp_common)
-find_package(rosbuild)
+find_package(catkin)
 
 include(CheckIncludeFile)
 include(CheckFunctionExists)

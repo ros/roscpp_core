@@ -1,6 +1,6 @@
 project(roscpp_serialization)
 
-find_package(rosbuild)
+find_package(catkin)
 
 find_package(cpp_common)
 include_directories(${cpp_common_INCLUDE_DIRS})

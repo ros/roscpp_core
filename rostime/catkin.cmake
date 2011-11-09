@@ -1,5 +1,5 @@
 project(rostime)
-find_package(rosbuild)
+find_package(catkin)
 include_directories(include)
 
 find_package(cpp_common)

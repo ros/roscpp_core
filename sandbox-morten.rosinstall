@@ -9,7 +9,7 @@
     version: master
 
 - git:
-    uri: 'git://github.com/straszheim/rosbuild.git'
+    uri: 'git://github.com/straszheim/catkin.git'
     local-name: rosbuild
     version: master
 

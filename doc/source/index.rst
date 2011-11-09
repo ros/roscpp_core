@@ -23,7 +23,7 @@ manually.
 * ros_cmake is a package.  it has only cmake and python as
   dependencies.  it is the base of everything... common cmake
   infrastructure goes in there.  Maybe eventually it contains all the
-  rosbuild2 cmake infrastructure.
+  catkin cmake infrastructure.
 
   it is capable of e.g. finding all the lang packages listed in
   ROS_GENLANGS
@@ -78,7 +78,7 @@ one buildspace, with packages that generate cpp only, py only, both, and e.g. ${
 open questions
 ==============
 
-rosbuild2 currently makes .deb-per-package... not .deb-per-stack.  :(
+catkin currently makes .deb-per-package... not .deb-per-stack.  :(
 
 -debug and non-debug packages.
 

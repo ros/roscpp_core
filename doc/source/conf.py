@@ -40,7 +40,7 @@ show_sphinx = False
 master_doc = 'index'
 
 # General information about the project.
-project = u'rosbuild'
+project = u'catkin'
 gitcmd = 'git log -n1 --pretty=format:%cD'.split()
 print gitcmd
 
@@ -102,7 +102,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  Major themes that come with
 # Sphinx are currently 'default' and 'sphinxdoc'.
-html_theme = 'rosbuild'
+html_theme = 'catkin'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -114,7 +114,7 @@ html_theme_path = ['.']
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = 'rosbuild'
+html_title = 'catkin'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
@@ -172,7 +172,7 @@ html_static_path = ['_static']
 #html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'rosbuild-cmakedoc'
+htmlhelp_basename = 'catkin-cmakedoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -186,7 +186,7 @@ htmlhelp_basename = 'rosbuild-cmakedoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'rosbuild.tex', ur'Rosbuild',
+  ('index', 'catkin.tex', ur'Catkin',
    ur'troy d. straszheim', 'manual'),
 ]
 

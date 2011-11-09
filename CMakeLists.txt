@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-find_package(rosbuild)
+find_package(catkin)
 find_package(genmsg)
 
 message(STATUS "dist sandbox!  whee!")
