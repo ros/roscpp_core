@@ -1,23 +1,22 @@
-if(CATKIN)
-  include(catkin.cmake OPTIONAL)
-  return()
-endif()
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
+project(roscpp_serialization)
 
-# Set the build type.  Options are:
-#  Coverage       : w/ debug symbols, w/o optimization, w/ code-coverage
-#  Debug          : w/ debug symbols, w/o optimization
-#  Release        : w/o debug symbols, w/ optimization
-#  RelWithDebInfo : w/ debug symbols, w/ optimization
-#  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
-#set(ROS_BUILD_TYPE RelWithDebInfo)
+find_package(catkin)
 
-rosbuild_init()
+find_package(cpp_common)
+include_directories(${cpp_common_INCLUDE_DIRS})
 
-#set the default path for built executables to the "bin" directory
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-#set the default path for built libraries to the "lib" directory
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+find_package(rostime)
+include_directories(${rostime_INCLUDE_DIRS})
 
-rosbuild_add_library(${PROJECT_NAME} src/serialization.cpp)
+find_package(roscpp_traits)
+include_directories(${roscpp_traits_INCLUDE_DIRS})
+
+include_directories(include)
+
+add_library(${PROJECT_NAME} src/serialization.cpp)
+
+install_cmake_infrastructure(roscpp_serialization
+  VERSION 0.0.0
+  LIBRARIES roscpp_serialization
+  INCLUDE_DIRS include
+  )

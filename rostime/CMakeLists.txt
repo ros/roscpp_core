@@ -1,33 +1,33 @@
-if(CATKIN)
-  include(catkin.cmake)
-  return()
-endif()
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
+project(rostime)
+find_package(catkin)
+include_directories(include)
 
-# Set the build type.  Options are:
-#  Coverage       : w/ debug symbols, w/o optimization, w/ code-coverage
-#  Debug          : w/ debug symbols, w/o optimization
-#  Release        : w/o debug symbols, w/ optimization
-#  RelWithDebInfo : w/ debug symbols, w/ optimization
-#  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
-#set(ROS_BUILD_TYPE RelWithDebInfo)
+find_package(cpp_common)
+include_directories(${cpp_common_INCLUDE_DIRS})
 
-rosbuild_init()
+# include(${CMAKE_CURRENT_BINARY_DIR}/package.cmake)
+# 
+# rosbuild_add_boost_directories()
+# 
 
-#set the default path for built executables to the "bin" directory
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-#set the default path for built libraries to the "lib" directory
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+add_library(${PROJECT_NAME} SHARED
+  src/time.cpp src/rate.cpp src/duration.cpp)
 
-rosbuild_add_boost_directories()
-rosbuild_add_library(${PROJECT_NAME} 
-  src/time.cpp 
-  src/rate.cpp
-  src/duration.cpp
+install(TARGETS ${PROJECT_NAME}
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
   )
-rosbuild_link_boost(${PROJECT_NAME} thread)
 
-if (NOT APPLE)
-target_link_libraries(${PROJECT_NAME} rt)
-endif (NOT APPLE)
+# 
+# rosbuild_link_boost(${PROJECT_NAME} date_time thread) 
+# 
+# if(NOT (APPLE OR WIN32 OR MINGW))
+#   target_link_libraries(${PROJECT_NAME} rt)
+# endif()
+# 
+
+install_cmake_infrastructure(rostime
+  VERSION 0.0.0
+  INCLUDE_DIRS include
+  )
