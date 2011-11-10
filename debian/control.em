@@ -1,11 +1,11 @@
-Source: roscpp-core
+Source: @(CATKIN_PACKAGE_PREFIX)roscpp-core
 Section: misc
 Priority: extra
-Maintainer: Troy Straszheim <straszheim@willowgarage.com>
+Maintainer: Troy Straszheim <straszheim@@willowgarage.com>
 Build-Depends: debhelper (>= 7), cmake, gcc, make, catkin
 Homepage: <insert the upstream URL, if relevant>
 
-Package: roscpp-core
+Package: @(CATKIN_PACKAGE_PREFIX)roscpp-core
 Architecture: any
 Depends: ${misc:Depends}
 Description: <insert up to 60 chars description>

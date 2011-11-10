@@ -301,8 +301,10 @@ cmake-infrastructure changes upstream, this set of hacks will
 contract: as new versions/3rdparty dependencies come online, it will
 expand.
 
+IDEA:  find_package(ROS electric COMPONENTS ros_comm common_msgs)
 
-
+       include_directories(${ROS_INCLUDE_DIRS})
+       target_link_libraries(mytarget ${ROS_LIBRARIES})
 
 build farm
 ----------
