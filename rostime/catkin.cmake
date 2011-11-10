@@ -19,9 +19,11 @@ install(TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   )
 
-# 
-# rosbuild_link_boost(${PROJECT_NAME} date_time thread) 
-# 
+
+find_package(Boost COMPONENTS date_time thread)
+
+target_link_libraries(rostime ${Boost_LIBRARIES})
+ 
 # if(NOT (APPLE OR WIN32 OR MINGW))
 #   target_link_libraries(${PROJECT_NAME} rt)
 # endif()
@@ -30,4 +32,5 @@ install(TARGETS ${PROJECT_NAME}
 install_cmake_infrastructure(rostime
   VERSION 0.0.0
   INCLUDE_DIRS include
+  LIBRARIES rostime
   )
