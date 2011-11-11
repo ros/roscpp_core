@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# roscpp core prototype documentation build configuration file, created by
+# roscpp_core prototype documentation build configuration file, created by
 # sphinx-quickstart on Fri Nov 11 11:12:23 2011.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -42,7 +42,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'roscpp core prototype'
+project = u'roscpp_core prototype'
 copyright = u'2011, Troy D. Straszheim'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -185,7 +185,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'roscppcoreprototype.tex', u'roscpp core prototype Documentation',
+  ('index', 'roscppcoreprototype.tex', u'roscpp_core prototype Documentation',
    u'Troy D. Straszheim', 'manual'),
 ]
 
@@ -215,7 +215,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'roscppcoreprototype', u'roscpp core prototype Documentation',
+    ('index', 'roscppcoreprototype', u'roscpp_core prototype Documentation',
      [u'Troy D. Straszheim'], 1)
 ]
 
@@ -229,7 +229,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'roscppcoreprototype', u'roscpp core prototype Documentation',
+  ('index', 'roscppcoreprototype', u'roscpp_core prototype Documentation',
    u'Troy D. Straszheim', 'roscppcoreprototype', 'One line description of project.',
    'Miscellaneous'),
 ]

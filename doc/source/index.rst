@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-A roscpp core prototype
+A roscpp_core prototype
 =======================
 
 The goal of this prototype is to discover ways to make it easy to use
@@ -92,6 +92,12 @@ The important line is the ``find_package``.  This usage is very
 standard CMake practice.  Unfortunately it is not possible to pass
 ``fuerte`` as the version, as cmake insists that the version be
 numeric.
+
+Indeed, four dependencies (cpp_common, rostime, roscpp_traits,
+roscpp_serialization) does seem like a lot, but each is very tiny;
+roscpp_traits has no library, roscpp_serialization contains only one
+function.  We'll be cleaning this up.  The important bit is that the
+user's workflow is decoupled from upstream.
 
 Now build in the usual way, with the caveat that ``CMAKE_PREFIX_PATH``
 must be specified for the ``find_package`` to work.  We believe that
