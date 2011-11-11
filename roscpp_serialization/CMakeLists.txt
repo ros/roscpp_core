@@ -13,7 +13,7 @@ include_directories(${roscpp_traits_INCLUDE_DIRS})
 
 include_directories(include)
 
-add_library(${PROJECT_NAME} src/serialization.cpp)
+add_library(roscpp_serialization SHARED src/serialization.cpp)
 
 install_cmake_infrastructure(roscpp_serialization
   VERSION 0.0.0
