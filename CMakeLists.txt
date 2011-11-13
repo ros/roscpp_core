@@ -9,7 +9,6 @@ foreach(subdir
     roscpp_traits
     roscpp_serialization
     )
-  message("roscpp_core: ${subdir}")
   add_subdirectory(${subdir})
 endforeach()
 
