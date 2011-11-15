@@ -40,6 +40,9 @@
     local-name: catkin_test
     version: master
 
+- svn:
+    uri: 'https://code.ros.org/svn/ros/stacks/ros_tutorials/trunk/roscpp_tutorials/'
+    local-name: roscpp_tutorials
 
 
 
