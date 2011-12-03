@@ -17,5 +17,5 @@ Homepage: http://www.ros.org
 
 Catkin-ProjectName: roscpp_core
 Catkin-CopyrightType:  willowgarage
-Catkin-Depends: catkin, genmsg, std_msgs
+Catkin-Depends: catkin, genmsg
 Catkin-DebRulesType: cmake
