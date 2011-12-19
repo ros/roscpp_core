@@ -6,7 +6,10 @@ find_package(cpp_common)
 include_directories(${cpp_common_INCLUDE_DIRS})
 
 find_package(Boost COMPONENTS date_time thread)
-find_library(RT_LIBRARY rt)
+
+# todo: what is with this rt.
+#find_library(RT_LIBRARY rt)
+#message("RT_LIBRARY: ${RT_LIBRARY}")
 
 add_library(rostime SHARED
   src/time.cpp src/rate.cpp src/duration.cpp)
