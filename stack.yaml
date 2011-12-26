@@ -1,5 +1,5 @@
 Catkin-ProjectName: roscpp_core
-Version: 0.1.2
+Version: 0.1.3
 Description: Willow Garage low level build system macros and infrastructure
 Author: Troy Straszheim <straszheim@willowgarage.com>, Morten Kjaergaard, Ken Conley
 Maintainer: Troy Straszheim <straszheim@willowgarage.com>
