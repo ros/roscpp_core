@@ -24,13 +24,15 @@ if(HAVE_GLIBC_BACKTRACE)
 endif(HAVE_GLIBC_BACKTRACE)
 
 add_library(${PROJECT_NAME} SHARED src/debug.cpp)
+
 install(TARGETS ${PROJECT_NAME}
-  RUNTIME DESTINATION bin
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
+    DESTINATION lib
   )
-  
-install_cmake_infrastructure(cpp_common
+
+install(DIRECTORY include
+    DESTINATION include)
+
+catkin_project(cpp_common
   VERSION 0.0.0
   INCLUDE_DIRS include
   )
