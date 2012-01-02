@@ -20,7 +20,7 @@ install(TARGETS rostime
   DESTINATION lib
   )
 
-install(DIRECTORY include
+install(DIRECTORY include/
   DESTINATION include
   )
 

@@ -19,7 +19,7 @@ install(TARGETS roscpp_serialization
     DESTINATION lib
   )
 
-install(DIRECTORY include
+install(DIRECTORY include/
     DESTINATION include)
 
 catkin_project(roscpp_serialization

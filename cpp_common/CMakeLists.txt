@@ -29,7 +29,7 @@ install(TARGETS ${PROJECT_NAME}
     DESTINATION lib
   )
 
-install(DIRECTORY include
+install(DIRECTORY include/
     DESTINATION include)
 
 catkin_project(cpp_common

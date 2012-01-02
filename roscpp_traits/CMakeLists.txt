@@ -1,7 +1,7 @@
 project(roscpp_traits)
 find_package(catkin)
 
-install(DIRECTORY include
+install(DIRECTORY include/
   DESTINATION include)
 
 catkin_project(roscpp_traits
