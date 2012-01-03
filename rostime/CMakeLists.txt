@@ -9,7 +9,10 @@ find_package(Boost COMPONENTS date_time thread)
 add_library(rostime SHARED
   src/time.cpp src/rate.cpp src/duration.cpp)
 
-target_link_libraries(rostime ${Boost_LIBRARIES} ${RT_LIBRARY})
+target_link_libraries(rostime ${Boost_LIBRARIES})
+if(NOT APPLE)
+  target_link_libraries(rostime ${RT_LIBRARY})
+endif()
 
 install(TARGETS rostime
   DESTINATION lib
