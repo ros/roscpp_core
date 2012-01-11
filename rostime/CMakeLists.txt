@@ -19,8 +19,9 @@ install(TARGETS rostime
   )
 
 install(DIRECTORY include/
-  DESTINATION include
-  )
+        DESTINATION include
+        FILES_MATCHING PATTERN "*.h"
+        PATTERN ".svn" EXCLUDE)
 
 catkin_project(rostime
   VERSION 0.0.0
