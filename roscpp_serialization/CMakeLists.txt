@@ -20,7 +20,9 @@ install(TARGETS roscpp_serialization
   )
 
 install(DIRECTORY include/
-    DESTINATION include)
+        DESTINATION include
+        FILES_MATCHING PATTERN "*.h"
+        PATTERN ".svn" EXCLUDE)
 
 catkin_project(roscpp_serialization
   VERSION 0.0.0

@@ -30,7 +30,9 @@ install(TARGETS ${PROJECT_NAME}
   )
 
 install(DIRECTORY include/
-    DESTINATION include)
+        DESTINATION include
+        FILES_MATCHING PATTERN "*.h"
+        PATTERN ".svn" EXCLUDE)
 
 catkin_project(cpp_common
   VERSION 0.0.0
