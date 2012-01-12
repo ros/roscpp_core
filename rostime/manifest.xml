@@ -1,4 +1,5 @@
 <package>
+  <catkin/>
   <description brief="rostime">
 
 Time and Duration implementations for C++ libraries, including roscpp.
@@ -8,8 +9,6 @@ Time and Duration implementations for C++ libraries, including roscpp.
   <license>BSD</license>
   <review status="Doc reviewed" notes="2011-01-12"/>
   <url>http://ros.org/wiki/rostime</url>
-
-  <depend package="cpp_common"/>
 
   <export>
     <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags rostime`"

@@ -1,4 +1,5 @@
 <package>
+  <catkin/>
   <description brief="roscpp_serialization">
 
 roscpp_serialization contains the code for serialization as described in
@@ -11,10 +12,6 @@ This package is a component of <a href="http://www.ros.org/wiki/roscpp">roscpp</
   <license>BSD</license>
   <review status="Doc reviewed" notes="2011-01-12"/>
   <url>http://ros.org/wiki/roscpp_serialization</url>
-
-  <depend package="roscpp_traits"/>
-  <depend package="cpp_common"/>
-  <depend package="rostime"/>
 
   <export>
     <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags roscpp_serialization`"
