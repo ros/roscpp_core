@@ -17,7 +17,8 @@ This package is a component of <a href="http://www.ros.org/wiki/roscpp">roscpp</
   <depend package="rostime"/>
 
   <export>
-    <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -Wl,-rpath,${prefix}/lib -lroscpp_serialization"/>
+    <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags roscpp_serialization`"
+         lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs roscpp_serialization`"/>
   </export>
 
 </package>
