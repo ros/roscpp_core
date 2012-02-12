@@ -2,6 +2,7 @@ project(roscpp_core)
 cmake_minimum_required(VERSION 2.8)
 find_package(catkin)
 find_package(genmsg)
+catkin_stack()
 
 foreach(subdir
     cpp_common
