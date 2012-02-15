@@ -835,11 +835,13 @@ inline SerializedMessage serializeServiceResponse(bool ok, const M& message)
   }
   else
   {
-    m.num_bytes = 5;
-    m.buf.reset(new uint8_t[5]);
+    uint32_t len = serializationLength(message);
+    m.num_bytes = len + 1;
+    m.buf.reset(new uint8_t[m.num_bytes]);
+
     OStream s(m.buf.get(), (uint32_t)m.num_bytes);
     serialize(s, (uint8_t)ok);
-    serialize(s, (uint32_t)0);
+    serialize(s, message);
   }
 
   return m;
