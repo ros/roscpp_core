@@ -8,7 +8,6 @@ Homepage: http://www.ros.org
 Catkin-CopyrightType:  willowgarage
 Catkin-DebRulesType: cmake
 
-Depends: genmsg,
-         libboost-thread-dev,
-         libboost-date-time-dev
+Depends: boost,
+         genmsg
 
