@@ -1,7 +1,7 @@
 <stack>
   <description brief="roscpp_core">Underlying data libraries for roscpp messages. </description>
   <author>Josh Faust</author>
-  <version>1.7.0</version>
+  <version>0.2.1</version>
   <license>BSD,LGPL</license>  
   <review status="doc reviewed" notes="REP 100"/>
   <url>http://ros.org/wiki/roscpp_core</url>
