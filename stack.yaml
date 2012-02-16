@@ -1,9 +1,9 @@
 Catkin-ProjectName: roscpp_core
 Version: 0.2.1
-Description: Willow Garage low level build system macros and infrastructure
-Author: Troy Straszheim <straszheim@willowgarage.com>, Morten Kjaergaard, Ken Conley
-Maintainer: Troy Straszheim <straszheim@willowgarage.com>
-Homepage: http://www.ros.org
+Description: Underlying data libraries for roscpp messages.
+Author: Josh Faust <jfaust@willowgarage.com>
+Maintainer: Dirk Thomas <dthomas@willowgarage.com>
+Homepage: http://www.ros.org/wiki/roscpp_core
 
 Catkin-CopyrightType:  willowgarage
 Catkin-DebRulesType: cmake
