@@ -13,10 +13,11 @@ include_directories(${roscpp_traits_INCLUDE_DIRS})
 
 include_directories(include)
 
-add_library(roscpp_serialization SHARED src/serialization.cpp)
+add_library(roscpp_serialization src/serialization.cpp)
 
 install(TARGETS roscpp_serialization
-    DESTINATION lib
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
   )
 
 install(DIRECTORY include/

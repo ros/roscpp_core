@@ -23,10 +23,11 @@ if(HAVE_GLIBC_BACKTRACE)
   add_definitions(-DHAVE_GLIBC_BACKTRACE)
 endif(HAVE_GLIBC_BACKTRACE)
 
-add_library(${PROJECT_NAME} SHARED src/debug.cpp)
+add_library(${PROJECT_NAME} src/debug.cpp)
 
 install(TARGETS ${PROJECT_NAME}
-    DESTINATION lib
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
   )
 
 install(DIRECTORY include/

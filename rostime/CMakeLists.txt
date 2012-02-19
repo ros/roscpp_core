@@ -6,7 +6,7 @@ find_package(cpp_common)
 include_directories(${cpp_common_INCLUDE_DIRS})
 find_package(Boost COMPONENTS date_time thread)
 
-add_library(rostime SHARED
+add_library(rostime 
   src/time.cpp src/rate.cpp src/duration.cpp)
 
 target_link_libraries(rostime ${Boost_LIBRARIES})
@@ -15,7 +15,8 @@ if(NOT APPLE)
 endif()
 
 install(TARGETS rostime
-  DESTINATION lib
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
   )
 
 install(DIRECTORY include/
