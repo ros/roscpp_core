@@ -25,7 +25,6 @@ install(DIRECTORY include/
         PATTERN ".svn" EXCLUDE)
 
 catkin_project(rostime
-  VERSION 0.0.0
   INCLUDE_DIRS include
   LIBRARIES rostime
   )
