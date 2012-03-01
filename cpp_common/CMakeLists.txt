@@ -36,6 +36,5 @@ install(DIRECTORY include/
         PATTERN ".svn" EXCLUDE)
 
 catkin_project(cpp_common
-  VERSION 0.0.0
   INCLUDE_DIRS include
   )

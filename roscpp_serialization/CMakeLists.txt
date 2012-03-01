@@ -26,7 +26,6 @@ install(DIRECTORY include/
         PATTERN ".svn" EXCLUDE)
 
 catkin_project(roscpp_serialization
-  VERSION 0.0.0
   LIBRARIES roscpp_serialization
   INCLUDE_DIRS include
   )
