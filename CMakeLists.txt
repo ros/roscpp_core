@@ -16,4 +16,5 @@ endforeach()
 # install all manifests
 install_matching_to_share(manifest.xml)
 
-install(FILES stack.yaml DESTINATION share/${PROJECT_NAME})
+install(FILES stack.yaml stack.xml 
+        DESTINATION share/${PROJECT_NAME})
