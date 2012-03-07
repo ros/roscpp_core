@@ -47,6 +47,7 @@
 
 #include <boost/thread/mutex.hpp>
 #include <boost/io/ios_state.hpp>
+#include <boost/date_time/posix_time/ptime.hpp>
 
 /*********************************************************************
  ** Preprocessor
@@ -308,6 +309,24 @@ namespace ros
       }
 
     return true;
+  }
+
+  Time Time::fromBoost(const boost::posix_time::ptime& t)
+  {
+   boost::posix_time::time_duration diff = t - boost::posix_time::from_time_t(0);
+   return Time::fromBoost(diff);
+  }
+
+  Time Time::fromBoost(const boost::posix_time::time_duration& d)
+  {
+    Time t;
+    t.sec = d.total_seconds();
+#if defined(BOOST_DATE_TIME_HAS_NANOSECONDS)
+    t.nsec = d.fractional_seconds();
+#else
+    t.nsec = d.fractional_seconds()*1000;
+#endif
+    return t;
   }
 
   std::ostream& operator<<(std::ostream& os, const Time &rhs)

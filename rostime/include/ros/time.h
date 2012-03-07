@@ -71,6 +71,7 @@
 namespace boost {
   namespace posix_time {
     class ptime;
+    class time_duration;
   }
 }
 
@@ -207,6 +208,9 @@ namespace ros
      * \brief Wait for time to become valid, with timeout
      */
     static bool waitForValid(const ros::WallDuration& timeout);
+
+    static Time fromBoost(const boost::posix_time::ptime& t);
+    static Time fromBoost(const boost::posix_time::time_duration& d);
   };
 
   extern const Time TIME_MAX;
