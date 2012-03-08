@@ -1,5 +1,5 @@
 Catkin-ProjectName: roscpp_core
-Version: 0.2.2
+Version: 0.2.3
 Description: Underlying data libraries for roscpp messages.
 Author: Josh Faust <jfaust@willowgarage.com>
 Maintainer: Dirk Thomas <dthomas@willowgarage.com>
