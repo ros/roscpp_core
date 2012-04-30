@@ -122,8 +122,8 @@ namespace ros
     // problems in Windows Vista, and this API is by far the most accurate that
     // I know of in Windows, so I'll use it here despite all these caveats
     static LARGE_INTEGER cpu_freq, init_cpu_time;
-    uint32_t start_sec = 0;
-    uint32_t start_nsec = 0;
+    static uint32_t start_sec = 0;
+    static uint32_t start_nsec = 0;
     if ( ( start_sec == 0 ) && ( start_nsec == 0 ) )
       {
         QueryPerformanceFrequency(&cpu_freq);
