@@ -5,7 +5,7 @@
     Underlying data libraries for roscpp messages.
   </description>
   <author>Josh Faust</author>
-  <maintainer>Dirk Thomas dthomas@willowgarage.com</maintainer>
+  <maintainer email="dthomas@willowgarage.com">Dirk Thomas</maintainer>
   <license>BSD,LGPL</license>  
   <copyright>Willow Garage</copyright>
   <url>http://www.ros.org/wiki/roscpp_core</url>
