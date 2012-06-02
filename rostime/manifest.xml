@@ -1,5 +1,4 @@
 <package>
-  <catkin/>
   <description brief="rostime">
 
 Time and Duration implementations for C++ libraries, including roscpp.

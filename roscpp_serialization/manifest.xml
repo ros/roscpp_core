@@ -1,5 +1,4 @@
 <package>
-  <catkin/>
   <description brief="roscpp_serialization">
 
 roscpp_serialization contains the code for serialization as described in

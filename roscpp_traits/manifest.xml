@@ -1,5 +1,4 @@
 <package>
-  <catkin/>
   <description brief="roscpp_traits">
 
 roscpp_traits contains the message traits code as described in

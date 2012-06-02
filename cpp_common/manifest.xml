@@ -1,5 +1,4 @@
 <package>
-  <catkin/>
   <description brief="cpp_common">
 
 cpp_common contains C++ code for doing things that are not necessarily ROS
