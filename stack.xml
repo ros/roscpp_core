@@ -12,7 +12,7 @@
   <review status="doc reviewed" notes="REP 100"/>
 
   <build_depends>boost</build_depends>
-  <build_depends>genmsg</build_depends>
+  <build_depends>catkin</build_depends>
   <build_depends>ros</build_depends> <!-- rosclean, roslang, roslib, rosunit -->
 
   <depends>boost</depends>
