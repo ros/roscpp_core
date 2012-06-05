@@ -1,10 +1,10 @@
 project(rostime)
-find_package(catkin)
+find_package(catkin REQUIRED)
 include_directories(include)
 
-find_package(cpp_common)
+find_package(cpp_common REQUIRED)
 include_directories(${cpp_common_INCLUDE_DIRS})
-find_package(Boost COMPONENTS date_time thread)
+find_package(Boost REQUIRED COMPONENTS date_time thread)
 
 add_library(rostime 
   src/time.cpp src/rate.cpp src/duration.cpp)

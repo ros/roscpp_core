@@ -1,5 +1,5 @@
 project(roscpp_traits)
-find_package(catkin)
+find_package(catkin REQUIRED)
 
 install(DIRECTORY include/
         DESTINATION include

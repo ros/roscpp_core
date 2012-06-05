@@ -1,14 +1,14 @@
 project(roscpp_serialization)
 
-find_package(catkin)
+find_package(catkin REQUIRED)
 
-find_package(cpp_common)
+find_package(cpp_common REQUIRED)
 include_directories(${cpp_common_INCLUDE_DIRS})
 
-find_package(rostime)
+find_package(rostime REQUIRED)
 include_directories(${rostime_INCLUDE_DIRS})
 
-find_package(roscpp_traits)
+find_package(roscpp_traits REQUIRED)
 include_directories(${roscpp_traits_INCLUDE_DIRS})
 
 include_directories(include)

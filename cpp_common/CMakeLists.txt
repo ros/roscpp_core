@@ -1,5 +1,5 @@
 project(cpp_common)
-find_package(catkin)
+find_package(catkin REQUIRED)
 
 include(CheckIncludeFile)
 include(CheckFunctionExists)
