@@ -213,8 +213,8 @@ namespace ros
     static Time fromBoost(const boost::posix_time::time_duration& d);
   };
 
-  extern const Time TIME_MAX;
-  extern const Time TIME_MIN;
+  extern ROSTIME_DECL const Time TIME_MAX;
+  extern ROSTIME_DECL const Time TIME_MIN;
 
   /**
    * \brief Time representation.  Always wall-clock time.
