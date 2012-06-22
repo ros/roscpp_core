@@ -124,8 +124,8 @@ public:
   bool sleep() const;
 };
 
-extern const Duration DURATION_MAX;
-extern const Duration DURATION_MIN;
+extern ROSTIME_DECL const Duration DURATION_MAX;
+extern ROSTIME_DECL const Duration DURATION_MIN;
 
 /**
  * \brief Duration representation for use with the WallTime class.
