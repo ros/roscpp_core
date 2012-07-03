@@ -8,7 +8,7 @@ namespace ros {
     int64_t nsec_part = nsec;
     int64_t sec_part = sec;
 
-    while (nsec_part > 1000000000L)
+    while (nsec_part >= 1000000000L)
       {
         nsec_part -= 1000000000L;
         ++sec_part;
