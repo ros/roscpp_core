@@ -472,15 +472,9 @@ namespace ros
 
   void normalizeSecNSecUnsigned(int64_t& sec, int64_t& nsec)
   {
-    int64_t nsec_part = nsec;
-    int64_t sec_part = sec;
-
-    while (nsec_part >= 1000000000L)
-      {
-        nsec_part -= 1000000000L;
-        ++sec_part;
-      }
-    while (nsec_part < 0)
+    int64_t nsec_part = nsec % 1000000000L;
+    int64_t sec_part = sec + nsec / 1000000000L;
+    if (nsec_part < 0)
       {
         nsec_part += 1000000000L;
         --sec_part;

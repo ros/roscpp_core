@@ -62,10 +62,13 @@ namespace ros
   template<class T, class D>
   T& TimeBase<T, D>::fromNSec(uint64_t t)
   {
-    sec  = (int32_t)(t / 1000000000);
-    nsec = (int32_t)(t % 1000000000);
+    uint64_t sec64 = 0;
+    uint64_t nsec64 = t;
 
-    normalizeSecNSec(sec, nsec);
+    normalizeSecNSec(sec64, nsec64);
+
+    sec = (uint32_t)sec64;
+    nsec = (uint32_t)nsec64;
 
     return *static_cast<T*>(this);
   }
