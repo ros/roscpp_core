@@ -452,7 +452,7 @@ namespace ros
     uint64_t nsec_part = nsec % 1000000000UL;
     uint64_t sec_part = nsec / 1000000000UL;
 
-    if (sec_part > UINT_MAX)
+    if (sec + sec_part > UINT_MAX)
       throw std::runtime_error("Time is out of dual 32-bit range");
 
     sec += sec_part;
@@ -486,7 +486,7 @@ namespace ros
         --sec_part;
       }
 
-    if (sec_part < 0 || sec_part > INT_MAX)
+    if (sec_part < 0 || sec_part > UINT_MAX)
       throw std::runtime_error("Time is out of dual 32-bit range");
 
     sec = sec_part;
