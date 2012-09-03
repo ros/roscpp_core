@@ -1,5 +1,7 @@
 project(cpp_common)
 find_package(catkin REQUIRED)
+catkin_project(cpp_common
+  INCLUDE_DIRS include)
 
 include(CheckIncludeFile)
 include(CheckFunctionExists)
@@ -26,15 +28,9 @@ endif(HAVE_GLIBC_BACKTRACE)
 add_library(${PROJECT_NAME} src/debug.cpp)
 
 install(TARGETS ${PROJECT_NAME}
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-  )
+  ARCHIVE DESTINATION ${PROJECT_LIB_DESTINATION}
+  LIBRARY DESTINATION ${PROJECT_LIB_DESTINATION})
 
 install(DIRECTORY include/
-        DESTINATION include
-        FILES_MATCHING PATTERN "*.h"
-        PATTERN ".svn" EXCLUDE)
-
-catkin_project(cpp_common
-  INCLUDE_DIRS include
-  )
+  DESTINATION ${PROJECT_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h")

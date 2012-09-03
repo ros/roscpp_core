@@ -1,9 +1,12 @@
 project(rostime)
-find_package(catkin REQUIRED)
-include_directories(include)
+find_package(catkin REQUIRED COMPONENTS cpp_common)
+catkin_project(rostime
+  INCLUDE_DIRS include
+  LIBRARIES rostime)
 
-find_package(cpp_common REQUIRED)
-include_directories(${cpp_common_INCLUDE_DIRS})
+include_directories(include ${catkin_INCLUDE_DIRS})
+link_directories(${catkin_LIBRARY_DIRS})
+
 find_package(Boost REQUIRED COMPONENTS date_time thread)
 
 add_library(rostime 
@@ -15,16 +18,9 @@ if(NOT APPLE)
 endif()
 
 install(TARGETS rostime
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  )
+  ARCHIVE DESTINATION ${PROJECT_LIB_DESTINATION}
+  LIBRARY DESTINATION ${PROJECT_LIB_DESTINATION})
 
 install(DIRECTORY include/
-        DESTINATION include
-        FILES_MATCHING PATTERN "*.h"
-        PATTERN ".svn" EXCLUDE)
-
-catkin_project(rostime
-  INCLUDE_DIRS include
-  LIBRARIES rostime
-  )
+  DESTINATION ${PROJECT_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h")

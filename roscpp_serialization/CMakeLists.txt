@@ -1,31 +1,18 @@
 project(roscpp_serialization)
+find_package(catkin REQUIRED COMPONENTS cpp_common roscpp_traits rostime)
+catkin_project(roscpp_serialization
+  INCLUDE_DIRS include
+  LIBRARIES roscpp_serialization)
 
-find_package(catkin REQUIRED)
-
-find_package(cpp_common REQUIRED)
-include_directories(${cpp_common_INCLUDE_DIRS})
-
-find_package(rostime REQUIRED)
-include_directories(${rostime_INCLUDE_DIRS})
-
-find_package(roscpp_traits REQUIRED)
-include_directories(${roscpp_traits_INCLUDE_DIRS})
-
-include_directories(include)
+include_directories(include ${catkin_INCLUDE_DIRS})
+link_directories(${catkin_LIBRARY_DIRS})
 
 add_library(roscpp_serialization src/serialization.cpp)
 
 install(TARGETS roscpp_serialization
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-  )
+  ARCHIVE DESTINATION ${PROJECT_LIB_DESTINATION}
+  LIBRARY DESTINATION ${PROJECT_LIB_DESTINATION})
 
 install(DIRECTORY include/
-        DESTINATION include
-        FILES_MATCHING PATTERN "*.h"
-        PATTERN ".svn" EXCLUDE)
-
-catkin_project(roscpp_serialization
-  LIBRARIES roscpp_serialization
-  INCLUDE_DIRS include
-  )
+  DESTINATION ${PROJECT_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h")
