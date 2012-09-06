@@ -13,8 +13,8 @@ This package is a component of <a href="http://www.ros.org/wiki/roscpp">roscpp</
   <url>http://ros.org/wiki/roscpp_serialization</url>
 
   <export>
-    <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags roscpp_serialization`"
-         lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs roscpp_serialization`"/>
+    <cpp cflags="`pkg-config --cflags roscpp_serialization`"
+         lflags="`pkg-config --libs roscpp_serialization`"/>
   </export>
 
 </package>

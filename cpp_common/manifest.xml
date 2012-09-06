@@ -15,8 +15,8 @@ This package is a component of <a href="http://www.ros.org/wiki/roscpp">roscpp</
   <url>http://ros.org/wiki/cpp_common</url>
 
   <export>
-    <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags cpp_common`"
-         lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs cpp_common`"/>
+    <cpp cflags="`pkg-config --cflags cpp_common`"
+         lflags="`pkg-config --libs cpp_common`"/>
   </export>
 
 </package>

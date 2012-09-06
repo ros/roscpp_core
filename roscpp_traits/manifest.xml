@@ -13,8 +13,8 @@ This package is a component of <a href="http://www.ros.org/wiki/roscpp">roscpp</
   <url>http://ros.org/wiki/roscpp_traits</url>
 
   <export>
-    <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags roscpp_traits`"
-         lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs roscpp_traits`"/>
+    <cpp cflags="`pkg-config --cflags roscpp_traits`"
+         lflags="`pkg-config --libs roscpp_traits`"/>
   </export>
 
 </package>
