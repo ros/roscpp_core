@@ -1,6 +1,6 @@
 <stack>
   <name>roscpp_core</name>
-  <version>0.3.2</version>
+  <version>0.3.3</version>
   <description>
     Underlying data libraries for roscpp messages.
   </description>
