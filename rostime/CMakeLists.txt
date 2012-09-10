@@ -7,7 +7,7 @@ catkin_project(rostime
 include_directories(include ${catkin_INCLUDE_DIRS})
 link_directories(${catkin_LIBRARY_DIRS})
 
-find_package(Boost REQUIRED COMPONENTS date_time thread)
+find_package(Boost REQUIRED COMPONENTS date_time thread system)
 
 add_library(rostime 
   src/time.cpp src/rate.cpp src/duration.cpp)
