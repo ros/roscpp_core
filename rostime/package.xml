@@ -1,0 +1,16 @@
+<package>
+  <name>rostime</name>
+  <description>
+Time and Duration implementations for C++ libraries, including roscpp.
+  </description>
+  <maintainer email="dthomas@willowgarage.com">Dirk Thomas</maintainer>
+  <license>BSD</license>
+
+  <url>http://ros.org/wiki/rostime</url>
+  <author>Josh Faust</author>
+
+  <export>
+    <cpp cflags="`pkg-config --cflags rostime`"
+         lflags="`pkg-config --libs rostime`"/>
+  </export>
+</package>

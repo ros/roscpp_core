@@ -1,7 +1,6 @@
 project(roscpp_serialization)
 find_package(catkin REQUIRED COMPONENTS cpp_common roscpp_traits rostime)
-catkin_project(roscpp_serialization
-  INCLUDE_DIRS include
+catkin_project_export(INCLUDE_DIRS include
   LIBRARIES roscpp_serialization)
 
 include_directories(include ${catkin_INCLUDE_DIRS})

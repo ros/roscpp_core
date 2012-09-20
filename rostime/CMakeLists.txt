@@ -1,7 +1,6 @@
 project(rostime)
 find_package(catkin REQUIRED COMPONENTS cpp_common)
-catkin_project(rostime
-  INCLUDE_DIRS include
+catkin_project_export(INCLUDE_DIRS include
   LIBRARIES rostime)
 
 include_directories(include ${catkin_INCLUDE_DIRS})

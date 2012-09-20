@@ -1,7 +1,6 @@
 project(cpp_common)
 find_package(catkin REQUIRED)
-catkin_project(cpp_common
-  INCLUDE_DIRS include)
+catkin_project_export(INCLUDE_DIRS include)
 
 include(CheckIncludeFile)
 include(CheckFunctionExists)

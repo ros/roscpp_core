@@ -1,7 +1,7 @@
 project(roscpp_core)
 cmake_minimum_required(VERSION 2.8)
 find_package(catkin REQUIRED)
-catkin_stack()
+catkin_package()
 
 foreach(subdir
     cpp_common

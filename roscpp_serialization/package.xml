@@ -1,0 +1,20 @@
+<package>
+  <name>roscpp_serialization</name>
+  <description>
+
+roscpp_serialization contains the code for serialization as described in
+<a href="http://www.ros.org/wiki/roscpp/Overview/MessagesSerializationAndAdaptingTypes">MessagesSerializationAndAdaptingTypes</a>.
+
+This package is a component of <a href="http://www.ros.org/wiki/roscpp">roscpp</a>.
+
+  </description>
+  <license>BSD</license>
+
+  <url>http://ros.org/wiki/roscpp_serialization</url>
+  <author>Josh Faust</author>
+
+  <export>
+    <cpp cflags="`pkg-config --cflags roscpp_serialization`"
+         lflags="`pkg-config --libs roscpp_serialization`"/>
+  </export>
+</package>
