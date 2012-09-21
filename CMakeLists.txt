@@ -1,5 +1,5 @@
-project(roscpp_core)
 cmake_minimum_required(VERSION 2.8)
+project(roscpp_core)
 find_package(catkin REQUIRED)
 catkin_package()
 

@@ -1,6 +1,10 @@
+cmake_minimum_required(VERSION 2.8)
 project(cpp_common)
 find_package(catkin REQUIRED)
-catkin_project_export(INCLUDE_DIRS include)
+catkin_package()
+catkin_package_export(
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME})
 
 include(CheckIncludeFile)
 include(CheckFunctionExists)
@@ -27,8 +31,8 @@ endif(HAVE_GLIBC_BACKTRACE)
 add_library(${PROJECT_NAME} src/debug.cpp)
 
 install(TARGETS ${PROJECT_NAME}
-  ARCHIVE DESTINATION ${CATKIN_PROJECT_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PROJECT_LIB_DESTINATION})
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
 
 install(DIRECTORY include/
   DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}

@@ -1,7 +1,10 @@
+cmake_minimum_required(VERSION 2.8)
 project(rostime)
 find_package(catkin REQUIRED COMPONENTS cpp_common)
-catkin_project_export(INCLUDE_DIRS include
-  LIBRARIES rostime)
+catkin_package()
+catkin_package_export(
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME})
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 link_directories(${catkin_LIBRARY_DIRS})
@@ -9,7 +12,9 @@ link_directories(${catkin_LIBRARY_DIRS})
 find_package(Boost REQUIRED COMPONENTS date_time system thread)
 
 add_library(rostime 
-  src/time.cpp src/rate.cpp src/duration.cpp)
+  src/duration.cpp
+  src/rate.cpp
+  src/time.cpp)
 
 target_link_libraries(rostime ${Boost_LIBRARIES})
 if(NOT APPLE)
@@ -17,8 +22,8 @@ if(NOT APPLE)
 endif()
 
 install(TARGETS rostime
-  ARCHIVE DESTINATION ${CATKIN_PROJECT_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PROJECT_LIB_DESTINATION})
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
 
 install(DIRECTORY include/
   DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}

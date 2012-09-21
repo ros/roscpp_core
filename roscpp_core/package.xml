@@ -11,11 +11,12 @@
   <url type="website">http://www.ros.org/wiki/roscpp_core</url>
   <author>Josh Faust</author>
 
-  <build_depend>boost</build_depend>
-  <build_depend>catkin</build_depend>
-  <build_depend>ros</build_depend><!-- rosclean, roslang, roslib, rosunit -->
+  <run_depend>cpp_common</run_depend>
+  <run_depend>roscpp_serialization</run_depend>
+  <run_depend>roscpp_traits</run_depend>
+  <run_depend>rostime</run_depend>
 
-  <run_depend>boost</run_depend>
-  <run_depend>ros</run_depend> <!-- rosclean, roslang, roslib, rosunit -->
+  <export>
+    <meta_package/>
+  </export>
 </package>
-
