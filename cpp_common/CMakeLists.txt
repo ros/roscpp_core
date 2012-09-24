@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(cpp_common)
 find_package(catkin REQUIRED)
-catkin_package()
-catkin_package_export(
+catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME})
 
