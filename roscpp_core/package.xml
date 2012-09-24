@@ -17,6 +17,6 @@
   <run_depend>rostime</run_depend>
 
   <export>
-    <meta_package/>
+    <metapackage/>
   </export>
 </package>
