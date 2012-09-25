@@ -13,6 +13,7 @@
   <url>http://ros.org/wiki/roscpp_serialization</url>
   <author>Josh Faust</author>
 
+  <build_depend>catkin</build_depend>
   <build_depend>cpp_common</build_depend>
   <build_depend>roscpp_traits</build_depend>
   <build_depend>rostime</build_depend>

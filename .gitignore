@@ -1,20 +1,2 @@
 ._*
-*.so
-# *.pyc
-# *.egg-info
-build/
-# inst/
-# obj-x86_64-linux-gnu/
-# *.deb
-# *.changes
-# *.substvars
-# *.debhelper.log
-# *.build
-# cmake_install.cmake
-# Makefile
-# CMakeCache.txt
-# *~
-# *.upload
-# *.dsc
-# *.tar.gz
 *~

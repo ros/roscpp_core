@@ -11,6 +11,7 @@
   <author>Josh Faust</author>
 
   <build_depend>boost</build_depend>
+  <build_depend>catkin</build_depend>
   <build_depend>cpp_common</build_depend>
 
   <run_depend>boost</run_depend>
