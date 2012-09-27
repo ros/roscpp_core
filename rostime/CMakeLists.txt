@@ -5,10 +5,10 @@ catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME})
 
-include_directories(include ${catkin_INCLUDE_DIRS})
-link_directories(${catkin_LIBRARY_DIRS})
-
 find_package(Boost REQUIRED COMPONENTS date_time system thread)
+
+include_directories(include ${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS})
+link_directories(${catkin_LIBRARY_DIRS})
 
 add_library(rostime 
   src/duration.cpp
