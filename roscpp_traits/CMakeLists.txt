@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.3)
 project(roscpp_traits)
 find_package(catkin REQUIRED COMPONENTS rostime)
 catkin_package(

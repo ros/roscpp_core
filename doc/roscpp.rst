@@ -78,7 +78,7 @@ the main.cpp does a very simple (de)serialization of a
 and the ``CMakeLists.txt`` demonstrates the CMake incantations
 required to find and use the code::
 
-  cmake_minimum_required(VERSION 2.8)
+  cmake_minimum_required(VERSION 2.8.3)
 
   find_package(ROS 12.04 COMPONENTS
     cpp_common rostime roscpp_traits roscpp_serialization sensor_msgs)
