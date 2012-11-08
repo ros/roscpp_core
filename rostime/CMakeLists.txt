@@ -6,7 +6,9 @@ find_package(Boost REQUIRED COMPONENTS date_time system thread)
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
-  DEPENDS Boost cpp_common)
+  CATKIN_DEPENDS cpp_common
+  DEPENDS Boost
+)
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIR})
 

@@ -4,7 +4,8 @@ find_package(catkin REQUIRED COMPONENTS cpp_common roscpp_traits rostime)
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES roscpp_serialization
-  DEPENDS cpp_common roscpp_traits rostime)
+  CATKIN_DEPENDS cpp_common roscpp_traits rostime
+)
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 link_directories(${catkin_LIBRARY_DIRS})
