@@ -53,7 +53,7 @@ struct Printer<int8_t>
   template<typename Stream>
   static void stream(Stream& s, const std::string& indent, int8_t value)
   {
-    s << (uint32_t)value << "\n";
+    s << static_cast<int32_t>(value) << "\n";
   }
 };
 
@@ -63,7 +63,7 @@ struct Printer<uint8_t>
   template<typename Stream>
   static void stream(Stream& s, const std::string& indent, uint8_t value)
   {
-    s << (uint32_t)value << "\n";
+    s << static_cast<uint32_t>(value) << "\n";
   }
 };
 
