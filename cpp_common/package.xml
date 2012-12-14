@@ -15,5 +15,5 @@
   <url>http://www.ros.org/wiki/cpp_common</url>
   <author>John Faust</author>
 
-  <build_depend>catkin</build_depend>
+  <buildtool_depend>catkin</buildtool_depend>
 </package>

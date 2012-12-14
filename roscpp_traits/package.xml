@@ -13,7 +13,7 @@
   <url type="website">http://ros.org/wiki/roscpp_traits</url>
   <author>Josh Faust</author>
 
-  <build_depend>catkin</build_depend>
+  <buildtool_depend>catkin</buildtool_depend>
 
   <run_depend>rostime</run_depend>
 </package>
