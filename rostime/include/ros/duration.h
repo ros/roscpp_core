@@ -94,7 +94,7 @@ public:
   int64_t toNSec() const {return (int64_t)sec*1000000000ll + (int64_t)nsec;  };
   T& fromSec(double t);
   T& fromNSec(int64_t t);
-  bool isZero();
+  bool isZero() const;
   boost::posix_time::time_duration toBoost() const;
 };
 
