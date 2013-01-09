@@ -339,7 +339,14 @@ namespace ros
   std::ostream& operator<<(std::ostream& os, const Duration& rhs)
   {
     boost::io::ios_all_saver s(os);
-    os << rhs.sec << "." << std::setw(9) << std::setfill('0') << rhs.nsec;
+    if (rhs.sec >= 0 || rhs.nsec == 0)
+    {
+      os << rhs.sec << "." << std::setw(9) << std::setfill('0') << rhs.nsec;
+    }
+    else
+    {
+      os << (rhs.sec == -1 ? "-" : "") << (rhs.sec + 1) << "." << std::setw(9) << std::setfill('0') << (1000000000 - rhs.nsec);
+    }
     return os;
   }
 
@@ -438,7 +445,14 @@ namespace ros
   std::ostream &operator<<(std::ostream& os, const WallDuration& rhs)
   {
     boost::io::ios_all_saver s(os);
-    os << rhs.sec << "." << std::setw(9) << std::setfill('0') << rhs.nsec;
+    if (rhs.sec >= 0 || rhs.nsec == 0)
+    {
+      os << rhs.sec << "." << std::setw(9) << std::setfill('0') << rhs.nsec;
+    }
+    else
+    {
+      os << (rhs.sec == -1 ? "-" : "") << (rhs.sec + 1) << "." << std::setw(9) << std::setfill('0') << (1000000000 - rhs.nsec);
+    }
     return os;
   }
 
