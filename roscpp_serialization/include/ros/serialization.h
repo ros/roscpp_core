@@ -609,7 +609,7 @@ struct ArraySerializer<T, N, typename boost::enable_if<mt::IsSimple<T> >::type>
     memcpy(&v.front(), stream.advance(data_len), data_len);
   }
 
-  inline static uint32_t serializedLength(const ArrayType& v)
+  inline static uint32_t serializedLength(const ArrayType&)
   {
     return N * sizeof(T);
   }
