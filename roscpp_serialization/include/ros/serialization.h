@@ -37,8 +37,10 @@
 #include "ros/message_traits.h"
 #include "ros/builtin_message_traits.h"
 #include "ros/exception.h"
+#include "ros/datatypes.h"
 
 #include <vector>
+#include <map>
 
 #include <boost/array.hpp>
 #include <boost/call_traits.hpp>
@@ -898,7 +900,48 @@ inline void deserializeMessage(const SerializedMessage& m, M& message)
   deserialize(s, message);
 }
 
+
+// Additional serialization traits
+
+template<typename M>
+struct PreDeserializeParams
+{
+  boost::shared_ptr<M> message;
+  boost::shared_ptr<std::map<std::string, std::string> > connection_header;
+};
+
+/**
+ * \brief called by the SubscriptionCallbackHelper after a message is
+ * instantiated but before that message is deserialized
+ */
+template<typename M>
+struct PreDeserialize
+{
+  static void notify(const PreDeserializeParams<M>&) { }
+};
+
 } // namespace serialization
+
+
+template<typename T>
+void
+assignSubscriptionConnectionHeader(T* t, const boost::shared_ptr<M_string>& connection_header,
+                                   typename boost::enable_if<ros::message_traits::IsMessage<T> >::type*_=0)
+{
+  (void)_; // warning stopper
+  t->__connection_header = connection_header;
+}
+
+template<typename T>
+void
+assignSubscriptionConnectionHeader(T* t, const boost::shared_ptr<M_string>& connection_header,
+                                   typename boost::disable_if<ros::message_traits::IsMessage<T> >::type*_=0)
+{ 
+  (void)_; // warning stopper
+}
+
+
+
 } // namespace ros
 
 #endif // ROSCPP_SERIALIZATION_H
