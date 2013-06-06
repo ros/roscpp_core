@@ -2,8 +2,8 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.15 (2013-06-06)
+-------------------
 * fix install destination for dll's under Windows
 
 0.3.14 (2013-03-21)
