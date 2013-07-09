@@ -188,7 +188,7 @@ inline uint32_t serializationLength(const T& t)
       return sizeof(Type); \
     } \
   };
-    
+
 #define ROS_CREATE_SIMPLE_SERIALIZER_ARM(Type) \
   template<> struct Serializer<Type> \
   { \
@@ -208,7 +208,7 @@ inline uint32_t serializationLength(const T& t)
     } \
 };
 
-#ifdef __arm
+#if defined(__arm__) || defined(__arm)
     ROS_CREATE_SIMPLE_SERIALIZER_ARM(uint8_t);
     ROS_CREATE_SIMPLE_SERIALIZER_ARM(int8_t);
     ROS_CREATE_SIMPLE_SERIALIZER_ARM(uint16_t);
@@ -219,7 +219,7 @@ inline uint32_t serializationLength(const T& t)
     ROS_CREATE_SIMPLE_SERIALIZER_ARM(int64_t);
     ROS_CREATE_SIMPLE_SERIALIZER_ARM(float);
     ROS_CREATE_SIMPLE_SERIALIZER_ARM(double);
-#else    
+#else
     ROS_CREATE_SIMPLE_SERIALIZER(uint8_t);
     ROS_CREATE_SIMPLE_SERIALIZER(int8_t);
     ROS_CREATE_SIMPLE_SERIALIZER(uint16_t);
@@ -240,7 +240,7 @@ template<> struct Serializer<bool>
   template<typename Stream> inline static void write(Stream& stream, const bool v)
   {
     uint8_t b = (uint8_t)v;
-#ifdef __arm
+#if defined(__arm__) || defined(__arm)
     memcpy(stream.advance(sizeof(1)), &b, 1 );
 #else
     *reinterpret_cast<uint8_t*>(stream.advance(1)) = b;
@@ -250,7 +250,7 @@ template<> struct Serializer<bool>
   template<typename Stream> inline static void read(Stream& stream, bool& v)
   {
     uint8_t b;
-#ifdef __arm
+#if defined(__arm__) || defined(__arm)
     memcpy(&b, stream.advance(sizeof(1)), 1 );
 #else
     b = *reinterpret_cast<uint8_t*>(stream.advance(1));
