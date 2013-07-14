@@ -2,6 +2,10 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.3.16 (2013-07-14)
+-------------------
+* support for CATKIN_ENABLE_TESTING
+
 0.3.15 (2013-06-06)
 -------------------
 * fix install destination for dll's under Windows

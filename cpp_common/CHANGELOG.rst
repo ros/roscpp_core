@@ -2,6 +2,9 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.3.16 (2013-07-14)
+-------------------
+
 0.3.15 (2013-06-06)
 -------------------
 * fix install destination for dll's under Windows
