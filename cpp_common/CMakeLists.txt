@@ -29,6 +29,7 @@ if(HAVE_GLIBC_BACKTRACE)
 endif(HAVE_GLIBC_BACKTRACE)
 
 add_library(${PROJECT_NAME} src/debug.cpp src/header.cpp)
+target_link_libraries(${PROJECT_NAME} ${console_bridge_LIBRARIES})
 
 install(TARGETS ${PROJECT_NAME}
   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
