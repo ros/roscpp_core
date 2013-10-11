@@ -3,7 +3,7 @@ project(roscpp_traits)
 find_package(catkin REQUIRED)
 catkin_package(
   INCLUDE_DIRS include
-  DEPENDS rostime)
+  CATKIN_DEPENDS cpp_common rostime)
 
 install(DIRECTORY include/
   DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}

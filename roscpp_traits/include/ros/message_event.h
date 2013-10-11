@@ -30,6 +30,7 @@
 #define ROSCPP_MESSAGE_EVENT_H
 
 #include "ros/time.h"
+#include <ros/datatypes.h>
 #include <ros/message_traits.h>
 
 #include <boost/type_traits/is_void.hpp>
