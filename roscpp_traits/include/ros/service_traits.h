@@ -106,7 +106,7 @@ inline const char* datatype(const M& m)
   return DataType<typename boost::remove_reference<typename boost::remove_const<M>::type>::type>::value(m);
 }
 
-} // namespace message_traits
+} // namespace service_traits
 } // namespace ros
 
 #endif // ROSCPP_SERVICE_TRAITS_H
