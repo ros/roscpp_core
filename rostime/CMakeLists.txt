@@ -10,7 +10,7 @@ catkin_package(
   DEPENDS Boost
 )
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIR})
+include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
 add_library(rostime 
   src/duration.cpp
