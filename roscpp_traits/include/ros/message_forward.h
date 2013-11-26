@@ -28,10 +28,17 @@
 #ifndef ROSLIB_MESSAGE_FORWARD_H
 #define ROSLIB_MESSAGE_FORWARD_H
 
+// C++ standard section 17.4.3.1/1 states that forward declarations of STL types
+// that aren't specializations involving user defined types results in undefined
+// behavior. Apparently only libc++ has a problem with this and won't compile it.
+#ifndef _LIBCPP_VERSION
 namespace std
 {
 template<typename T> class allocator;
 }
+#else
+#include <memory>
+#endif
 
 namespace boost
 {
