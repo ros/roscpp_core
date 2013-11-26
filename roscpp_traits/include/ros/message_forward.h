@@ -28,11 +28,6 @@
 #ifndef ROSLIB_MESSAGE_FORWARD_H
 #define ROSLIB_MESSAGE_FORWARD_H
 
-namespace std
-{
-template<typename T> class allocator;
-}
-
 namespace boost
 {
 template<typename T> class shared_ptr;
