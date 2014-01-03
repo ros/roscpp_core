@@ -3,6 +3,7 @@ project(cpp_common)
 find_package(console_bridge)
 find_package(catkin REQUIRED)
 catkin_package(
+  DEPENDS console_bridge
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME})
 
