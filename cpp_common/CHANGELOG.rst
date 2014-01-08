@@ -2,6 +2,10 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* move several client library independent parts from ros_comm into roscpp_core (`#12 <https://github.com/ros/roscpp_core/issues/12>`_)
+
 0.3.16 (2013-07-14)
 -------------------
 
