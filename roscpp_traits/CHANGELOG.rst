@@ -2,8 +2,8 @@
 Changelog for package roscpp_traits
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.17 (2014-01-07)
+-------------------
 * move several client library independent parts from ros_comm into roscpp_core (`#12 <https://github.com/ros/roscpp_core/issues/12>`_)
 * fix compilation with libc++ (`#15 <https://github.com/ros/roscpp_core/issues/15>`_)
 
