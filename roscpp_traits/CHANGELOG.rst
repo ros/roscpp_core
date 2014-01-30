@@ -2,8 +2,8 @@
 Changelog for package roscpp_traits
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.4.0 (2014-01-29)
+------------------
 * ros::MessageEvent no longer reads __connection_header from ROS message (`#19 <https://github.com/ros/roscpp_core/issues/19>`_)
 
 0.3.17 (2014-01-07)
