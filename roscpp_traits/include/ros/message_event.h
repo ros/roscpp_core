@@ -111,7 +111,7 @@ public:
    */
   MessageEvent(const ConstMessagePtr& message)
   {
-    init(message, getConnectionHeader(message.get()), ros::Time::now(), true, ros::DefaultMessageCreator<Message>());
+    init(message, boost::shared_ptr<M_string>(), ros::Time::now(), true, ros::DefaultMessageCreator<Message>());
   }
 
   MessageEvent(const ConstMessagePtr& message, const boost::shared_ptr<M_string>& connection_header, ros::Time receipt_time)
@@ -121,7 +121,7 @@ public:
 
   MessageEvent(const ConstMessagePtr& message, ros::Time receipt_time)
   {
-    init(message, getConnectionHeader(message.get()), receipt_time, true, ros::DefaultMessageCreator<Message>());
+    init(message, boost::shared_ptr<M_string>(), receipt_time, true, ros::DefaultMessageCreator<Message>());
   }
 
   MessageEvent(const ConstMessagePtr& message, const boost::shared_ptr<M_string>& connection_header, ros::Time receipt_time, bool nonconst_need_copy, const CreateFunction& create)
@@ -236,21 +236,6 @@ private:
   {
     return boost::const_pointer_cast<Message>(message_);
   }
-
-  template<typename T>
-  boost::shared_ptr<ros::M_string>
-  getConnectionHeader(T* t, typename boost::enable_if<ros::message_traits::IsMessage<T> >::type*_ = 0) const
-  {
-    return t->__connection_header;
-  }
-
-  template<typename T>
-  boost::shared_ptr<ros::M_string>
-  getConnectionHeader(T* t, typename boost::disable_if<ros::message_traits::IsMessage<T> >::type*_ = 0) const
-  {
-    return boost::shared_ptr<ros::M_string>();
-  }
-
 
   ConstMessagePtr message_;
   // Kind of ugly to make this mutable, but it means we can pass a const MessageEvent to a callback and not worry about other things being modified
