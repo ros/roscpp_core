@@ -2,6 +2,9 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.3.17 (2014-01-07)
 -------------------
 * fix boost include dir
