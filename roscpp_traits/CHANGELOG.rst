@@ -2,8 +2,8 @@
 Changelog for package roscpp_traits
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.4.1 (2014-02-11)
+------------------
 * remove MessageEvent constructors from Message (`#21 <https://github.com/ros/roscpp_core/issues/21>`_)
 
 0.4.0 (2014-01-29)
