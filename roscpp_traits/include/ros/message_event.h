@@ -106,9 +106,22 @@ public:
     init(boost::const_pointer_cast<Message>(boost::static_pointer_cast<ConstMessage>(rhs.getMessage())), rhs.getConnectionHeaderPtr(), rhs.getReceiptTime(), rhs.nonConstWillCopy(), create);
   }
 
+  /**
+   * \todo Make this explicit in ROS 2.0.  Keep as auto-converting for now to maintain backwards compatibility in some places (message_filters)
+   */
+  MessageEvent(const ConstMessagePtr& message)
+  {
+    init(message, boost::shared_ptr<M_string>(), ros::Time::now(), true, ros::DefaultMessageCreator<Message>());
+  }
+
   MessageEvent(const ConstMessagePtr& message, const boost::shared_ptr<M_string>& connection_header, ros::Time receipt_time)
   {
     init(message, connection_header, receipt_time, true, ros::DefaultMessageCreator<Message>());
+  }
+
+  MessageEvent(const ConstMessagePtr& message, ros::Time receipt_time)
+  {
+    init(message, boost::shared_ptr<M_string>(), receipt_time, true, ros::DefaultMessageCreator<Message>());
   }
 
   MessageEvent(const ConstMessagePtr& message, const boost::shared_ptr<M_string>& connection_header, ros::Time receipt_time, bool nonconst_need_copy, const CreateFunction& create)
