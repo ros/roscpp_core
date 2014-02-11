@@ -2,6 +2,9 @@
 Changelog for package roscpp_serialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.4.0 (2014-01-29)
 ------------------
 * remove assignSubscriptionConnectionHeader (`#19 <https://github.com/ros/roscpp_core/issues/19>`_)
