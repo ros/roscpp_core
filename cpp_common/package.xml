@@ -15,7 +15,7 @@
   <url>http://www.ros.org/wiki/cpp_common</url>
   <author>John Faust</author>
 
-  <build_depend>console_bridge</build_depend>
-  <run_depend>console_bridge</run_depend>
+  <build_depend>libconsole-bridge-dev</build_depend>
+  <run_depend>libconsole-bridge-dev</run_depend>
   <buildtool_depend>catkin</buildtool_depend>
 </package>
