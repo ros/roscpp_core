@@ -2,8 +2,8 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.5.2 (2014-06-27)
+------------------
 * find_package console_bridge with REQUIRED (`#23 <https://github.com/ros/roscpp_core/issues/23>`_)
 
 0.5.1 (2014-06-24)
