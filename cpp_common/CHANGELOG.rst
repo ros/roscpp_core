@@ -2,6 +2,10 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* find_package console_bridge with REQUIRED (`#23 <https://github.com/ros/roscpp_core/issues/23>`_)
+
 0.5.1 (2014-06-24)
 ------------------
 * convert to use console bridge from upstream debian package (`ros/rosdistro#4633 <https://github.com/ros/rosdistro/issues/4633>`_)
