@@ -30,6 +30,7 @@
 #include <vector>
 
 #include <gtest/gtest.h>
+#include <ros/rate.h>
 #include <ros/time.h>
 #include <sys/time.h>
 
@@ -407,6 +408,12 @@ TEST(Duration, sleepWithSignal)
   Time end = Time::now();
 
   ASSERT_GT(end - start, d);
+}
+
+TEST(Rate, constructFromDuration){
+  Duration d(4, 0);
+  Rate r(d);
+  EXPECT_EQ(r.expectedCycleTime(), d);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
