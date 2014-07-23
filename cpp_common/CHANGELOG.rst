@@ -2,6 +2,9 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.5.3 (2014-06-28)
 ------------------
 * add missing boost dependency (`#24 <https://github.com/ros/roscpp_core/issues/24>`_)

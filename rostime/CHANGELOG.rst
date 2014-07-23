@@ -2,6 +2,10 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix Rate initialized by Duration (`#26 <https://github.com/ros/roscpp_core/issues/26>`_)
+
 0.5.3 (2014-06-28)
 ------------------
 
