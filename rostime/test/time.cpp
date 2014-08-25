@@ -72,8 +72,8 @@ void generate_rand_durations(uint32_t range, uint64_t runs, std::vector<ros::Dur
   values2.reserve(runs);
   for ( uint32_t i = 0; i < runs ; i++ )
   {
-    values1.push_back(ros::Duration( (rand() * range / RAND_MAX), (rand() * 1000000000ULL/RAND_MAX)));
-    values2.push_back(ros::Duration( (rand() * range / RAND_MAX), (rand() * 1000000000ULL/RAND_MAX)));
+    values1.push_back(ros::Duration( (rand() * 2 * range / RAND_MAX) - range, (rand() * 1000000000ULL/RAND_MAX)));
+    values2.push_back(ros::Duration( (rand() * 2 * range / RAND_MAX) - range, (rand() * 1000000000ULL/RAND_MAX)));
   }
 }
 
@@ -283,6 +283,8 @@ TEST(Duration, Comparitors)
 
   }
 
+  EXPECT_EQ(ros::Duration(-0.5), ros::Duration(-1LL, 500000000LL));
+  EXPECT_EQ(ros::Duration(-0.5), ros::Duration(0, -500000000LL));
 }
 
 TEST(Duration, ToFromSec)
@@ -294,7 +296,7 @@ TEST(Duration, ToFromSec)
   for (uint32_t i = 0; i < v1.size(); i++)
   {
     EXPECT_EQ(v1[i].toSec(), v1[i].fromSec(v1[i].toSec()).toSec());
-
+    EXPECT_GE(ros::Duration(v1[i].toSec()).nsec, 0);
   }
 
 }
