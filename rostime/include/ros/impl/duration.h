@@ -52,16 +52,7 @@ namespace ros {
   template<class T>
   T& DurationBase<T>::fromSec(double d)
   {
-#ifdef HAVE_TRUNC
-    sec  = (int32_t)trunc(d);
-#else
-    // (morgan: why doesn't win32 provide trunc? argh. hacked this together
-    // without much thought. need to test this conversion.
-    if (d >= 0.0)
-      sec = (int32_t)floor(d);
-    else
-      sec = (int32_t)floor(d) + 1;
-#endif
+    sec = (int32_t)floor(d);
     nsec = (int32_t)((d - (double)sec)*1000000000);
     return *static_cast<T*>(this);
   }

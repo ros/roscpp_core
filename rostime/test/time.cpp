@@ -69,12 +69,33 @@ void generate_rand_durations(uint32_t range, uint64_t runs, std::vector<ros::Dur
   seed_rand();
   values1.clear();
   values2.clear();
-  values1.reserve(runs);
-  values2.reserve(runs);
+  values1.reserve(runs * 4);
+  values2.reserve(runs * 4);
   for ( uint32_t i = 0; i < runs ; i++ )
   {
-    values1.push_back(ros::Duration( (rand() * range / RAND_MAX), (rand() * 1000000000ULL/RAND_MAX)));
-    values2.push_back(ros::Duration( (rand() * range / RAND_MAX), (rand() * 1000000000ULL/RAND_MAX)));
+    // positive durations
+    values1.push_back(ros::Duration(  (rand() * range / RAND_MAX),  (rand() * 1000000000ULL/RAND_MAX)));
+    values2.push_back(ros::Duration(  (rand() * range / RAND_MAX),  (rand() * 1000000000ULL/RAND_MAX)));
+    EXPECT_GE(values1.back(), ros::Duration(0,0));
+    EXPECT_GE(values2.back(), ros::Duration(0,0));
+
+    // negative durations
+    values1.push_back(ros::Duration( -(rand() * range / RAND_MAX), -(rand() * 1000000000ULL/RAND_MAX)));
+    values2.push_back(ros::Duration( -(rand() * range / RAND_MAX), -(rand() * 1000000000ULL/RAND_MAX)));
+    EXPECT_LE(values1.back(), ros::Duration(0,0));
+    EXPECT_LE(values2.back(), ros::Duration(0,0));
+
+    // positive and negative durations
+    values1.push_back(ros::Duration(  (rand() * range / RAND_MAX),  (rand() * 1000000000ULL/RAND_MAX)));
+    values2.push_back(ros::Duration( -(rand() * range / RAND_MAX), -(rand() * 1000000000ULL/RAND_MAX)));
+    EXPECT_GE(values1.back(), ros::Duration(0,0));
+    EXPECT_LE(values2.back(), ros::Duration(0,0));
+
+    // negative and positive durations
+    values1.push_back(ros::Duration( -(rand() * range / RAND_MAX), -(rand() * 1000000000ULL/RAND_MAX)));
+    values2.push_back(ros::Duration(  (rand() * range / RAND_MAX),  (rand() * 1000000000ULL/RAND_MAX)));
+    EXPECT_LE(values1.back(), ros::Duration(0,0));
+    EXPECT_GE(values2.back(), ros::Duration(0,0));
   }
 }
 
@@ -261,17 +282,19 @@ TEST(Duration, Comparitors)
 
   for (uint32_t i = 0; i < v1.size(); i++)
   {
-    if (v1[i].sec * 1000000000ULL + v1[i].nsec < v2[i].sec * 1000000000ULL + v2[i].nsec)
+    if (v1[i].sec * 1000000000LL + v1[i].nsec < v2[i].sec * 1000000000LL + v2[i].nsec)
     {
       EXPECT_LT(v1[i], v2[i]);
-      //      printf("%f %d ", v1[i].toSec(), v1[i].sec * 1000000000ULL + v1[i].nsec);
-      //printf("vs %f %d\n", v2[i].toSec(), v2[i].sec * 1000000000ULL + v2[i].nsec);
+//      printf("%f %lld ", v1[i].toSec(), v1[i].sec * 1000000000LL + v1[i].nsec);
+//      printf("vs %f %lld\n", v2[i].toSec(), v2[i].sec * 1000000000LL + v2[i].nsec);
       EXPECT_LE(v1[i], v2[i]);
       EXPECT_NE(v1[i], v2[i]);
     }
-    else if (v1[i].sec * 1000000000ULL + v1[i].nsec > v2[i].sec * 1000000000ULL + v2[i].nsec)
+    else if (v1[i].sec * 1000000000LL + v1[i].nsec > v2[i].sec * 1000000000LL + v2[i].nsec)
     {
       EXPECT_GT(v1[i], v2[i]);
+//      printf("%f %lld ", v1[i].toSec(), v1[i].sec * 1000000000LL + v1[i].nsec);
+//      printf("vs %f %lld\n", v2[i].toSec(), v2[i].sec * 1000000000LL + v2[i].nsec);
       EXPECT_GE(v1[i], v2[i]);
       EXPECT_NE(v1[i], v2[i]);
     }
@@ -283,7 +306,6 @@ TEST(Duration, Comparitors)
     }
 
   }
-
 }
 
 TEST(Duration, ToFromSec)
@@ -295,9 +317,11 @@ TEST(Duration, ToFromSec)
   for (uint32_t i = 0; i < v1.size(); i++)
   {
     EXPECT_EQ(v1[i].toSec(), v1[i].fromSec(v1[i].toSec()).toSec());
-
+    EXPECT_GE(ros::Duration(v1[i].toSec()).nsec, 0);
   }
 
+  EXPECT_EQ(ros::Duration(-0.5), ros::Duration(-1LL, 500000000LL));
+  EXPECT_EQ(ros::Duration(-0.5), ros::Duration(0, -500000000LL));
 }
 
 
