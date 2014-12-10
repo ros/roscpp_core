@@ -176,15 +176,5 @@ namespace ros {
     return bt::seconds(sec) + bt::microseconds(nsec/1000.0);
 #endif
   }
-
-  inline Duration::Duration(const Rate& r)
-  {
-    fromSec(r.expectedCycleTime().toSec());
-  }
-
-  inline WallDuration::WallDuration(const Rate& r)
-  {
-    fromSec(r.expectedCycleTime().toSec());
-  }
 }
 #endif

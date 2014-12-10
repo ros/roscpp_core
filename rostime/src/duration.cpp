@@ -36,6 +36,14 @@
 
 namespace ros {
 
+  Duration::Duration(const Rate& rate)
+    : DurationBase<Duration>(rate.expectedCycleTime().sec, rate.expectedCycleTime().nsec)
+  { }
+
+  WallDuration::WallDuration(const Rate& rate)
+    : DurationBase<WallDuration>(rate.expectedCycleTime().sec, rate.expectedCycleTime().nsec)
+  { }
+
   void normalizeSecNSecSigned(int64_t& sec, int64_t& nsec)
   {
     int64_t nsec_part = nsec % 1000000000L;
