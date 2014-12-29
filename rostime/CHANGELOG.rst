@@ -4,6 +4,8 @@ Changelog for package rostime
 
 Forthcoming
 -----------
+* move implementation of Duration(Rate) constructor (`#30 <https://github.com/ros/roscpp_core/issues/30>`_)
+* fix Duration initialization from seconds for negative values  (`#29 <https://github.com/ros/roscpp_core/pull/29>`_)
 
 0.3.17 (2014-01-07)
 -------------------
