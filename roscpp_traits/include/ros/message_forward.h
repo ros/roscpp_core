@@ -28,6 +28,9 @@
 #ifndef ROSLIB_MESSAGE_FORWARD_H
 #define ROSLIB_MESSAGE_FORWARD_H
 
+// Make sure that either __GLIBCXX__ or _LIBCPP_VERSION is defined.
+#include <cstddef>
+
 // C++ standard section 17.4.3.1/1 states that forward declarations of STL types
 // that aren't specializations involving user defined types results in undefined
 // behavior. Apparently only libc++ has a problem with this and won't compile it.
