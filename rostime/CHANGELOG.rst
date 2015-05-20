@@ -2,6 +2,9 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.5.5 (2014-12-22)
 ------------------
 * move implementation of Duration(Rate) constructor (`#30 <https://github.com/ros/roscpp_core/issues/30>`_)
