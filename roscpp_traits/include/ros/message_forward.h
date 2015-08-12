@@ -59,6 +59,8 @@ template<typename T> class shared_ptr;
 #define ROS_DECLARE_MESSAGE_WITH_ALLOCATOR(msg, new_name, alloc) \
   template<class Allocator> struct msg##_; \
   typedef msg##_<alloc<void> > new_name; \
+  typedef boost::shared_ptr<new_name> new_name##SharedPtr; \
+  typedef boost::shared_ptr<new_name const> new_name##ConstSharedPtr; \
   typedef boost::shared_ptr<new_name> new_name##Ptr; \
   typedef boost::shared_ptr<new_name const> new_name##ConstPtr;
 
