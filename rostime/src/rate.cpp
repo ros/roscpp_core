@@ -83,7 +83,8 @@ bool Rate::sleep()
     {
       start_ = actual_end;
     }
-    return true;
+    // return false to show that the desired rate was not met
+    return false;
   }
 
   return sleep_time.sleep();
