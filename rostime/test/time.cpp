@@ -440,6 +440,18 @@ TEST(Rate, constructFromDuration){
   EXPECT_EQ(r.expectedCycleTime(), d);
 }
 
+TEST(Rate, sleep_return_value_true){
+  Rate r(Duration(0.2));
+  Duration(r.expectedCycleTime() * 0.5).sleep();
+  EXPECT_TRUE(r.sleep());
+}
+
+TEST(Rate, sleep_return_value_false){
+  Rate r(Duration(0.2));
+  Duration(r.expectedCycleTime() * 2).sleep();
+  EXPECT_FALSE(r.sleep());  // requested rate cannot be achieved
+}
+
 ///////////////////////////////////////////////////////////////////////////////////
 // WallTime/WallDuration
 ///////////////////////////////////////////////////////////////////////////////////
