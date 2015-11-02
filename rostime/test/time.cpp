@@ -441,16 +441,26 @@ TEST(Rate, constructFromDuration){
 }
 
 TEST(Rate, sleep_return_value_true){
-  Duration d(0.5);
-  Rate r(d);
-  Duration(r.expectedCycleTime() * 0.5).sleep(); // half
+  Rate r(Duration(0.2));
+  Duration(r.expectedCycleTime() * 0.5).sleep();
   EXPECT_TRUE(r.sleep());
 }
 
 TEST(Rate, sleep_return_value_false){
-  Duration d(0.2);
-  Rate r(d);
+  Rate r(Duration(0.2));
   Duration(r.expectedCycleTime() * 2).sleep();
+  EXPECT_FALSE(r.sleep());  // requested rate cannot be achieved
+}
+
+TEST(WallRate, sleep_return_value_true){
+  WallRate r(5);
+  Duration(r.expectedCycleTime().toSec() * 0.5).sleep();
+  EXPECT_TRUE(r.sleep());
+}
+
+TEST(WallRate, sleep_return_value_false){
+  WallRate r(5);
+  Duration(r.expectedCycleTime().toSec() * 2).sleep();
   EXPECT_FALSE(r.sleep());  // requested rate cannot be achieved
 }
 
