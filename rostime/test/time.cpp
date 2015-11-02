@@ -452,18 +452,6 @@ TEST(Rate, sleep_return_value_false){
   EXPECT_FALSE(r.sleep());  // requested rate cannot be achieved
 }
 
-TEST(WallRate, sleep_return_value_true){
-  WallRate r(5);
-  Duration(r.expectedCycleTime().toSec() * 0.5).sleep();
-  EXPECT_TRUE(r.sleep());
-}
-
-TEST(WallRate, sleep_return_value_false){
-  WallRate r(5);
-  Duration(r.expectedCycleTime().toSec() * 2).sleep();
-  EXPECT_FALSE(r.sleep());  // requested rate cannot be achieved
-}
-
 ///////////////////////////////////////////////////////////////////////////////////
 // WallTime/WallDuration
 ///////////////////////////////////////////////////////////////////////////////////
