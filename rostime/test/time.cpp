@@ -440,6 +440,13 @@ TEST(Rate, constructFromDuration){
   EXPECT_EQ(r.expectedCycleTime(), d);
 }
 
+TEST(WallRate, constructFromDuration){
+  Duration d(4, 0);
+  WallRate r(d);
+  WallDuration wd(4, 0);
+  EXPECT_EQ(r.expectedCycleTime(), wd);
+}
+
 ///////////////////////////////////////////////////////////////////////////////////
 // WallTime/WallDuration
 ///////////////////////////////////////////////////////////////////////////////////

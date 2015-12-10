@@ -107,7 +107,7 @@ WallRate::WallRate(double frequency)
 
 WallRate::WallRate(const Duration& d)
 : start_(WallTime::now())
-, expected_cycle_time_(1.0 / d.toSec())
+, expected_cycle_time_(d.sec, d.nsec)
 , actual_cycle_time_(0.0)
 {}
 
