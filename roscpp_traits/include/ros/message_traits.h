@@ -168,8 +168,8 @@ struct Definition
 template<typename M, typename Enable = void>
 struct Header
 {
-  static std_msgs::Header* pointer(M& m) { return 0; }
-  static std_msgs::Header const* pointer(const M& m) { return 0; }
+  static std_msgs::Header* pointer(M& m) { (void)m; return 0; }
+  static std_msgs::Header const* pointer(const M& m) { (void)m; return 0; }
 };
 
 template<typename M>
@@ -187,8 +187,8 @@ struct Header<M, typename boost::enable_if<HasHeader<M> >::type >
 template<typename M, typename Enable = void>
 struct FrameId
 {
-  static std::string* pointer(M& m) { return 0; }
-  static std::string const* pointer(const M& m) { return 0; }
+  static std::string* pointer(M& m) { (void)m; return 0; }
+  static std::string const* pointer(const M& m) { (void)m; return 0; }
 };
 
 template<typename M>
@@ -207,8 +207,8 @@ struct FrameId<M, typename boost::enable_if<HasHeader<M> >::type >
 template<typename M, typename Enable = void>
 struct TimeStamp
 {
-  static ros::Time* pointer(M& m) { return 0; }
-  static ros::Time const* pointer(const M& m) { return 0; }
+  static ros::Time* pointer(M& m) { (void)m; return 0; }
+  static ros::Time const* pointer(const M& m) { (void)m; return 0; }
 };
 
 template<typename M>
