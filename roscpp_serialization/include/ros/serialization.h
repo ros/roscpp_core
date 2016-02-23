@@ -243,7 +243,7 @@ template<> struct Serializer<bool>
   {
     uint8_t b = (uint8_t)v;
 #if defined(__arm__) || defined(__arm)
-    memcpy(stream.advance(sizeof(1)), &b, 1 );
+    memcpy(stream.advance(1), &b, 1 );
 #else
     *reinterpret_cast<uint8_t*>(stream.advance(1)) = b;
 #endif
@@ -253,7 +253,7 @@ template<> struct Serializer<bool>
   {
     uint8_t b;
 #if defined(__arm__) || defined(__arm)
-    memcpy(&b, stream.advance(sizeof(1)), 1 );
+    memcpy(&b, stream.advance(1), 1 );
 #else
     b = *reinterpret_cast<uint8_t*>(stream.advance(1));
 #endif
