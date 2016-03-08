@@ -41,6 +41,7 @@
 #include <boost/shared_array.hpp>
 
 #include "ros/datatypes.h"
+#include "cpp_common_decl.h"
 
 namespace ros
 {
@@ -48,7 +49,7 @@ namespace ros
 /**
  * \brief Provides functionality to parse a connection header and retrieve values from it
  */
-class Header
+class CPP_COMMON_DECL Header
 {
 public:
   Header();
