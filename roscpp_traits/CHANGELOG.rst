@@ -2,6 +2,9 @@
 Changelog for package roscpp_traits
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.5.6 (2015-05-20)
 ------------------
 * fix for compile issue on OS X 10.10 (`#34 <https://github.com/ros/roscpp_core/pull/34>`_)

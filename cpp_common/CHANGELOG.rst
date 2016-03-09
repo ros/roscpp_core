@@ -2,6 +2,10 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* export symbols for Header (`#46 <https://github.com/ros/roscpp_core/pull/46>`_)
+
 0.5.6 (2015-05-20)
 ------------------
 

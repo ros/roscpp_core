@@ -2,6 +2,10 @@
 Changelog for package roscpp_serialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix serializer bool on ARM (`#44 <https://github.com/ros/roscpp_core/pull/44>`_)
+
 0.5.6 (2015-05-20)
 ------------------
 
