@@ -2,6 +2,10 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* change Duration:sleep return semantic (`#47 <https://github.com/ros/roscpp_core/pull/47>`_)
+
 0.5.7 (2016-03-09)
 ------------------
 * Adjust return value of sleep() function (`#45 <https://github.com/ros/roscpp_core/pull/45>`_)
