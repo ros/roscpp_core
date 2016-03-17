@@ -32,6 +32,10 @@ install(DIRECTORY include/
   FILES_MATCHING PATTERN "*.h")
 
 if(CATKIN_ENABLE_TESTING)
+  catkin_add_gtest(${PROJECT_NAME}-test_duration test/duration.cpp)
+  if(TARGET ${PROJECT_NAME}-test_duration)
+    target_link_libraries(${PROJECT_NAME}-test_duration ${catkin_LIBRARIES} rostime)
+  endif()
   catkin_add_gtest(${PROJECT_NAME}-test_time test/time.cpp)
   if(TARGET ${PROJECT_NAME}-test_time)
     target_link_libraries(${PROJECT_NAME}-test_time ${catkin_LIBRARIES} rostime)

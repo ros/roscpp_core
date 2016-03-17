@@ -101,7 +101,7 @@ public:
 
   /**
    * @brief  Sleeps for any leftover time in a cycle. Calculated from the last time sleep, reset, or the constructor was called.
-   * @return Passes through the return value from WallDuration::sleep() if it slept, otherwise True
+   * @return Passes through the return value from WallDuration::sleep() if it slept, false otherwise.
    */
   bool sleep();
 
