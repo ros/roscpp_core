@@ -142,7 +142,7 @@ bool WallRate::sleep()
     {
       start_ = actual_end;
     }
-    return true;
+    return false;
   }
 
   return sleep_time.sleep();
