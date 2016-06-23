@@ -150,7 +150,14 @@ namespace ros
     bool operator<=(const T &rhs) const;
 
     double toSec()  const { return (double)sec + 1e-9*(double)nsec; };
-    T& fromSec(double t) { sec = (uint32_t)floor(t); nsec = (uint32_t)boost::math::round((t-sec) * 1e9);  return *static_cast<T*>(this);}
+    T& fromSec(double t) {
+      sec = (uint32_t)floor(t);
+      nsec = (uint32_t)boost::math::round((t-sec) * 1e9);
+      // avoid rounding errors
+      sec += (nsec % 1000000000ul);
+      nsec %= 1000000000ul;
+      return *static_cast<T*>(this);
+    }
 
     uint64_t toNSec() const {return (uint64_t)sec*1000000000ull + (uint64_t)nsec;  }
     T& fromNSec(uint64_t t);
