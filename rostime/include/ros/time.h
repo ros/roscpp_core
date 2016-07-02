@@ -154,7 +154,7 @@ namespace ros
       sec = (uint32_t)floor(t);
       nsec = (uint32_t)boost::math::round((t-sec) * 1e9);
       // avoid rounding errors
-      sec += (nsec % 1000000000ul);
+      sec += (nsec / 1000000000ul);
       nsec %= 1000000000ul;
       return *static_cast<T*>(this);
     }

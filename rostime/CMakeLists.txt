@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(rostime)
 
+set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+
 find_package(catkin REQUIRED COMPONENTS cpp_common)
 find_package(Boost REQUIRED COMPONENTS date_time system thread)
 catkin_package(
