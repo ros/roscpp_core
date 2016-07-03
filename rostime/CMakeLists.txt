@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(rostime)
 
-set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
-
 find_package(catkin REQUIRED COMPONENTS cpp_common)
 find_package(Boost REQUIRED COMPONENTS date_time system thread)
 catkin_package(
@@ -40,6 +38,7 @@ if(CATKIN_ENABLE_TESTING)
   endif()
   catkin_add_gtest(${PROJECT_NAME}-test_time test/time.cpp)
   if(TARGET ${PROJECT_NAME}-test_time)
+    set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
     target_link_libraries(${PROJECT_NAME}-test_time ${catkin_LIBRARIES} rostime)
   endif()
 endif()
