@@ -152,6 +152,21 @@ TEST(Time, ToFromDouble)
 
 }
 
+TEST(Time, RoundingError)
+{
+  double someInt = 1031.0; // some integer
+  double t = std::nextafter(someInt, 0); // someint - epsilon
+  // t should be 1031.000000
+
+  ros::Time exampleTime;
+  exampleTime.fromSec(t);
+
+  // if rounded incorrectly, sec may be 1030
+  // and nsec may be 1e9.
+  EXPECT_EQ(exampleTime.sec, 1031);
+  EXPECT_EQ(exampleTime.nsec, 0);
+}
+
 TEST(Time, OperatorPlus)
 {
   Time t(100, 0);
