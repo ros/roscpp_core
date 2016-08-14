@@ -204,7 +204,7 @@ inline uint32_t serializationLength(const T& t)
       memcpy(&v, stream.advance(sizeof(v)), sizeof(v) ); \
     } \
     \
-    inline static uint32_t serializedLength(const Type t) \
+    inline static uint32_t serializedLength(const Type&) \
       { \
       return sizeof(Type); \
     } \
