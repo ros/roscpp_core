@@ -2,6 +2,10 @@
 Changelog for package roscpp_serialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix warning about unused parameter (`#51 <https://github.com/ros/roscpp_core/pull/51>`_)
+
 0.6.0 (2016-03-17)
 ------------------
 
