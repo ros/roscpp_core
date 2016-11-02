@@ -39,8 +39,9 @@ template<typename M>
 struct Printer
 {
   template<typename Stream>
-  static void stream(Stream& s, const std::string& /* indent */, const M& value)
+  static void stream(Stream& s, const std::string& indent, const M& value)
   {
+    (void)indent;
     s << value << "\n";
   }
 };
@@ -51,8 +52,9 @@ template<>
 struct Printer<int8_t>
 {
   template<typename Stream>
-  static void stream(Stream& s, const std::string& /* indent */, int8_t value)
+  static void stream(Stream& s, const std::string& indent, int8_t value)
   {
+    (void)indent;
     s << static_cast<int32_t>(value) << "\n";
   }
 };
@@ -61,8 +63,9 @@ template<>
 struct Printer<uint8_t>
 {
   template<typename Stream>
-  static void stream(Stream& s, const std::string& /* indent */, uint8_t value)
+  static void stream(Stream& s, const std::string& indent, uint8_t value)
   {
+    (void)indent;
     s << static_cast<uint32_t>(value) << "\n";
   }
 };
