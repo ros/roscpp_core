@@ -39,7 +39,7 @@
 
 namespace std_msgs
 {
-  ROS_DECLARE_MESSAGE(Header);
+  ROS_DECLARE_MESSAGE(Header)
 }
 
 #define ROS_IMPLEMENT_SIMPLE_TOPIC_TRAITS(msg, md5sum, datatype, definition) \
