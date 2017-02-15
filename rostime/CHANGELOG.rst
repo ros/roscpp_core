@@ -2,6 +2,9 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.6.1 (2016-09-02)
 ------------------
 * fix rounding errors leading to invalid stored data in ros::TimeBase (`#48 <https://github.com/ros/roscpp_core/issues/48>`_)
