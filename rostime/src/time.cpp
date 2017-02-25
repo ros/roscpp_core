@@ -167,6 +167,29 @@ namespace ros
     nsec = nsec_sum;
 #endif
   }
+
+  void ros_monotonictime(uint32_t& sec, uint32_t& nsec)
+#ifndef WIN32
+    throw(NoHighPerformanceTimersException)
+#endif
+  {
+#ifndef WIN32
+#if HAS_CLOCK_GETTIME
+    timespec start;
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    sec  = start.tv_sec;
+    nsec = start.tv_nsec;
+#else
+    // what to do if clock_gettime is not available???
+    struct timeval timeofday;
+    gettimeofday(&timeofday,NULL);
+    sec  = timeofday.tv_sec;
+    nsec = timeofday.tv_usec * 1000;
+#endif
+#else
+    ros_walltime(sec, nsec);
+#endif
+}
   /**
    * @brief Simple representation of the rt library nanosleep function.
    */
@@ -389,6 +412,17 @@ namespace ros
     return true;
   }
 
+  bool MonotonicTime::sleepUntil(const MonotonicTime& end)
+  {
+    WallDuration d(end - MonotonicTime::now());
+    if (d > WallDuration(0))
+    {
+      return d.sleep();
+    }
+
+    return true;
+  }
+
   bool Duration::sleep() const
   {
     if (Time::useSystemTime())
@@ -444,6 +478,13 @@ namespace ros
     return t;
   }
 
+  MonotonicTime MonotonicTime::now()
+  {
+    MonotonicTime t;
+    ros_monotonictime(t.sec, t.nsec);
+
+    return t;
+  }
   std::ostream &operator<<(std::ostream& os, const WallDuration& rhs)
   {
     boost::io::ios_all_saver s(os);
@@ -505,6 +546,7 @@ namespace ros
 
   template class TimeBase<Time, Duration>;
   template class TimeBase<WallTime, WallDuration>;
+  template class TimeBase<MonotonicTime, WallDuration>;
 }
 
 

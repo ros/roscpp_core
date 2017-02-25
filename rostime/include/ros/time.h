@@ -256,8 +256,41 @@ namespace ros
     static bool isSystemTime() { return true; }
   };
 
+  /**
+   * \brief Time representation.  Always monotonic-clock time.
+   *
+   * ros::TimeBase provides most of its functionality.
+   */
+  class ROSTIME_DECL MonotonicTime : public TimeBase<MonotonicTime, WallDuration>
+  {
+    public:
+      MonotonicTime()
+              : TimeBase<MonotonicTime, WallDuration>()
+      {}
+
+      MonotonicTime(uint32_t _sec, uint32_t _nsec)
+              : TimeBase<MonotonicTime, WallDuration>(_sec, _nsec)
+      {}
+
+      explicit MonotonicTime(double t) { fromSec(t); }
+
+      /**
+       * \brief Returns the current monotonic clock time.
+       */
+      static MonotonicTime now();
+
+      /**
+       * \brief Sleep until a specific time has been reached.
+       * @return True if the desired sleep time was met, false otherwise.
+       */
+      static bool sleepUntil(const MonotonicTime& end);
+
+      static bool isSystemTime() { return true; }
+  };
+
   ROSTIME_DECL std::ostream &operator <<(std::ostream &os, const Time &rhs);
   ROSTIME_DECL std::ostream &operator <<(std::ostream &os, const WallTime &rhs);
+  ROSTIME_DECL std::ostream &operator <<(std::ostream &os, const MonotonicTime &rhs);
 }
 
 #endif // ROS_TIME_H
