@@ -34,6 +34,7 @@ install(DIRECTORY include/
 if(CATKIN_ENABLE_TESTING)
   catkin_add_gtest(${PROJECT_NAME}-test_time test/time.cpp)
   if(TARGET ${PROJECT_NAME}-test_time)
+    set_property(TARGET ${PROJECT_NAME}-test_time APPEND_STRING PROPERTY COMPILE_FLAGS "-std=c++11")
     target_link_libraries(${PROJECT_NAME}-test_time ${catkin_LIBRARIES} rostime)
   endif()
 endif()
