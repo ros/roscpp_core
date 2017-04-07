@@ -190,15 +190,15 @@ namespace ros
       throw NoHighPerformanceTimersException();
     }
     QueryPerformanceCounter(&performance_count);
-    double steady_time = performance_count.QuadPart / (double) cpu_frequency.QuadPart
+    double steady_time = performance_count.QuadPart / (double) cpu_frequency.QuadPart;
     int64_t steady_sec = floor(steady_time);
     int64_t steady_nsec = boost::math::round((steady_time - steady_sec) * 1e9);
 
     // Throws an exception if we go out of 32-bit range
-    normalizeSecNSecUnsigned(sec_sum, nsec_sum);
+    normalizeSecNSecUnsigned(steady_sec, steady_nsec);
 
-    sec = sec_sum;
-    nsec = nsec_sum;
+    sec = steady_sec;
+    nsec = steady_nsec;
 #endif
 }
   /**
