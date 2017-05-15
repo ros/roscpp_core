@@ -2,6 +2,9 @@
 Changelog for package roscpp_serialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.6.2 (2017-02-14)
 ------------------
 * fix warning when compiling with -Wpedantic (`#53 <https://github.com/ros/roscpp_core/issues/53>`_)
