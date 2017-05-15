@@ -2,8 +2,8 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.6.3 (2017-05-15)
+------------------
 * add SteadyTime (`#57 <https://github.com/ros/roscpp_core/issues/57>`_)
 
 0.6.2 (2017-02-14)
