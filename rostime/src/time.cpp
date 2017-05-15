@@ -167,6 +167,40 @@ namespace ros
     nsec = nsec_sum;
 #endif
   }
+
+  void ros_steadytime(uint32_t& sec, uint32_t& nsec)
+#ifndef WIN32
+    throw(NoHighPerformanceTimersException)
+#endif
+  {
+#ifndef WIN32
+    timespec start;
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    sec  = start.tv_sec;
+    nsec = start.tv_nsec;
+#else
+    static LARGE_INTEGER cpu_frequency, performance_count;
+    // These should not ever fail since XP is already end of life:
+    // From https://msdn.microsoft.com/en-us/library/windows/desktop/ms644905(v=vs.85).aspx and
+    //      https://msdn.microsoft.com/en-us/library/windows/desktop/ms644904(v=vs.85).aspx:
+    // "On systems that run Windows XP or later, the function will always succeed and will
+    //  thus never return zero."
+    QueryPerformanceFrequency(&cpu_frequency);
+    if (cpu_frequency.QuadPart == 0) {
+      throw NoHighPerformanceTimersException();
+    }
+    QueryPerformanceCounter(&performance_count);
+    double steady_time = performance_count.QuadPart / (double) cpu_frequency.QuadPart;
+    int64_t steady_sec = floor(steady_time);
+    int64_t steady_nsec = boost::math::round((steady_time - steady_sec) * 1e9);
+
+    // Throws an exception if we go out of 32-bit range
+    normalizeSecNSecUnsigned(steady_sec, steady_nsec);
+
+    sec = steady_sec;
+    nsec = steady_nsec;
+#endif
+}
   /**
    * @brief Simple representation of the rt library nanosleep function.
    */
@@ -389,6 +423,17 @@ namespace ros
     return true;
   }
 
+  bool SteadyTime::sleepUntil(const SteadyTime& end)
+  {
+    WallDuration d(end - SteadyTime::now());
+    if (d > WallDuration(0))
+    {
+      return d.sleep();
+    }
+
+    return true;
+  }
+
   bool Duration::sleep() const
   {
     if (Time::useSystemTime())
@@ -436,10 +481,25 @@ namespace ros
     return os;
   }
 
+  std::ostream &operator<<(std::ostream& os, const SteadyTime &rhs)
+  {
+    boost::io::ios_all_saver s(os);
+    os << rhs.sec << "." << std::setw(9) << std::setfill('0') << rhs.nsec;
+    return os;
+  }
+
   WallTime WallTime::now()
   {
     WallTime t;
     ros_walltime(t.sec, t.nsec);
+
+    return t;
+  }
+
+  SteadyTime SteadyTime::now()
+  {
+    SteadyTime t;
+    ros_steadytime(t.sec, t.nsec);
 
     return t;
   }
@@ -505,6 +565,7 @@ namespace ros
 
   template class TimeBase<Time, Duration>;
   template class TimeBase<WallTime, WallDuration>;
+  template class TimeBase<SteadyTime, WallDuration>;
 }
 
 
