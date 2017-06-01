@@ -151,9 +151,16 @@ namespace ros
 
     double toSec()  const { return (double)sec + 1e-9*(double)nsec; };
     T& fromSec(double t) {
+      if ((int64_t)t < 0 || (int64_t)t > UINT_MAX) 
+	throw std::runtime_error("Time is out of dual 32-bit range"); 
+
       sec = (uint32_t)floor(t);
       nsec = (uint32_t)boost::math::round((t-sec) * 1e9);
       // avoid rounding errors
+
+      if ((int64_t)sec + (int64_t)((nsec / 1000000000ul)) < 0 || (int64_t)sec + (int64_t)((nsec / 1000000000ul)) > UINT_MAX)
+	throw std::runtime_error("Time is out of dual 32-bit range");      
+
       sec += (nsec / 1000000000ul);
       nsec %= 1000000000ul;
       return *static_cast<T*>(this);

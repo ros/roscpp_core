@@ -76,6 +76,9 @@ namespace ros
   template<class T, class D>
   D TimeBase<T, D>::operator-(const T &rhs) const
   {
+    if ((int64_t)sec - (int64_t)rhs.sec < INT_MIN || (int64_t)sec - (int64_t)rhs.sec > INT_MAX)
+      throw std::runtime_error("Duration is out of dual 32-bit range");
+
     return D((int32_t)sec -  (int32_t)rhs.sec,
              (int32_t)nsec - (int32_t)rhs.nsec); // carry handled in ctor
   }
