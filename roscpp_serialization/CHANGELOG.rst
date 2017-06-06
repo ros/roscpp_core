@@ -2,6 +2,9 @@
 Changelog for package roscpp_serialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.6.3 (2017-05-15)
 ------------------
 
