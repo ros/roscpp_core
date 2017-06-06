@@ -45,6 +45,12 @@
 #include <stdexcept>
 #include <limits>
 
+// time related includes for macOS
+#if defined(__MACH__)
+#include <mach/clock.h>
+#include <mach/mach.h>
+#endif  // defined(__MACH__)
+
 #include <boost/thread/mutex.hpp>
 #include <boost/io/ios_state.hpp>
 #include <boost/date_time/posix_time/ptime.hpp>
@@ -175,7 +181,19 @@ namespace ros
   {
 #ifndef WIN32
     timespec start;
+#if defined(__MACH__)
+    // On macOS use clock_get_time.
+    clock_serv_t cclock;
+    mach_timespec_t mts;
+    host_get_clock_service(mach_host_self(), SYSTEM_CLOCK, &cclock);
+    clock_get_time(cclock, &mts);
+    mach_port_deallocate(mach_task_self(), cclock);
+    start.tv_sec = mts.tv_sec;
+    start.tv_nsec = mts.tv_nsec;
+#else  // defined(__MACH__)
+    // Otherwise use clock_gettime.
     clock_gettime(CLOCK_MONOTONIC, &start);
+#endif  // defined(__MACH__)
     sec  = start.tv_sec;
     nsec = start.tv_nsec;
 #else
@@ -200,7 +218,8 @@ namespace ros
     sec = steady_sec;
     nsec = steady_nsec;
 #endif
-}
+  }
+
   /**
    * @brief Simple representation of the rt library nanosleep function.
    */
