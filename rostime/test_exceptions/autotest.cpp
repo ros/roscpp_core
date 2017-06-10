@@ -15,7 +15,7 @@ void Test::check(bool expr, const char *func, const char  *filename, size_t line
 
 void Test::showFinalResults() {
   if (failedNum)
-    printf("Failed %i of %i tests.\n", failedNum, totalNum);
+    printf("Failed %i of %zu tests.\n", failedNum, totalNum);
   else
     printf("All tests passed.\n");
 }
