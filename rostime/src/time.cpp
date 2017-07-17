@@ -303,7 +303,12 @@ namespace ros
           }
       }
 
-    return !g_stopped;
+    if (g_stopped)
+      {
+        return false;
+      }
+
+    return true;
   }
 
   Time Time::fromBoost(const boost::posix_time::ptime& t)
