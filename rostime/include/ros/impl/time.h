@@ -58,6 +58,23 @@
 
 namespace ros
 {
+  template<class T, class D>
+  T& TimeBase<T, D>::fromSec(double t) {
+    double secd = floor(t);
+
+    //Check if double fits in. There can be some mistakes close to 2^32.
+    if (secd < -1e-9 || secd - (double) UINT_MAX > 1e-9)
+      throw std::runtime_error("Time is out of dual 32-bit range");
+
+    sec = (uint32_t) secd;
+    nsec = (uint32_t) boost::math::round((t - sec) * 1e9);
+
+    // avoid rounding errors
+    sec += (nsec / 1000000000ul);
+    nsec %= 1000000000ul;
+
+    return *static_cast<T*>(this);
+  }
 
   template<class T, class D>
   T& TimeBase<T, D>::fromNSec(uint64_t t)
@@ -76,8 +93,13 @@ namespace ros
   template<class T, class D>
   D TimeBase<T, D>::operator-(const T &rhs) const
   {
-    return D((int32_t)sec -  (int32_t)rhs.sec,
-             (int32_t)nsec - (int32_t)rhs.nsec); // carry handled in ctor
+    int64_t sec_dif  = (int64_t)sec - (int64_t)rhs.sec;
+    int64_t nsec_dif = (int64_t)nsec - (int64_t)rhs.nsec;
+
+    //Check if difference fits in int32_t. It throws an exception if it doesn't.
+    normalizeSecNSecSigned(sec_dif, nsec_dif);
+
+    return D((int32_t)sec_dif, (int32_t)nsec_dif); // carry handled in ctor
   }
 
   template<class T, class D>

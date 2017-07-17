@@ -49,10 +49,16 @@ namespace ros {
     normalizeSecNSecSigned(sec, nsec);
   }
 
+  //Cast from double can work incorrectly, if it takes too big values with big precision.
+  //For example, fromSec(2147483647.999999999) will throw an exception, although it's correct value,
   template<class T>
   T& DurationBase<T>::fromSec(double d)
   {
-    sec = (int32_t)floor(d);
+    double secd = floor(d);
+    if (secd - (double)INT_MIN < -1e-9  || secd - (double)INT_MAX > 1e-9)
+      throw std::runtime_error("Duration is out of dual 32-bit range");
+
+    sec = (int32_t)secd;
     nsec = (int32_t)((d - (double)sec)*1000000000);
     return *static_cast<T*>(this);
   }
@@ -60,10 +66,14 @@ namespace ros {
   template<class T>
   T& DurationBase<T>::fromNSec(int64_t t)
   {
-    sec  = (int32_t)(t / 1000000000);
-    nsec = (int32_t)(t % 1000000000);
+    int64_t sec64  = 0;
+    int64_t nsec64 = t;
 
-    normalizeSecNSecSigned(sec, nsec);
+    //Throws an exception, if parameter out of 32-bit range.
+    normalizeSecNSecSigned(sec64, nsec64);
+
+    sec = (int32_t)sec64;
+    nsec = (int32_t)nsec64;
 
     return *static_cast<T*>(this);
   }
@@ -71,7 +81,13 @@ namespace ros {
   template<class T>
   T DurationBase<T>::operator+(const T &rhs) const
   {
-    return T(sec + rhs.sec, nsec + rhs.nsec);
+    int64_t sec_sum  = (int64_t)sec  + (int64_t)rhs.sec;
+    int64_t nsec_sum = (int64_t)nsec + (int64_t)rhs.nsec;
+
+    // Throws an exception if we go out of 32-bit range.
+    normalizeSecNSecSigned(sec_sum, nsec_sum);
+
+    return T((int32_t)sec_sum, (int32_t)nsec_sum);
   }
 
   template<class T>
@@ -83,13 +99,27 @@ namespace ros {
   template<class T>
   T DurationBase<T>::operator-(const T &rhs) const
   {
-    return T(sec - rhs.sec, nsec - rhs.nsec);
+    int64_t sec_dif  = (int64_t)sec  - (int64_t)rhs.sec;
+    int64_t nsec_dif = (int64_t)nsec - (int64_t)rhs.nsec;
+
+    // Throws an exception if we go out of 32-bit range
+    normalizeSecNSecSigned(sec_dif, nsec_dif);
+
+    return T((int32_t)sec_dif, (int32_t)nsec_dif);
   }
 
+//Duration values in range [-2147483648..2147483647.999999999].
+//Question is: -(-2147483648) should throw an exception (as it does now it's correct),
+//or should it be as c++ integer: -(-2147483648) == -2147483648 ???
   template<class T>
   T DurationBase<T>::operator-() const
   {
-    return T(-sec , -nsec);
+    int64_t sec64 = -(int64_t)sec;
+    int64_t nsec64 = -(int64_t)nsec;
+
+    normalizeSecNSecSigned(sec64, nsec64);
+
+    return T(sec64, nsec64);
   }
 
   template<class T>
