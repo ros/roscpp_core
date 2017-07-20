@@ -52,7 +52,10 @@ namespace ros {
   template<class T>
   T& DurationBase<T>::fromSec(double d)
   {
-    sec = (int32_t)floor(d);
+    int64_t sec64 = (int64_t)floor(d);
+    if (sec64 < INT_MIN || sec64 > INT_MAX)
+      throw std::runtime_error("Duration is out of dual 32-bit range");
+    sec = (int32_t)sec64;
     nsec = (int32_t)((d - (double)sec)*1000000000);
     return *static_cast<T*>(this);
   }
@@ -60,18 +63,19 @@ namespace ros {
   template<class T>
   T& DurationBase<T>::fromNSec(int64_t t)
   {
-    sec  = (int32_t)(t / 1000000000);
+    int64_t sec64 = t / 1000000000;
+    if (sec64 < INT_MIN || sec64 > INT_MAX)
+      throw std::runtime_error("Duration is out of dual 32-bit range");
+    sec = (int32_t)sec64;
     nsec = (int32_t)(t % 1000000000);
-
-    normalizeSecNSecSigned(sec, nsec);
-
     return *static_cast<T*>(this);
   }
 
   template<class T>
   T DurationBase<T>::operator+(const T &rhs) const
   {
-    return T(sec + rhs.sec, nsec + rhs.nsec);
+    T t;
+    return t.fromNSec(toNSec() + rhs.toNSec());
   }
 
   template<class T>
@@ -83,13 +87,15 @@ namespace ros {
   template<class T>
   T DurationBase<T>::operator-(const T &rhs) const
   {
-    return T(sec - rhs.sec, nsec - rhs.nsec);
+    T t;
+    return t.fromNSec(toNSec() - rhs.toNSec());
   }
 
   template<class T>
   T DurationBase<T>::operator-() const
   {
-    return T(-sec , -nsec);
+    T t;
+    return t.fromNSec(-toNSec());
   }
 
   template<class T>

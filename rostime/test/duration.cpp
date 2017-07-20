@@ -55,9 +55,9 @@ TEST(Duration, castFromDoubleExceptions)
     Duration d1, d2, d3, d4;
     // Valid values to cast, must not throw exceptions
     EXPECT_NO_THROW(d1.fromSec(-2147483648.0));
-    EXPECT_NO_THROW(d2.fromSec(-2147483647.999));
+    EXPECT_NO_THROW(d2.fromSec(-2147483647.999999));
     EXPECT_NO_THROW(d3.fromSec(2147483647.0));
-    EXPECT_NO_THROW(d4.fromSec(2147483647.999));
+    EXPECT_NO_THROW(d4.fromSec(2147483647.999999));
 
     // The next casts all incorrect.
     EXPECT_THROW(d1.fromSec(2147483648.0), std::runtime_error);
