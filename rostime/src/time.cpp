@@ -108,11 +108,15 @@ namespace ros
 #if HAS_CLOCK_GETTIME
     timespec start;
     clock_gettime(CLOCK_REALTIME, &start);
+    if (start.tv_sec < 0 || start.tv_sec > UINT_MAX)
+      throw std::runtime_error("Timespec is out of dual 32-bit range");
     sec  = start.tv_sec;
     nsec = start.tv_nsec;
 #else
     struct timeval timeofday;
     gettimeofday(&timeofday,NULL);
+    if (timeofday.tv_sec < 0 || timeofday.tv_sec > UINT_MAX)
+      throw std::runtime_error("Timeofday is out of dual signed 32-bit range");
     sec  = timeofday.tv_sec;
     nsec = timeofday.tv_usec * 1000;
 #endif
@@ -150,7 +154,10 @@ namespace ros
 #else
     	start_li.QuadPart -= 116444736000000000ULL;
 #endif
-        start_sec = (uint32_t)(start_li.QuadPart / 10000000); // 100-ns units. odd.
+        int64_t start_sec64 = start_li.QuadPart / 10000000;  // 100-ns units
+        if (start_sec64 < 0 || start_sec64 > UINT_MAX)
+          throw std::runtime_error("SystemTime is out of dual 32-bit range");
+        start_sec = (uint32_t)start_sec64;
         start_nsec = (start_li.LowPart % 10000000) * 100;
       }
     LARGE_INTEGER cur_time;
@@ -373,7 +380,10 @@ namespace ros
   Time Time::fromBoost(const boost::posix_time::time_duration& d)
   {
     Time t;
-    t.sec = d.total_seconds();
+    int64_t sec64 = d.total_seconds();
+    if (sec64 < 0 || sec64 > UINT_MAX)
+      throw std::runtime_error("time_duration is out of dual 32-bit range");
+    t.sec = (uint32_t)sec64;
 #if defined(BOOST_DATE_TIME_HAS_NANOSECONDS)
     t.nsec = d.fractional_seconds();
 #else
