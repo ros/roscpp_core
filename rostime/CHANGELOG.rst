@@ -2,8 +2,8 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.6.5 (2017-07-27)
+------------------
 * add additional checks for valid time values (`#62 <https://github.com/ros/roscpp_core/pull/62>`_)
 * fix overflow bugs in Time and Duration (`#61 <https://github.com/ros/roscpp_core/pull/61>`_, `#63 <https://github.com/ros/roscpp_core/pull/63>`_)
 
