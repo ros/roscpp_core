@@ -153,7 +153,7 @@ namespace ros
     T& fromSec(double t) {
       int64_t sec64 = (int64_t)floor(t);
       if (sec64 < 0 || sec64 > UINT_MAX)
-        throw std::runtime_error("Duration is out of dual 32-bit range");
+        throw std::runtime_error("Time is out of dual 32-bit range");
       sec = (uint32_t)sec64;
       nsec = (uint32_t)boost::math::round((t-sec) * 1e9);
       // avoid rounding errors
