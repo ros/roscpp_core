@@ -100,9 +100,6 @@ namespace ros
    * (i.e. not exposed to users of the time classes)
    */
   void ros_walltime(uint32_t& sec, uint32_t& nsec) 
-#ifndef WIN32    
-    throw(NoHighPerformanceTimersException)
-#endif
   {
 #ifndef WIN32
 #if HAS_CLOCK_GETTIME
@@ -182,9 +179,6 @@ namespace ros
   }
 
   void ros_steadytime(uint32_t& sec, uint32_t& nsec)
-#ifndef WIN32
-    throw(NoHighPerformanceTimersException)
-#endif
   {
 #ifndef WIN32
     timespec start;
