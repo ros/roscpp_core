@@ -51,8 +51,7 @@ template<typename T> class shared_ptr;
 /**
  * \brief Forward-declare a message, including Ptr and ConstPtr types, with an allocator
  *
- * \param ns The namespace the message should be declared inside
- * \param m The "base" message type, i.e. the name of the .msg file
+ * \param msg The "base" message type, i.e., the name of the .msg file
  * \param new_name The name you'd like the message to have
  * \param alloc The allocator to use, e.g. std::allocator
  */
