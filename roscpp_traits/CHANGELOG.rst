@@ -2,6 +2,11 @@
 Changelog for package roscpp_traits
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix assignment operator of MessageEvent (`#66 <https://github.com/ros/roscpp_core/issues/66>`_)
+* fix docblock of ROS_DECLARE_MESSAGE_WITH_ALLOCATOR (`#67 <https://github.com/ros/roscpp_core/issues/67>`_)
+
 0.6.5 (2017-07-27)
 ------------------
 

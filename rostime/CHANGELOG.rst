@@ -2,6 +2,11 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* only use Apple features on Apple (`#68 <https://github.com/ros/roscpp_core/issues/68>`_)
+* remove exception specification (`#64 <https://github.com/ros/roscpp_core/issues/64>`_)
+
 0.6.5 (2017-07-27)
 ------------------
 * add additional checks for valid time values (`#62 <https://github.com/ros/roscpp_core/pull/62>`_)
