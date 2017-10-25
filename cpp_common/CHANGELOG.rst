@@ -2,8 +2,8 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.6.6 (2017-10-25)
+------------------
 * replace usage of deprecated logError macros (`#69 <https://github.com/ros/roscpp_core/issues/69>`_)
 
 0.6.5 (2017-07-27)

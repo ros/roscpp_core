@@ -2,8 +2,8 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.6.6 (2017-10-25)
+------------------
 * only use Apple features on Apple (`#68 <https://github.com/ros/roscpp_core/issues/68>`_)
 * remove exception specification (`#64 <https://github.com/ros/roscpp_core/issues/64>`_)
 
