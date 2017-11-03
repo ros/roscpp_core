@@ -2,6 +2,9 @@
 Changelog for package roscpp_traits
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.6.6 (2017-10-25)
 ------------------
 * fix assignment operator of MessageEvent (`#66 <https://github.com/ros/roscpp_core/issues/66>`_)

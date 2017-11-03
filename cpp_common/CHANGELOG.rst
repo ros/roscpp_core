@@ -2,6 +2,10 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix support for console_bridge < 0.3.0 (`#70 <https://github.com/ros/roscpp_core/issues/70>`_, regression of 0.6.6)
+
 0.6.6 (2017-10-25)
 ------------------
 * replace usage of deprecated logError macros (`#69 <https://github.com/ros/roscpp_core/issues/69>`_)
