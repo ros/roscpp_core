@@ -2,8 +2,8 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.6.7 (2017-11-03)
+------------------
 * fix support for console_bridge < 0.3.0 (`#70 <https://github.com/ros/roscpp_core/issues/70>`_, regression of 0.6.6)
 
 0.6.6 (2017-10-25)
