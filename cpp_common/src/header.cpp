@@ -34,7 +34,9 @@
 
 #include "ros/header.h"
 
+#ifndef ROS2
 #include "console_bridge/console.h"
+#endif // !ROS2
 
 #include <sstream>
 
@@ -45,6 +47,12 @@
 #define SROS_SERIALIZE_BUFFER(ptr, data, data_size) { if (data_size > 0) { memcpy(ptr, data, data_size); ptr += data_size; } }
 #define SROS_DESERIALIZE_PRIMITIVE(ptr, data) { memcpy(&data, ptr, sizeof(data)); ptr += sizeof(data); }
 #define SROS_DESERIALIZE_BUFFER(ptr, data, data_size) { if (data_size > 0) { memcpy(data, ptr, data_size); ptr += data_size; } }
+
+#ifdef ROS2
+#ifndef logError
+  #define logError(...)
+#endif
+#endif // ROS2
 
 // Remove this when no longer supporting platforms with libconsole-bridge-dev < 0.3.0,
 // in particular Debian Jessie: https://packages.debian.org/jessie/libconsole-bridge-dev

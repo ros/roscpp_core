@@ -1,4 +1,5 @@
-<package>
+<?xml version="1.0"?>
+<package format="2">
   <name>roscpp_traits</name>
   <version>0.6.7</version>
   <description>
@@ -13,8 +14,12 @@
   <url type="website">http://ros.org/wiki/roscpp_traits</url>
   <author>Josh Faust</author>
 
-  <buildtool_depend>catkin</buildtool_depend>
-
-  <run_depend>cpp_common</run_depend>
-  <run_depend>rostime</run_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>cpp_common</build_depend>
+  <build_depend>rostime</build_depend>
+  <exec_depend>cpp_common</exec_depend>
+  <exec_depend>rostime</exec_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

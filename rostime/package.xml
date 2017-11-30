@@ -1,4 +1,5 @@
-<package>
+<?xml version="1.0"?>
+<package format="2">
   <name>rostime</name>
   <version>0.6.7</version>
   <description>
@@ -10,11 +11,12 @@
   <url>http://ros.org/wiki/rostime</url>
   <author>Josh Faust</author>
 
-  <buildtool_depend version_gte="0.5.68">catkin</buildtool_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <build_depend>boost</build_depend>
   <build_depend>cpp_common</build_depend>
+  <exec_depend>cpp_common</exec_depend>
 
-  <run_depend>boost</run_depend>
-  <run_depend>cpp_common</run_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

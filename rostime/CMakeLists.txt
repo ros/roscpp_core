@@ -1,44 +1,31 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(rostime)
 
-find_package(catkin REQUIRED COMPONENTS cpp_common)
-find_package(Boost REQUIRED COMPONENTS date_time system thread)
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS cpp_common
-  DEPENDS Boost
-)
+find_package(ament_cmake REQUIRED)
+find_package(cpp_common REQUIRED)
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+include_directories(include 
+  ${cpp_common_INCLUDE_DIRS}
+  $ENV{Boost_Root}
+)
 
 add_library(rostime 
   src/duration.cpp
   src/rate.cpp
   src/time.cpp)
 
-target_link_libraries(rostime ${Boost_LIBRARIES})
-if(NOT APPLE)
-  target_link_libraries(rostime ${RT_LIBRARY})
-endif()
+target_link_libraries(rostime)
+
+ament_export_include_directories(include)
+ament_export_libraries(rostime)
+ament_package()
 
 install(TARGETS rostime
-  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin)
 
 install(DIRECTORY include/
-  DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
+  DESTINATION include
   FILES_MATCHING PATTERN "*.h")
 
-if(CATKIN_ENABLE_TESTING)
-  catkin_add_gtest(${PROJECT_NAME}-test_duration test/duration.cpp)
-  if(TARGET ${PROJECT_NAME}-test_duration)
-    target_link_libraries(${PROJECT_NAME}-test_duration ${catkin_LIBRARIES} rostime)
-  endif()
-  catkin_add_gtest(${PROJECT_NAME}-test_time test/time.cpp)
-  if(TARGET ${PROJECT_NAME}-test_time)
-    set_property(TARGET ${PROJECT_NAME}-test_time APPEND_STRING PROPERTY COMPILE_FLAGS "-std=c++11")
-    target_link_libraries(${PROJECT_NAME}-test_time ${catkin_LIBRARIES} rostime)
-  endif()
-endif()
