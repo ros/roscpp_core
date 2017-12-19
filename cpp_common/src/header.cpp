@@ -49,7 +49,8 @@
 // Remove this when no longer supporting platforms with libconsole-bridge-dev < 0.3.0,
 // in particular Debian Jessie: https://packages.debian.org/jessie/libconsole-bridge-dev
 #ifndef CONSOLE_BRIDGE_logError
-  #define CONSOLE_BRIDGE_logError logError
+# define CONSOLE_BRIDGE_logError(fmt, ...)  \
+  console_bridge::log(__FILE__, __LINE__, console_bridge::CONSOLE_BRIDGE_LOG_ERROR, fmt, ##__VA_ARGS__)
 #endif
 
 using namespace std;
