@@ -4,7 +4,7 @@ project(cpp_common)
 find_package(ament_cmake REQUIRED)
 
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system thread)
 
 include(CheckIncludeFile)
 include(CheckFunctionExists)
