@@ -3,13 +3,14 @@ project(cpp_common)
 
 find_package(ament_cmake REQUIRED)
 
+set(Boost_USE_STATIC_LIBS ON)
+find_package(Boost REQUIRED)
+
 include(CheckIncludeFile)
 include(CheckFunctionExists)
 include(CheckCXXSourceCompiles)
 
-add_definitions(-DROS2)
-
-include_directories(include $ENV{Boost_Root})
+include_directories(include ${Boost_INCLUDE_DIRS})
 
 # execinfo.h is needed for backtrace on glibc systems
 CHECK_INCLUDE_FILE(execinfo.h HAVE_EXECINFO_H)

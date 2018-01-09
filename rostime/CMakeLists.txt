@@ -4,9 +4,12 @@ project(rostime)
 find_package(ament_cmake REQUIRED)
 find_package(cpp_common REQUIRED)
 
+set(Boost_USE_STATIC_LIBS ON)
+find_package(Boost REQUIRED)
+
 include_directories(include 
   ${cpp_common_INCLUDE_DIRS}
-  $ENV{Boost_Root}
+  ${Boost_INCLUDE_DIRS}
 )
 
 add_library(rostime 
