@@ -2,6 +2,10 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* define console_bridge macro with API call rather than relying on short macro being defined (`#71 <https://github.com/ros/roscpp_core/issues/71>`_)
+
 0.6.7 (2017-11-03)
 ------------------
 * fix support for console_bridge < 0.3.0 (`#70 <https://github.com/ros/roscpp_core/issues/70>`_, regression of 0.6.6)
