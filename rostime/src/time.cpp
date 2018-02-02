@@ -95,11 +95,7 @@ namespace ros
   /*********************************************************************
    ** Cross Platform Functions
    *********************************************************************/
-  /*
-   * These have only internal linkage to this translation unit.
-   * (i.e. not exposed to users of the time classes)
-   */
-  void ros_walltime(uint32_t& sec, uint32_t& nsec) 
+  void ros_walltime(uint32_t& sec, uint32_t& nsec)
   {
 #ifndef WIN32
 #if HAS_CLOCK_GETTIME
@@ -220,6 +216,11 @@ namespace ros
     nsec = steady_nsec;
 #endif
   }
+
+  /*
+   * These have only internal linkage to this translation unit.
+   * (i.e. not exposed to users of the time classes)
+   */
 
   /**
    * @brief Simple representation of the rt library nanosleep function.

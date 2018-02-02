@@ -115,6 +115,8 @@ namespace ros
   ROSTIME_DECL void normalizeSecNSec(uint64_t& sec, uint64_t& nsec);
   ROSTIME_DECL void normalizeSecNSec(uint32_t& sec, uint32_t& nsec);
   ROSTIME_DECL void normalizeSecNSecUnsigned(int64_t& sec, int64_t& nsec);
+  ROSTIME_DECL void ros_walltime(uint32_t& sec, uint32_t& nsec);
+  ROSTIME_DECL void ros_steadytime(uint32_t& sec, uint32_t& nsec);
 
   /*********************************************************************
    ** Time Classes
