@@ -56,7 +56,7 @@ namespace ros {
     if (sec64 < INT_MIN || sec64 > INT_MAX)
       throw std::runtime_error("Duration is out of dual 32-bit range");
     sec = (int32_t)sec64;
-    nsec = (int32_t)((d - (double)sec)*1000000000);
+    nsec = (int32_t)(nearbyint((d - (double)sec)*1000000000));
     return *static_cast<T*>(this);
   }
 
