@@ -2,6 +2,13 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.6.9 (2018-02-02)
+------------------
+* expose ros_walltime and ros_steadytime (`#73 <https://github.com/ros/roscpp_core/issues/73>`_)
+
+0.6.8 (2018-01-26)
+------------------
+
 0.6.7 (2017-11-03)
 ------------------
 
