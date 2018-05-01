@@ -2,6 +2,10 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix conversion of Duration on macOS (`#78 <https://github.com/ros/roscpp_core/issues/78>`_)
+
 0.6.9 (2018-02-02)
 ------------------
 * expose ros_walltime and ros_steadytime (`#73 <https://github.com/ros/roscpp_core/issues/73>`_)
