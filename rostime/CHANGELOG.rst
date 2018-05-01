@@ -2,8 +2,8 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.6.10 (2018-05-01)
+-------------------
 * fix conversion of Duration on macOS (`#78 <https://github.com/ros/roscpp_core/issues/78>`_)
 
 0.6.9 (2018-02-02)
