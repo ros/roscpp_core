@@ -138,7 +138,6 @@ namespace ros
       normalizeSecNSec(sec, nsec);
     }
     explicit TimeBase(double t) { fromSec(t); }
-    ~TimeBase() {}
     D operator-(const T &rhs) const;
     T operator+(const D &rhs) const;
     T operator-(const D &rhs) const;
