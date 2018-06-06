@@ -179,7 +179,7 @@ namespace ros {
 #if defined(BOOST_DATE_TIME_HAS_NANOSECONDS)
     return bt::seconds(sec) + bt::nanoseconds(nsec);
 #else
-    return bt::seconds(sec) + bt::microseconds(nsec/1000.0);
+    return bt::seconds(sec) + bt::microseconds(nsec/1000);
 #endif
   }
 }
