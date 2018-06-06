@@ -177,25 +177,6 @@ inline uint32_t serializationLength(const T& t)
   { \
     template<typename Stream> inline static void write(Stream& stream, const Type v) \
     { \
-      *reinterpret_cast<Type*>(stream.advance(sizeof(v))) = v; \
-    } \
-    \
-    template<typename Stream> inline static void read(Stream& stream, Type& v) \
-    { \
-      v = *reinterpret_cast<Type*>(stream.advance(sizeof(v))); \
-    } \
-    \
-    inline static uint32_t serializedLength(const Type&) \
-    { \
-      return sizeof(Type); \
-    } \
-  };
-
-#define ROS_CREATE_SIMPLE_SERIALIZER_ARM(Type) \
-  template<> struct Serializer<Type> \
-  { \
-    template<typename Stream> inline static void write(Stream& stream, const Type v) \
-    { \
       memcpy(stream.advance(sizeof(v)), &v, sizeof(v) ); \
     } \
     \
@@ -210,29 +191,16 @@ inline uint32_t serializationLength(const T& t)
     } \
 };
 
-#if defined(__arm__) || defined(__arm)
-    ROS_CREATE_SIMPLE_SERIALIZER_ARM(uint8_t)
-    ROS_CREATE_SIMPLE_SERIALIZER_ARM(int8_t)
-    ROS_CREATE_SIMPLE_SERIALIZER_ARM(uint16_t)
-    ROS_CREATE_SIMPLE_SERIALIZER_ARM(int16_t)
-    ROS_CREATE_SIMPLE_SERIALIZER_ARM(uint32_t)
-    ROS_CREATE_SIMPLE_SERIALIZER_ARM(int32_t)
-    ROS_CREATE_SIMPLE_SERIALIZER_ARM(uint64_t)
-    ROS_CREATE_SIMPLE_SERIALIZER_ARM(int64_t)
-    ROS_CREATE_SIMPLE_SERIALIZER_ARM(float)
-    ROS_CREATE_SIMPLE_SERIALIZER_ARM(double)
-#else
-    ROS_CREATE_SIMPLE_SERIALIZER(uint8_t)
-    ROS_CREATE_SIMPLE_SERIALIZER(int8_t)
-    ROS_CREATE_SIMPLE_SERIALIZER(uint16_t)
-    ROS_CREATE_SIMPLE_SERIALIZER(int16_t)
-    ROS_CREATE_SIMPLE_SERIALIZER(uint32_t)
-    ROS_CREATE_SIMPLE_SERIALIZER(int32_t)
-    ROS_CREATE_SIMPLE_SERIALIZER(uint64_t)
-    ROS_CREATE_SIMPLE_SERIALIZER(int64_t)
-    ROS_CREATE_SIMPLE_SERIALIZER(float)
-    ROS_CREATE_SIMPLE_SERIALIZER(double)
-#endif
+ROS_CREATE_SIMPLE_SERIALIZER(uint8_t)
+ROS_CREATE_SIMPLE_SERIALIZER(int8_t)
+ROS_CREATE_SIMPLE_SERIALIZER(uint16_t)
+ROS_CREATE_SIMPLE_SERIALIZER(int16_t)
+ROS_CREATE_SIMPLE_SERIALIZER(uint32_t)
+ROS_CREATE_SIMPLE_SERIALIZER(int32_t)
+ROS_CREATE_SIMPLE_SERIALIZER(uint64_t)
+ROS_CREATE_SIMPLE_SERIALIZER(int64_t)
+ROS_CREATE_SIMPLE_SERIALIZER(float)
+ROS_CREATE_SIMPLE_SERIALIZER(double)
 
 /**
  * \brief Serializer specialized for bool (serialized as uint8)
@@ -242,21 +210,13 @@ template<> struct Serializer<bool>
   template<typename Stream> inline static void write(Stream& stream, const bool v)
   {
     uint8_t b = (uint8_t)v;
-#if defined(__arm__) || defined(__arm)
     memcpy(stream.advance(1), &b, 1 );
-#else
-    *reinterpret_cast<uint8_t*>(stream.advance(1)) = b;
-#endif
   }
 
   template<typename Stream> inline static void read(Stream& stream, bool& v)
   {
     uint8_t b;
-#if defined(__arm__) || defined(__arm)
     memcpy(&b, stream.advance(1), 1 );
-#else
-    b = *reinterpret_cast<uint8_t*>(stream.advance(1));
-#endif
     v = (bool)b;
   }
 
