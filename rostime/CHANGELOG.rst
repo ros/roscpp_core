@@ -2,6 +2,11 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* argument to boost microseconds must be integral for Boost 1.67 and newer compatibility (`#79 <https://github.com/ros/roscpp_core/issues/79>`_)
+* remove empty destructor of TimeBase (which makes TimeBase, Time and WallTime trivially copyable) (`#82 <https://github.com/ros/roscpp_core/issues/82>`_)
+
 0.6.10 (2018-05-01)
 -------------------
 * fix conversion of Duration on macOS (`#78 <https://github.com/ros/roscpp_core/issues/78>`_)
