@@ -76,7 +76,7 @@ public:
   DurationBase() : sec(0), nsec(0) { }
   DurationBase(int32_t _sec, int32_t _nsec);
   explicit DurationBase(double t){fromSec(t);};
-  ~DurationBase() {}
+  virtual ~DurationBase() {}
   T operator+(const T &rhs) const;
   T operator-(const T &rhs) const;
   T operator-() const;
