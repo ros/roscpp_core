@@ -95,7 +95,7 @@ namespace ros
   };
 
   /**
-   * @brief Thrown if windoze high perf. timestamping is unavailable.
+   * @brief Thrown if windows high perf. timestamping is unavailable.
    *
    * @sa getWallTime
    */
