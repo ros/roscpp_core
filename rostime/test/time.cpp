@@ -32,7 +32,9 @@
 #include <gtest/gtest.h>
 #include <ros/rate.h>
 #include <ros/time.h>
+#ifndef _WIN32
 #include <sys/time.h>
+#endif
 
 #include <boost/date_time/posix_time/ptime.hpp>
 
@@ -45,9 +47,13 @@ double epsilon = 1e-9;
 void seed_rand()
 {
   //Seed random number generator with current microseond count
+#ifndef _WIN32
   timeval temp_time_struct;
   gettimeofday(&temp_time_struct,NULL);
   srand(temp_time_struct.tv_usec);
+#else
+  srand(time(nullptr));
+#endif
 };
 
 void generate_rand_times(uint32_t range, uint64_t runs, std::vector<ros::Time>& values1, std::vector<ros::Time>& values2)
@@ -509,8 +515,11 @@ void alarmHandler(int sig)
 
 TEST(Duration, sleepWithSignal)
 {
+#ifndef _WIN32
   signal(SIGALRM, alarmHandler);
   alarm(1);
+#endif
+
   Time start = Time::now();
   Duration d(2.0);
   bool rc = d.sleep();

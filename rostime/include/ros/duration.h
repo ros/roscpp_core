@@ -153,8 +153,8 @@ public:
   bool sleep() const;
 };
 
-std::ostream &operator <<(std::ostream &os, const Duration &rhs);
-std::ostream &operator <<(std::ostream &os, const WallDuration &rhs);
+ROSTIME_DECL std::ostream &operator <<(std::ostream &os, const Duration &rhs);
+ROSTIME_DECL std::ostream &operator <<(std::ostream &os, const WallDuration &rhs);
 
 
 }
