@@ -17,7 +17,7 @@
  *   * Neither the name of Willow Garage, Inc. nor the names of its
  *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
- *
+ *90
  *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -34,8 +34,6 @@
 
 #include "ros/header.h"
 
-#include "console_bridge/console.h"
-
 #include <sstream>
 
 #include <cstring>
@@ -46,11 +44,13 @@
 #define SROS_DESERIALIZE_PRIMITIVE(ptr, data) { memcpy(&data, ptr, sizeof(data)); ptr += sizeof(data); }
 #define SROS_DESERIALIZE_BUFFER(ptr, data, data_size) { if (data_size > 0) { memcpy(data, ptr, data_size); ptr += data_size; } }
 
-// Remove this when no longer supporting platforms with libconsole-bridge-dev < 0.3.0,
-// in particular Debian Jessie: https://packages.debian.org/jessie/libconsole-bridge-dev
+#ifndef logError
+#define logError(...)
+#endif
+
+// TODO: enable console bridge
 #ifndef CONSOLE_BRIDGE_logError
-# define CONSOLE_BRIDGE_logError(fmt, ...)  \
-  console_bridge::log(__FILE__, __LINE__, console_bridge::CONSOLE_BRIDGE_LOG_ERROR, fmt, ##__VA_ARGS__)
+  #define CONSOLE_BRIDGE_logError logError
 #endif
 
 using namespace std;
