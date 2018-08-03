@@ -22,7 +22,7 @@ if(HAVE_EXECINFO_H)
 endif(HAVE_EXECINFO_H)
 # do we have demangle capability?
 # CHECK_INCLUDE_FILE doesn't work here for some reason
-CHECK_CXX_SOURCE_COMPILES("#include<cxxabi.h>\nintmain(intargc,char**argv){}" HAVE_CXXABI_H)
+CHECK_CXX_SOURCE_COMPILES("#include<cxxabi.h>\nint main(int argc,char**argv){}" HAVE_CXXABI_H)
 if(HAVE_CXXABI_H)
   add_definitions(-DHAVE_CXXABI_H=1)
 endif()
