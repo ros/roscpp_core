@@ -51,7 +51,7 @@
 #include <mach/mach.h>
 #endif  // defined(__APPLE__)
 
-#ifdef WIN32
+#ifdef _WINDOWS
 #include <windows.h>
 #endif
 
