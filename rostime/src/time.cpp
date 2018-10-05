@@ -51,6 +51,10 @@
 #include <mach/mach.h>
 #endif  // defined(__APPLE__)
 
+#ifdef WIN32
+#include <windows.h>
+#endif
+
 #include <boost/thread/mutex.hpp>
 #include <boost/io/ios_state.hpp>
 #include <boost/date_time/posix_time/ptime.hpp>
