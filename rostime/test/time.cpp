@@ -28,6 +28,7 @@
  */
 
 #include <vector>
+#include <cmath>
 
 #include <gtest/gtest.h>
 #include <ros/rate.h>
