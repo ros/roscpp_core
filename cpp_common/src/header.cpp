@@ -37,7 +37,7 @@
 #include "console_bridge/console.h"
 
 #include <sstream>
-
+#include <boost/utility/string_ref.hpp>
 #include <cstring>
 #include <cerrno>
 
@@ -76,6 +76,7 @@ bool Header::parse(const boost::shared_array<uint8_t>& buffer, uint32_t size, st
 
 bool Header::parse(uint8_t* buffer, uint32_t size, std::string& error_msg)
 {
+  std::string key_;
   uint8_t* buf = buffer;
   while (buf < buffer + size)
   {
@@ -90,12 +91,12 @@ bool Header::parse(uint8_t* buffer, uint32_t size, std::string& error_msg)
       return false;
     }
 
-    std::string line((char*)buf, len);
+    boost::string_ref line((char*)buf, len);
 
     buf += len;
 
     //printf(":%s:\n", line.c_str());
-    size_t eqpos = line.find_first_of("=", 0);
+    size_t eqpos = line.find_first_of("=");
     if (eqpos == string::npos)
     {
       error_msg = "Received an invalid TCPROS header.  Each line must have an equals sign.";
@@ -103,10 +104,12 @@ bool Header::parse(uint8_t* buffer, uint32_t size, std::string& error_msg)
 
       return false;
     }
-    string key = line.substr(0, eqpos);
-    string value = line.substr(eqpos+1);
+    boost::string_ref key_ref = line.substr(0, eqpos);
+    boost::string_ref value_ref = line.substr(eqpos+1);
 
-    (*read_map_)[key] = value;
+    key_.assign(key_ref.data(), key_ref.length());
+
+    (*read_map_)[key_].assign(value_ref.data(), value_ref.length());
   }
 
   return true;
