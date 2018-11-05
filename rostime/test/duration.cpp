@@ -145,14 +145,14 @@ TEST(Duration, rounding)
     Duration d4(-49.0000000006);
     EXPECT_EQ(-50, d4.sec);
     EXPECT_EQ(999999999, d4.nsec);
-    
+
     Duration d5(49.9999999994);
     EXPECT_EQ(49, d5.sec);
     EXPECT_EQ(999999999, d5.nsec);
     Duration d6(-49.9999999994);
     EXPECT_EQ(-50, d6.sec);
     EXPECT_EQ(1, d6.nsec);
-    
+
     Duration d7(49.9999999996);
     EXPECT_EQ(50, d7.sec);
     EXPECT_EQ(0, d7.nsec);
