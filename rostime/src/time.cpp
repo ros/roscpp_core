@@ -51,6 +51,11 @@
 #include <mach/mach.h>
 #endif  // defined(__APPLE__)
 
+#ifdef _WINDOWS
+#include <chrono>
+#include <thread>
+#endif
+
 #include <boost/thread/mutex.hpp>
 #include <boost/io/ios_state.hpp>
 #include <boost/date_time/posix_time/ptime.hpp>
@@ -228,27 +233,7 @@ namespace ros
   int ros_nanosleep(const uint32_t &sec, const uint32_t &nsec)
   {
 #if defined(WIN32)
-    HANDLE timer = NULL;
-    LARGE_INTEGER sleepTime;
-    sleepTime.QuadPart = -
-      static_cast<int64_t>(sec)*10000000LL -
-      static_cast<int64_t>(nsec) / 100LL;
-
-    timer = CreateWaitableTimer(NULL, TRUE, NULL);
-    if (timer == NULL)
-      {
-        return -1;
-      }
-
-    if (!SetWaitableTimer (timer, &sleepTime, 0, NULL, NULL, 0))
-      {
-        return -1;
-      }
-
-    if (WaitForSingleObject (timer, INFINITE) != WAIT_OBJECT_0)
-      {
-        return -1;
-      }
+    std::this_thread::sleep_for(std::chrono::nanoseconds(static_cast<int64_t>(sec * 1e9 + nsec)));
     return 0;
 #else
     timespec req = { sec, nsec };
