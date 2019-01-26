@@ -67,11 +67,14 @@ namespace ros {
   template<class T>
   T& DurationBase<T>::fromNSec(int64_t t)
   {
-    int64_t sec64 = t / 1000000000;
+    int64_t sec64 = t / 1000000000LL;
     if (sec64 < INT_MIN || sec64 > INT_MAX)
       throw std::runtime_error("Duration is out of dual 32-bit range");
     sec = (int32_t)sec64;
-    nsec = (int32_t)(t % 1000000000);
+    nsec = (int32_t)(t % 1000000000LL);
+
+    normalizeSecNSecSigned(sec, nsec);
+
     return *static_cast<T*>(this);
   }
 
