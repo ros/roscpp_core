@@ -51,13 +51,13 @@ namespace ros {
   }
 
   template<class T>
-  T& DurationBase<T>::fromSec(double t)
+  T& DurationBase<T>::fromSec(double d)
   {
-    int64_t sec64 = (int64_t)floor(t);
+    int64_t sec64 = (int64_t)floor(d);
     if (sec64 < INT_MIN || sec64 > INT_MAX)
       throw std::runtime_error("Duration is out of dual 32-bit range");
     sec = (int32_t)sec64;
-    nsec = (int32_t)boost::math::round((t-sec) * 1e9);
+    nsec = (int32_t)boost::math::round((d - sec) * 1e9);
     int32_t rollover = nsec / 1000000000ul;
     sec += rollover;
     nsec %= 1000000000ul;
