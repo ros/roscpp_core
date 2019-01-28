@@ -42,14 +42,18 @@
 #include <cmath>
 #include <ctime>
 #include <iomanip>
-#include <stdexcept>
 #include <limits>
+#include <stdexcept>
 
 // time related includes for macOS
 #if defined(__APPLE__)
 #include <mach/clock.h>
 #include <mach/mach.h>
 #endif  // defined(__APPLE__)
+
+#ifdef _WINDOWS
+#include <windows.h>
+#endif
 
 #include <boost/thread/mutex.hpp>
 #include <boost/io/ios_state.hpp>
