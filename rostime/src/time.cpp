@@ -42,8 +42,8 @@
 #include <cmath>
 #include <ctime>
 #include <iomanip>
-#include <stdexcept>
 #include <limits>
+#include <stdexcept>
 
 // time related includes for macOS
 #if defined(__APPLE__)
@@ -54,6 +54,7 @@
 #ifdef _WINDOWS
 #include <chrono>
 #include <thread>
+#include <windows.h>
 #endif
 
 #include <boost/thread/mutex.hpp>

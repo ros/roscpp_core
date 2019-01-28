@@ -415,6 +415,21 @@ TEST(Duration, ToFromSec)
   EXPECT_EQ(ros::Duration(-0.5), ros::Duration(0, -500000000LL));
 }
 
+TEST(Duration, FromNSec)
+{
+  ros::Duration t;
+  t.fromNSec(-500000000LL);
+  EXPECT_EQ(ros::Duration(-0.5), t);
+
+  t.fromNSec(-1500000000LL);
+  EXPECT_EQ(ros::Duration(-1.5), t);
+
+  t.fromNSec(500000000LL);
+  EXPECT_EQ(ros::Duration(0.5), t);
+
+  t.fromNSec(1500000000LL);
+  EXPECT_EQ(ros::Duration(1.5), t);
+}
 
 TEST(Duration, OperatorPlus)
 {
@@ -448,6 +463,13 @@ TEST(Duration, OperatorMinus)
 
   }
 
+  ros::Time t1(1.1);
+  ros::Time t2(1.3);
+  ros::Duration time_diff = t1 - t2; //=-0.2
+
+  EXPECT_NEAR(time_diff.toSec(), -0.2, epsilon);
+  EXPECT_LE(time_diff, ros::Duration(-0.19));
+  EXPECT_GE(time_diff, ros::Duration(-0.21));
 }
 
 TEST(Duration, OperatorTimes)

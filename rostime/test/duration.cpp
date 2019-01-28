@@ -128,6 +128,39 @@ TEST(Duration, negativeSignExceptions)
     EXPECT_EQ(2147483647999999998, d7.toNSec());
 }
 
+TEST(Duration, rounding)
+{
+    ros::Time::init();
+
+    Duration d1(49.0000000004);
+    EXPECT_EQ(49, d1.sec);
+    EXPECT_EQ(0, d1.nsec);
+    Duration d2(-49.0000000004);
+    EXPECT_EQ(-49, d2.sec);
+    EXPECT_EQ(0, d2.nsec);
+
+    Duration d3(49.0000000006);
+    EXPECT_EQ(49, d3.sec);
+    EXPECT_EQ(1, d3.nsec);
+    Duration d4(-49.0000000006);
+    EXPECT_EQ(-50, d4.sec);
+    EXPECT_EQ(999999999, d4.nsec);
+
+    Duration d5(49.9999999994);
+    EXPECT_EQ(49, d5.sec);
+    EXPECT_EQ(999999999, d5.nsec);
+    Duration d6(-49.9999999994);
+    EXPECT_EQ(-50, d6.sec);
+    EXPECT_EQ(1, d6.nsec);
+
+    Duration d7(49.9999999996);
+    EXPECT_EQ(50, d7.sec);
+    EXPECT_EQ(0, d7.nsec);
+    Duration d8(-49.9999999996);
+    EXPECT_EQ(-50, d8.sec);
+    EXPECT_EQ(0, d8.nsec);
+}
+
 int main(int argc, char **argv){
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
