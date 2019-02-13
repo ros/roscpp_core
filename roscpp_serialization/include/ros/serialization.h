@@ -408,7 +408,7 @@ struct VectorSerializer<T, ContainerAllocator, typename boost::enable_if<mt::IsS
     if (len > 0)
     {
       const uint32_t data_len = (uint32_t)sizeof(T) * len;
-      memcpy(&v.front(), stream.advance(data_len), data_len);
+      memcpy(static_cast<void*>(&v.front()), stream.advance(data_len), data_len);
     }
   }
 
