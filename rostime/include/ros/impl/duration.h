@@ -54,7 +54,7 @@ namespace ros {
   T& DurationBase<T>::fromSec(double d)
   {
     int64_t sec64 = (int64_t)floor(d);
-    if (sec64 < INT_MIN || sec64 > INT_MAX)
+    if (sec64 < std::numeric_limits<int32_t>::min() || sec64 > std::numeric_limits<int32_t>::max())
       throw std::runtime_error("Duration is out of dual 32-bit range");
     sec = (int32_t)sec64;
     nsec = (int32_t)boost::math::round((d - sec) * 1e9);
@@ -68,7 +68,7 @@ namespace ros {
   T& DurationBase<T>::fromNSec(int64_t t)
   {
     int64_t sec64 = t / 1000000000LL;
-    if (sec64 < INT_MIN || sec64 > INT_MAX)
+    if (sec64 < std::numeric_limits<int32_t>::min() || sec64 > std::numeric_limits<int32_t>::max())
       throw std::runtime_error("Duration is out of dual 32-bit range");
     sec = (int32_t)sec64;
     nsec = (int32_t)(t % 1000000000LL);

@@ -54,7 +54,7 @@ namespace ros {
         --sec_part;
       }
 
-    if (sec_part < INT_MIN || sec_part > INT_MAX)
+    if (sec_part < std::numeric_limits<int32_t>::min() || sec_part > std::numeric_limits<int32_t>::max())
       throw std::runtime_error("Duration is out of dual 32-bit range");
 
     sec = sec_part;

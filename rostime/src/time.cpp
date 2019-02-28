@@ -107,14 +107,14 @@ namespace ros
 #if HAS_CLOCK_GETTIME
     timespec start;
     clock_gettime(CLOCK_REALTIME, &start);
-    if (start.tv_sec < 0 || start.tv_sec > UINT_MAX)
+    if (start.tv_sec < 0 || start.tv_sec > std::numeric_limits<uint32_t>::max())
       throw std::runtime_error("Timespec is out of dual 32-bit range");
     sec  = start.tv_sec;
     nsec = start.tv_nsec;
 #else
     struct timeval timeofday;
     gettimeofday(&timeofday,NULL);
-    if (timeofday.tv_sec < 0 || timeofday.tv_sec > UINT_MAX)
+    if (timeofday.tv_sec < 0 || timeofday.tv_sec > std::numeric_limits<uint32_t>::max())
       throw std::runtime_error("Timeofday is out of dual signed 32-bit range");
     sec  = timeofday.tv_sec;
     nsec = timeofday.tv_usec * 1000;
@@ -154,7 +154,7 @@ namespace ros
     	start_li.QuadPart -= 116444736000000000ULL;
 #endif
         int64_t start_sec64 = start_li.QuadPart / 10000000;  // 100-ns units
-        if (start_sec64 < 0 || start_sec64 > UINT_MAX)
+        if (start_sec64 < 0 || start_sec64 > std::numeric_limits<uint32_t>::max())
           throw std::runtime_error("SystemTime is out of dual 32-bit range");
         start_sec = (uint32_t)start_sec64;
         start_nsec = (start_li.LowPart % 10000000) * 100;
@@ -362,7 +362,7 @@ namespace ros
   {
     Time t;
     int64_t sec64 = d.total_seconds();
-    if (sec64 < 0 || sec64 > UINT_MAX)
+    if (sec64 < 0 || sec64 > std::numeric_limits<uint32_t>::max())
       throw std::runtime_error("time_duration is out of dual 32-bit range");
     t.sec = (uint32_t)sec64;
 #if defined(BOOST_DATE_TIME_HAS_NANOSECONDS)
@@ -538,7 +538,7 @@ namespace ros
     uint64_t nsec_part = nsec % 1000000000UL;
     uint64_t sec_part = nsec / 1000000000UL;
 
-    if (sec + sec_part > UINT_MAX)
+    if (sec + sec_part > std::numeric_limits<uint32_t>::max())
       throw std::runtime_error("Time is out of dual 32-bit range");
 
     sec += sec_part;
@@ -566,7 +566,7 @@ namespace ros
         --sec_part;
       }
 
-    if (sec_part < 0 || sec_part > UINT_MAX)
+    if (sec_part < 0 || sec_part > std::numeric_limits<uint32_t>::max())
       throw std::runtime_error("Time is out of dual 32-bit range");
 
     sec = sec_part;
