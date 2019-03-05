@@ -2,6 +2,12 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* update the use of macros in platform.h (`#99 <https://github.com/ros/roscpp_core/issues/99>`_)
+* avoid unnecessary memory allocation (std::string) (`#95 <https://github.com/ros/roscpp_core/issues/95>`_)
+* fix bug in HAVE_CXXABI_H compiler check (`#89 <https://github.com/ros/roscpp_core/issues/89>`_)
+
 0.6.11 (2018-06-06)
 -------------------
 

@@ -2,6 +2,10 @@
 Changelog for package roscpp_serialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix GCC8 class-memaccess in VectorSerializer (`#102 <https://github.com/ros/roscpp_core/issues/102>`_)
+
 0.6.11 (2018-06-06)
 -------------------
 * replace reinterpret_cast with memcpy to avoid undefined behaviour/alignment issues (`#83 <https://github.com/ros/roscpp_core/issues/83>`_)

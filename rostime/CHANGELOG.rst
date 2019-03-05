@@ -2,6 +2,16 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* use std::numeric_limits instead of * _MAX macros for range checking (`#103 <https://github.com/ros/roscpp_core/issues/103>`_)
+* use std::this_thread::sleep_for instead of WaitableTimer (`#101 <https://github.com/ros/roscpp_core/issues/101>`_)
+* include windows.h in time.cpp (`#100 <https://github.com/ros/roscpp_core/issues/100>`_)
+* fix duration bug and add tests. (`#98 <https://github.com/ros/roscpp_core/issues/98>`_)
+* fix for Duration::fromSec() which had rounding issues (`#93 <https://github.com/ros/roscpp_core/issues/93>`_)
+* fix bug in HAVE_CXXABI_H compiler check (`#89 <https://github.com/ros/roscpp_core/issues/89>`_)
+* add ROSTIME_DECL storage-class attribute (`#90 <https://github.com/ros/roscpp_core/issues/90>`_)
+
 0.6.11 (2018-06-06)
 -------------------
 * argument to boost microseconds must be integral for Boost 1.67 and newer compatibility (`#79 <https://github.com/ros/roscpp_core/issues/79>`_)
