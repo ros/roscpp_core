@@ -2,8 +2,8 @@
 Changelog for package roscpp_serialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.6.12 (2019-03-04)
+-------------------
 * fix GCC8 class-memaccess in VectorSerializer (`#102 <https://github.com/ros/roscpp_core/issues/102>`_)
 
 0.6.11 (2018-06-06)

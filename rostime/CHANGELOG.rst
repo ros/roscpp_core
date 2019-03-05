@@ -2,8 +2,8 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.6.12 (2019-03-04)
+-------------------
 * use std::numeric_limits instead of * _MAX macros for range checking (`#103 <https://github.com/ros/roscpp_core/issues/103>`_)
 * use std::this_thread::sleep_for instead of WaitableTimer (`#101 <https://github.com/ros/roscpp_core/issues/101>`_)
 * include windows.h in time.cpp (`#100 <https://github.com/ros/roscpp_core/issues/100>`_)
