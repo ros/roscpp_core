@@ -67,8 +67,8 @@ namespace ros
 
     normalizeSecNSec(sec64, nsec64);
 
-    sec = (uint32_t)sec64;
-    nsec = (uint32_t)nsec64;
+    sec = static_cast<uint32_t>(sec64);
+    nsec = static_cast<uint32_t>(nsec64);
 
     return *static_cast<T*>(this);
   }
@@ -89,14 +89,14 @@ namespace ros
   template<class T, class D>
   T TimeBase<T, D>::operator+(const D &rhs) const
   {
-    int64_t sec_sum  = (int64_t)sec  + (int64_t)rhs.sec;
-    int64_t nsec_sum = (int64_t)nsec + (int64_t)rhs.nsec;
+    int64_t sec_sum  = static_cast<uint64_t>(sec) + static_cast<uint64_t>(rhs.sec);
+    int64_t nsec_sum = static_cast<uint64_t>(nsec) + static_cast<uint64_t>(rhs.nsec);
 
     // Throws an exception if we go out of 32-bit range
     normalizeSecNSecUnsigned(sec_sum, nsec_sum);
 
     // now, it's safe to downcast back to uint32 bits
-    return T((uint32_t)sec_sum, (uint32_t)nsec_sum);
+    return T(static_cast<uint32_t>(sec_sum), static_cast<uint32_t>(nsec_sum));
   }
 
   template<class T, class D>

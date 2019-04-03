@@ -150,20 +150,20 @@ namespace ros
     bool operator>=(const T &rhs) const;
     bool operator<=(const T &rhs) const;
 
-    double toSec()  const { return (double)sec + 1e-9*(double)nsec; };
+    double toSec()  const { return static_cast<double>(sec) + 1e-9*static_cast<double>(nsec); };
     T& fromSec(double t) {
-      int64_t sec64 = (int64_t)floor(t);
+      int64_t sec64 = static_cast<int64_t>(floor(t));
       if (sec64 < 0 || sec64 > std::numeric_limits<uint32_t>::max())
         throw std::runtime_error("Time is out of dual 32-bit range");
-      sec = (uint32_t)sec64;
-      nsec = (uint32_t)boost::math::round((t-sec) * 1e9);
+      sec = static_cast<uint32_t>(sec64);
+      nsec = static_cast<uint32_t>(boost::math::round((t-sec) * 1e9));
       // avoid rounding errors
       sec += (nsec / 1000000000ul);
       nsec %= 1000000000ul;
       return *static_cast<T*>(this);
     }
 
-    uint64_t toNSec() const {return (uint64_t)sec*1000000000ull + (uint64_t)nsec;  }
+    uint64_t toNSec() const {return static_cast<uint64_t>(sec)*1000000000ull + static_cast<uint64_t>(nsec); }
     T& fromNSec(uint64_t t);
 
     inline bool isZero() const { return sec == 0 && nsec == 0; }

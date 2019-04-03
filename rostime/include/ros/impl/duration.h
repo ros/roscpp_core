@@ -53,11 +53,11 @@ namespace ros {
   template<class T>
   T& DurationBase<T>::fromSec(double d)
   {
-    int64_t sec64 = (int64_t)floor(d);
+    int64_t sec64 = static_cast<int64_t>(floor(d));
     if (sec64 < std::numeric_limits<int32_t>::min() || sec64 > std::numeric_limits<int32_t>::max())
       throw std::runtime_error("Duration is out of dual 32-bit range");
-    sec = (int32_t)sec64;
-    nsec = (int32_t)boost::math::round((d - sec) * 1e9);
+    sec = static_cast<int32_t>(sec64);
+    nsec = static_cast<int32_t>(boost::math::round((d - sec) * 1e9));
     int32_t rollover = nsec / 1000000000ul;
     sec += rollover;
     nsec %= 1000000000ul;
@@ -70,8 +70,8 @@ namespace ros {
     int64_t sec64 = t / 1000000000LL;
     if (sec64 < std::numeric_limits<int32_t>::min() || sec64 > std::numeric_limits<int32_t>::max())
       throw std::runtime_error("Duration is out of dual 32-bit range");
-    sec = (int32_t)sec64;
-    nsec = (int32_t)(t % 1000000000LL);
+    sec = static_cast<int32_t>(sec64);
+    nsec = static_cast<int32_t>(t % 1000000000LL);
 
     normalizeSecNSecSigned(sec, nsec);
 

@@ -90,8 +90,8 @@ public:
   bool operator<(const T &rhs) const;
   bool operator>=(const T &rhs) const;
   bool operator<=(const T &rhs) const;
-  double toSec() const { return (double)sec + 1e-9*(double)nsec; };
-  int64_t toNSec() const {return (int64_t)sec*1000000000ll + (int64_t)nsec;  };
+  double toSec() const { return static_cast<double>(sec) + 1e-9*static_cast<double>(nsec); };
+  int64_t toNSec() const {return static_cast<int64_t>(sec)*1000000000ll + static_cast<int64_t>(nsec);  };
   T& fromSec(double t);
   T& fromNSec(int64_t t);
   bool isZero() const;
