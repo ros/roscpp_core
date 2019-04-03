@@ -74,6 +74,19 @@ namespace ros
   }
 
   template<class T, class D>
+  T& TimeBase<T, D>::fromSec(double t) {
+      int64_t sec64 = static_cast<int64_t>(floor(t));
+      if (sec64 < 0 || sec64 > std::numeric_limits<uint32_t>::max())
+        throw std::runtime_error("Time is out of dual 32-bit range");
+      sec = static_cast<uint32_t>(sec64);
+      nsec = static_cast<uint32_t>(boost::math::round((t-sec) * 1e9));
+      // avoid rounding errors
+      sec += (nsec / 1000000000ul);
+      nsec %= 1000000000ul;
+      return *static_cast<T*>(this);
+  }
+
+  template<class T, class D>
   D TimeBase<T, D>::operator-(const T &rhs) const
   {
     D d;
