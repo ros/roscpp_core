@@ -209,7 +209,7 @@ template<> struct Serializer<bool>
 {
   template<typename Stream> inline static void write(Stream& stream, const bool v)
   {
-    uint8_t b = (uint8_t)v;
+    uint8_t b = static_cast<uint8_t>(v);
     memcpy(stream.advance(1), &b, 1 );
   }
 
@@ -217,7 +217,7 @@ template<> struct Serializer<bool>
   {
     uint8_t b;
     memcpy(&b, stream.advance(1), 1 );
-    v = (bool)b;
+    v = static_cast<bool>(b);
   }
 
   inline static uint32_t serializedLength(bool)
@@ -238,11 +238,11 @@ struct Serializer<std::basic_string<char, std::char_traits<char>, ContainerAlloc
   inline static void write(Stream& stream, const StringType& str)
   {
     size_t len = str.size();
-    stream.next((uint32_t)len);
+    stream.next(static_cast<uint32_t>(len));
 
     if (len > 0)
     {
-      memcpy(stream.advance((uint32_t)len), str.data(), len);
+      memcpy(stream.advance(static_cast<uint32_t>(len)), str.data(), len);
     }
   }
 
@@ -253,7 +253,7 @@ struct Serializer<std::basic_string<char, std::char_traits<char>, ContainerAlloc
     stream.next(len);
     if (len > 0)
     {
-      str = StringType((char*)stream.advance(len), len);
+      str = StringType(reinterpret_cast<char*>(stream.advance(len)), len);
     }
     else
     {
@@ -263,7 +263,7 @@ struct Serializer<std::basic_string<char, std::char_traits<char>, ContainerAlloc
 
   inline static uint32_t serializedLength(const StringType& str)
   {
-    return 4 + (uint32_t)str.size();
+    return 4 + static_cast<uint32_t>(str.size());
   }
 };
 
@@ -339,7 +339,7 @@ struct VectorSerializer<T, ContainerAllocator, typename boost::disable_if<mt::Is
   template<typename Stream>
   inline static void write(Stream& stream, const VecType& v)
   {
-    stream.next((uint32_t)v.size());
+    stream.next(static_cast<uint32_t>(v.size()));
     ConstIteratorType it = v.begin();
     ConstIteratorType end = v.end();
     for (; it != end; ++it)
@@ -389,11 +389,11 @@ struct VectorSerializer<T, ContainerAllocator, typename boost::enable_if<mt::IsS
   template<typename Stream>
   inline static void write(Stream& stream, const VecType& v)
   {
-    uint32_t len = (uint32_t)v.size();
+    uint32_t len = static_cast<uint32_t>(v.size());
     stream.next(len);
     if (!v.empty())
     {
-      const uint32_t data_len = len * (uint32_t)sizeof(T);
+      const uint32_t data_len = len * static_cast<uint32_t>(sizeof(T));
       memcpy(stream.advance(data_len), &v.front(), data_len);
     }
   }
@@ -407,14 +407,14 @@ struct VectorSerializer<T, ContainerAllocator, typename boost::enable_if<mt::IsS
 
     if (len > 0)
     {
-      const uint32_t data_len = (uint32_t)sizeof(T) * len;
+      const uint32_t data_len = static_cast<uint32_t>(sizeof(T)) * len;
       memcpy(static_cast<void*>(&v.front()), stream.advance(data_len), data_len);
     }
   }
 
   inline static uint32_t serializedLength(const VecType& v)
   {
-    return 4 + v.size() * (uint32_t)sizeof(T);
+    return 4 + v.size() * static_cast<uint32_t>(sizeof(T));
   }
 };
 
@@ -431,7 +431,7 @@ struct VectorSerializer<T, ContainerAllocator, typename boost::enable_if<mpl::an
   template<typename Stream>
   inline static void write(Stream& stream, const VecType& v)
   {
-    stream.next((uint32_t)v.size());
+    stream.next(static_cast<uint32_t>(v.size()));
     ConstIteratorType it = v.begin();
     ConstIteratorType end = v.end();
     for (; it != end; ++it)
@@ -460,7 +460,7 @@ struct VectorSerializer<T, ContainerAllocator, typename boost::enable_if<mpl::an
     if (!v.empty())
     {
       uint32_t len_each = serializationLength(v.front());
-      size += len_each * (uint32_t)v.size();
+      size += len_each * static_cast<uint32_t>(v.size());
     }
 
     return size;
@@ -686,7 +686,7 @@ struct ROSCPP_SERIALIZATION_DECL Stream
   /**
    * \brief Returns the amount of space left in the stream
    */
-  inline uint32_t getLength() { return (uint32_t)(end_ - data_); }
+  inline uint32_t getLength() { return static_cast<uint32_t>(end_ - data_); }
 
 protected:
   Stream(uint8_t* _data, uint32_t _count)
@@ -809,8 +809,8 @@ inline SerializedMessage serializeMessage(const M& message)
   m.num_bytes = len + 4;
   m.buf.reset(new uint8_t[m.num_bytes]);
 
-  OStream s(m.buf.get(), (uint32_t)m.num_bytes);
-  serialize(s, (uint32_t)m.num_bytes - 4);
+  OStream s(m.buf.get(), static_cast<uint32_t>(m.num_bytes));
+  serialize(s, static_cast<uint32_t>(m.num_bytes) - 4);
   m.message_start = s.getData();
   serialize(s, message);
 
@@ -831,9 +831,9 @@ inline SerializedMessage serializeServiceResponse(bool ok, const M& message)
     m.num_bytes = len + 5;
     m.buf.reset(new uint8_t[m.num_bytes]);
 
-    OStream s(m.buf.get(), (uint32_t)m.num_bytes);
-    serialize(s, (uint8_t)ok);
-    serialize(s, (uint32_t)m.num_bytes - 5);
+    OStream s(m.buf.get(), static_cast<uint32_t>(m.num_bytes));
+    serialize(s, static_cast<uint8_t>(ok));
+    serialize(s, static_cast<uint32_t>(m.num_bytes) - 5);
     serialize(s, message);
   }
   else
@@ -842,8 +842,8 @@ inline SerializedMessage serializeServiceResponse(bool ok, const M& message)
     m.num_bytes = len + 1;
     m.buf.reset(new uint8_t[m.num_bytes]);
 
-    OStream s(m.buf.get(), (uint32_t)m.num_bytes);
-    serialize(s, (uint8_t)ok);
+    OStream s(m.buf.get(), static_cast<uint32_t>(m.num_bytes));
+    serialize(s, static_cast<uint8_t>(ok));
     serialize(s, message);
   }
 
