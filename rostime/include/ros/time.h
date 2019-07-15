@@ -199,15 +199,15 @@ namespace ros
     static bool isSystemTime();
 
     /**
-     * \brief Returns whether or not the current time is valid.  Time is valid if it is non-zero.
+     * \brief Returns whether or not the current time source is valid.  Simulation time is valid if it is non-zero.
      */
     static bool isValid();
     /**
-     * \brief Wait for time to become valid
+     * \brief Wait for time source to become valid
      */
     static bool waitForValid();
     /**
-     * \brief Wait for time to become valid, with timeout
+     * \brief Wait for time source to become valid, with timeout
      */
     static bool waitForValid(const ros::WallDuration& timeout);
 
