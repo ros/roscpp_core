@@ -103,7 +103,7 @@ namespace ros
    *********************************************************************/
   void ros_walltime(uint32_t& sec, uint32_t& nsec)
   {
-#ifndef WIN32
+#if !defined(_WIN32)
 #if HAS_CLOCK_GETTIME
     timespec start;
     clock_gettime(CLOCK_REALTIME, &start);
@@ -182,7 +182,7 @@ namespace ros
 
   void ros_steadytime(uint32_t& sec, uint32_t& nsec)
   {
-#ifndef WIN32
+#if !defined(_WIN32)
     timespec start;
 #if defined(__APPLE__)
     // On macOS use clock_get_time.
@@ -233,7 +233,7 @@ namespace ros
    */
   int ros_nanosleep(const uint32_t &sec, const uint32_t &nsec)
   {
-#if defined(WIN32)
+#if defined(_WIN32)
     std::this_thread::sleep_for(std::chrono::nanoseconds(static_cast<int64_t>(sec * 1e9 + nsec)));
     return 0;
 #else
@@ -249,7 +249,7 @@ namespace ros
    */
   bool ros_wallsleep(uint32_t sec, uint32_t nsec)
   {
-#if defined(WIN32)
+#if defined(_WIN32)
     ros_nanosleep(sec,nsec);
 #else
     timespec req = { sec, nsec };

@@ -62,7 +62,7 @@
  ** Cross Platform Headers
  *********************************************************************/
 
-#ifdef WIN32
+#if defined(_WIN32)
   #include <sys/timeb.h>
 #else
   #include <sys/time.h>
