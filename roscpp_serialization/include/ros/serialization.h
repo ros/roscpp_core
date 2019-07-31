@@ -856,7 +856,7 @@ inline SerializedMessage serializeServiceResponse(bool ok, const M& message)
 template<typename M>
 inline void deserializeMessage(const SerializedMessage& m, M& message)
 {
-  IStream s(m.message_start, m.num_bytes - (m.message_start - m.buf.get()));
+  IStream s(m.message_start, static_cast<uint32_t>(m.num_bytes - (m.message_start - m.buf.get())));
   deserialize(s, message);
 }
 
