@@ -2,8 +2,8 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.6.13 (2019-10-03)
+-------------------
 * use _WIN32 for platform detection (`#110 <https://github.com/ros/roscpp_core/issues/110>`_)
 * Clarified documentation for time validity (`#109 <https://github.com/ros/roscpp_core/issues/109>`_)
 * rostime: replace c-style casts with static_casts (`#106 <https://github.com/ros/roscpp_core/issues/106>`_)

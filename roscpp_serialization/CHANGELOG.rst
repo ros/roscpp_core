@@ -2,8 +2,8 @@
 Changelog for package roscpp_serialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.6.13 (2019-10-03)
+-------------------
 * added cast to uint32_t in roscpp_serialization to fix -Wconversion warning (`#113 <https://github.com/ros/roscpp_core/issues/113>`_)
 * roscpp_serialization: replace c-style-casts with static/reinterpret casts (`#107 <https://github.com/ros/roscpp_core/issues/107>`_)
 

@@ -1,6 +1,6 @@
 <package>
   <name>cpp_common</name>
-  <version>0.6.12</version>
+  <version>0.6.13</version>
   <description>
     cpp_common contains C++ code for doing things that are not necessarily ROS
     related, but are useful for multiple packages. This includes things like
