@@ -2,6 +2,11 @@
 Changelog for package roscpp_serialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* added cast to uint32_t in roscpp_serialization to fix -Wconversion warning (`#113 <https://github.com/ros/roscpp_core/issues/113>`_)
+* roscpp_serialization: replace c-style-casts with static/reinterpret casts (`#107 <https://github.com/ros/roscpp_core/issues/107>`_)
+
 0.6.12 (2019-03-04)
 -------------------
 * fix GCC8 class-memaccess in VectorSerializer (`#102 <https://github.com/ros/roscpp_core/issues/102>`_)

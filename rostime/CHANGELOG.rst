@@ -2,6 +2,12 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* use _WIN32 for platform detection (`#110 <https://github.com/ros/roscpp_core/issues/110>`_)
+* Clarified documentation for time validity (`#109 <https://github.com/ros/roscpp_core/issues/109>`_)
+* rostime: replace c-style casts with static_casts (`#106 <https://github.com/ros/roscpp_core/issues/106>`_)
+
 0.6.12 (2019-03-04)
 -------------------
 * use std::numeric_limits instead of * _MAX macros for range checking (`#103 <https://github.com/ros/roscpp_core/issues/103>`_)

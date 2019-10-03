@@ -2,6 +2,9 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.6.12 (2019-03-04)
 -------------------
 * update the use of macros in platform.h (`#99 <https://github.com/ros/roscpp_core/issues/99>`_)
