@@ -34,7 +34,7 @@
     #define CPP_COMMON_DECL ROS_HELPER_EXPORT
   #else // we are using shared lib/dll
     #define CPP_COMMON_DECL ROS_HELPER_IMPORT
-  #endif 
+  #endif
 #else // ros is being built around static libraries
   #define CPP_COMMON_DECL
 #endif

@@ -290,4 +290,3 @@ namespace ros
 }
 
 #endif // ROS_TIME_H
-

@@ -183,9 +183,6 @@ namespace ros
     return pt::from_time_t(sec) + pt::microseconds(nsec/1000);
 #endif
   }
-
-
 }
 
 #endif // ROS_IMPL_TIME_H_INCLUDED
-

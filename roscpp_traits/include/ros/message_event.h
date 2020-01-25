@@ -250,7 +250,6 @@ private:
 
 template<typename M> const std::string MessageEvent<M>::s_unknown_publisher_string_("unknown_publisher");
 
-
 }
 
 #endif // ROSCPP_MESSAGE_EVENT_H

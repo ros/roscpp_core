@@ -60,4 +60,3 @@ template<> struct IsFixedSize<bool> : public TrueType {};
 } // namespace ros
 
 #endif // ROSLIB_BUILTIN_MESSAGE_TRAITS_H
-

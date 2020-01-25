@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2008, Morgan Quigley and Willow Garage, Inc.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *   * Redistributions of source code must retain the above copyright notice,
@@ -35,7 +35,6 @@
 #include <list>
 
 #include <boost/shared_ptr.hpp>
-
 
 namespace ros {
 

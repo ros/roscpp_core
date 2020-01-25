@@ -156,9 +156,6 @@ public:
 ROSTIME_DECL std::ostream &operator <<(std::ostream &os, const Duration &rhs);
 ROSTIME_DECL std::ostream &operator <<(std::ostream &os, const WallDuration &rhs);
 
-
 }
 
 #endif // ROS_DURATION_H
-
-
