@@ -12,9 +12,13 @@
 
   <buildtool_depend version_gte="0.5.68">catkin</buildtool_depend>
 
-  <build_depend>boost</build_depend>
+  <build_depend>libboost-date-time-dev</build_depend>
+  <build_depend>libboost-system-dev</build_depend>
+  <build_depend>libboost-thread-dev</build_depend>
   <build_depend>cpp_common</build_depend>
 
-  <run_depend>boost</run_depend>
+  <run_depend>libboost-date-time-dev</run_depend>
+  <run_depend>libboost-system-dev</run_depend>
+  <run_depend>libboost-thread-dev</run_depend>
   <run_depend>cpp_common</run_depend>
 </package>
