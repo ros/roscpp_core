@@ -2,6 +2,12 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* rostime: remove empty destructor of DurationBase (`#104 <https://github.com/ros/roscpp_core/issues/104>`_)
+* various code cleanup (`#116 <https://github.com/ros/roscpp_core/issues/116>`_)
+* Bump CMake version to avoid CMP0048 warning (`#115 <https://github.com/ros/roscpp_core/issues/115>`_)
+
 0.6.13 (2019-10-03)
 -------------------
 * use _WIN32 for platform detection (`#110 <https://github.com/ros/roscpp_core/issues/110>`_)
