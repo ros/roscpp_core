@@ -2,6 +2,10 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* only depend on the boost components needed (`#117 <https://github.com/ros/roscpp_core/issues/117>`_)
+
 0.7.0 (2020-01-24)
 ------------------
 * rostime: remove empty destructor of DurationBase (`#104 <https://github.com/ros/roscpp_core/issues/104>`_)
