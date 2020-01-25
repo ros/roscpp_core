@@ -335,27 +335,27 @@ namespace ros
   {
     ros::WallTime start = ros::WallTime::now();
     while (!isValid() && !g_stopped)
-      {
-        ros::WallDuration(0.01).sleep();
+    {
+      ros::WallDuration(0.01).sleep();
 
-        if (timeout > ros::WallDuration(0, 0) && (ros::WallTime::now() - start > timeout))
-          {
-            return false;
-          }
-      }
-
-    if (g_stopped)
+      if (timeout > ros::WallDuration(0, 0) && (ros::WallTime::now() - start > timeout))
       {
         return false;
       }
+    }
+
+    if (g_stopped)
+    {
+      return false;
+    }
 
     return true;
   }
 
   Time Time::fromBoost(const boost::posix_time::ptime& t)
   {
-   boost::posix_time::time_duration diff = t - boost::posix_time::from_time_t(0);
-   return Time::fromBoost(diff);
+    boost::posix_time::time_duration diff = t - boost::posix_time::from_time_t(0);
+    return Time::fromBoost(diff);
   }
 
   Time Time::fromBoost(const boost::posix_time::time_duration& d)
@@ -397,29 +397,29 @@ namespace ros
   bool Time::sleepUntil(const Time& end)
   {
     if (Time::useSystemTime())
+    {
+      Duration d(end - Time::now());
+      if (d > Duration(0))
       {
-        Duration d(end - Time::now());
-        if (d > Duration(0))
-          {
-            return d.sleep();
-          }
-
-        return true;
+        return d.sleep();
       }
+
+      return true;
+    }
     else
+    {
+      Time start = Time::now();
+      while (!g_stopped && (Time::now() < end))
       {
-        Time start = Time::now();
-        while (!g_stopped && (Time::now() < end))
-          {
-            ros_nanosleep(0,1000000);
-            if (Time::now() < start)
-              {
-                return false;
-              }
-          }
-
-        return true;
+        ros_nanosleep(0,1000000);
+        if (Time::now() < start)
+        {
+          return false;
+        }
       }
+
+      return true;
+    }
   }
 
   bool WallTime::sleepUntil(const WallTime& end)
@@ -447,41 +447,41 @@ namespace ros
   bool Duration::sleep() const
   {
     if (Time::useSystemTime())
-      {
-        return ros_wallsleep(sec, nsec);
-      }
+    {
+      return ros_wallsleep(sec, nsec);
+    }
     else
+    {
+      Time start = Time::now();
+      Time end = start + *this;
+      if (start.isZero())
       {
-        Time start = Time::now();
-        Time end = start + *this;
-        if (start.isZero())
-          {
-            end = TIME_MAX;
-          }
-
-        bool rc = false;
-        while (!g_stopped && (Time::now() < end))
-          {
-            ros_wallsleep(0, 1000000);
-            rc = true;
-
-            // If we started at time 0 wait for the first actual time to arrive before starting the timer on
-            // our sleep
-            if (start.isZero())
-              {
-                start = Time::now();
-                end = start + *this;
-              }
-
-            // If time jumped backwards from when we started sleeping, return immediately
-            if (Time::now() < start)
-              {
-                return false;
-              }
-          }
-
-        return rc && !g_stopped;
+        end = TIME_MAX;
       }
+
+      bool rc = false;
+      while (!g_stopped && (Time::now() < end))
+      {
+        ros_wallsleep(0, 1000000);
+        rc = true;
+
+        // If we started at time 0 wait for the first actual time to arrive before starting the timer on
+        // our sleep
+        if (start.isZero())
+        {
+          start = Time::now();
+          end = start + *this;
+        }
+
+        // If time jumped backwards from when we started sleeping, return immediately
+        if (Time::now() < start)
+        {
+          return false;
+        }
+      }
+
+      return rc && !g_stopped;
+    }
   }
 
   std::ostream &operator<<(std::ostream& os, const WallTime &rhs)
@@ -577,5 +577,3 @@ namespace ros
   template class TimeBase<WallTime, WallDuration>;
   template class TimeBase<SteadyTime, WallDuration>;
 }
-
-

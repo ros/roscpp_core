@@ -272,7 +272,7 @@ TEST(Time, DontMungeStreamState)
   oss << std::setfill('N');
   oss << std::setw(13);
   oss << t;
-  
+
   EXPECT_EQ(oss.width(), 13);
   EXPECT_EQ(oss.fill(), 'N');
 }
@@ -296,73 +296,72 @@ TEST(Time, ToFromBoost)
 
 TEST(Time, CastFromDoubleExceptions)
 {
-    ros::Time::init();
+  ros::Time::init();
 
-    Time t1, t2, t3;
-    // Valid values to cast, must not throw exceptions
-    EXPECT_NO_THROW(t1.fromSec(4294967295.0));
-    EXPECT_NO_THROW(t2.fromSec(4294967295.999));
-    EXPECT_NO_THROW(t3.fromSec(0.0000001));
+  Time t1, t2, t3;
+  // Valid values to cast, must not throw exceptions
+  EXPECT_NO_THROW(t1.fromSec(4294967295.0));
+  EXPECT_NO_THROW(t2.fromSec(4294967295.999));
+  EXPECT_NO_THROW(t3.fromSec(0.0000001));
 
-    // The next casts all incorrect.
-    EXPECT_THROW(t1.fromSec(4294967296.0), std::runtime_error);
-    EXPECT_THROW(t2.fromSec(-0.0001), std::runtime_error);
-    EXPECT_THROW(t3.fromSec(-4294967296.0), std::runtime_error);
+  // The next casts all incorrect.
+  EXPECT_THROW(t1.fromSec(4294967296.0), std::runtime_error);
+  EXPECT_THROW(t2.fromSec(-0.0001), std::runtime_error);
+  EXPECT_THROW(t3.fromSec(-4294967296.0), std::runtime_error);
 }
 
 TEST(Time, OperatorMinusExceptions)
 {
-    ros::Time::init();
+  ros::Time::init();
 
-    Time t1(2147483648, 0);
-    Time t2(2147483647, 999999999);
-    Time t3(2147483647, 999999998);
-    Time t4(4294967295, 999999999);
-    Time t5(4294967295, 999999998);
-    Time t6(0, 1);
+  Time t1(2147483648, 0);
+  Time t2(2147483647, 999999999);
+  Time t3(2147483647, 999999998);
+  Time t4(4294967295, 999999999);
+  Time t5(4294967295, 999999998);
+  Time t6(0, 1);
 
-    Duration d1(2147483647, 999999999);
-    Duration d2(-2147483648, 0);
-    Duration d3(-2147483648, 1);
-    Duration d4(0, 1);
+  Duration d1(2147483647, 999999999);
+  Duration d2(-2147483648, 0);
+  Duration d3(-2147483648, 1);
+  Duration d4(0, 1);
 
-    EXPECT_NO_THROW(t1 - t2);
-    EXPECT_NO_THROW(t3 - t2);
-    EXPECT_NO_THROW(t4 - t5);
+  EXPECT_NO_THROW(t1 - t2);
+  EXPECT_NO_THROW(t3 - t2);
+  EXPECT_NO_THROW(t4 - t5);
 
-    EXPECT_NO_THROW(t1 - d1);
-    EXPECT_NO_THROW(t5 - d1);
+  EXPECT_NO_THROW(t1 - d1);
+  EXPECT_NO_THROW(t5 - d1);
 
-    EXPECT_THROW(t4 - t6, std::runtime_error);
-    EXPECT_THROW(t4 - t3, std::runtime_error);
+  EXPECT_THROW(t4 - t6, std::runtime_error);
+  EXPECT_THROW(t4 - t3, std::runtime_error);
 
-    EXPECT_THROW(t1 - d2, std::runtime_error);
-    EXPECT_THROW(t2 - d2, std::runtime_error);
-    EXPECT_THROW(t4 - d3, std::runtime_error);
+  EXPECT_THROW(t1 - d2, std::runtime_error);
+  EXPECT_THROW(t2 - d2, std::runtime_error);
+  EXPECT_THROW(t4 - d3, std::runtime_error);
 }
 
 TEST(Time, OperatorPlusExceptions)
 {
-    ros::Time::init();
+  ros::Time::init();
 
-    Time t1(2147483648, 0);
-    Time t2(2147483647, 999999999);
-    Time t4(4294967295, 999999999);
-    Time t5(4294967295, 999999998);
+  Time t1(2147483648, 0);
+  Time t2(2147483647, 999999999);
+  Time t4(4294967295, 999999999);
+  Time t5(4294967295, 999999998);
 
-    Duration d1(2147483647, 999999999);
-    Duration d2(-2147483648, 1);
-    Duration d3(0, 2);
-    Duration d4(0, 1);
+  Duration d1(2147483647, 999999999);
+  Duration d2(-2147483648, 1);
+  Duration d3(0, 2);
+  Duration d4(0, 1);
 
-    EXPECT_NO_THROW(t2 + d2);
-    EXPECT_NO_THROW(t1 + d1);
+  EXPECT_NO_THROW(t2 + d2);
+  EXPECT_NO_THROW(t1 + d1);
 
-    EXPECT_THROW(t4 + d4, std::runtime_error);
-    EXPECT_THROW(t4 + d1, std::runtime_error);
-    EXPECT_THROW(t5 + d3, std::runtime_error);
+  EXPECT_THROW(t4 + d4, std::runtime_error);
+  EXPECT_THROW(t4 + d1, std::runtime_error);
+  EXPECT_THROW(t5 + d3, std::runtime_error);
 }
-
 
 /************************************* Duration Tests *****************/
 
@@ -580,7 +579,6 @@ TEST(WallRate, constructFromDuration){
 ///////////////////////////////////////////////////////////////////////////////////
 // WallTime/WallDuration
 ///////////////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////////////
 // SteadyTime/WallDuration

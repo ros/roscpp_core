@@ -74,4 +74,3 @@ struct Printer<uint8_t>
 } // namespace ros
 
 #endif // ROSLIB_MESSAGE_OPERATIONS_H
-

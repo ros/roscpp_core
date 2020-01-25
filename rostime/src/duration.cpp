@@ -31,7 +31,7 @@
  *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
- #include <ros/duration.h>
+#include <ros/duration.h>
 #include <ros/impl/duration.h>
 
 namespace ros {
@@ -75,4 +75,3 @@ namespace ros {
   template class DurationBase<Duration>;
   template class DurationBase<WallDuration>;
 }
-

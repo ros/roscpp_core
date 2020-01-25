@@ -12,7 +12,7 @@ catkin_package(
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
-add_library(rostime 
+add_library(rostime
   src/duration.cpp
   src/rate.cpp
   src/time.cpp)

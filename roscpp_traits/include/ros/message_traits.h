@@ -65,7 +65,6 @@ namespace std_msgs
   } \
   }
 
-
 namespace ros
 {
 namespace message_traits

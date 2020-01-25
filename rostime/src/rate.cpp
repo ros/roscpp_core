@@ -51,8 +51,6 @@ Rate::Rate(const Duration& d)
   , actual_cycle_time_(0.0)
 { }
 
-
-
 bool Rate::sleep()
 {
   Time expected_end = start_ + expected_cycle_time_;
@@ -157,6 +155,5 @@ WallDuration WallRate::cycleTime() const
 {
   return actual_cycle_time_;
 }
-
 
 }

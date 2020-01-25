@@ -755,7 +755,6 @@ struct ROSCPP_SERIALIZATION_DECL OStream : public Stream
   }
 };
 
-
 /**
  * \brief Length stream
  *
@@ -859,7 +858,6 @@ inline void deserializeMessage(const SerializedMessage& m, M& message)
   IStream s(m.message_start, static_cast<uint32_t>(m.num_bytes - (m.message_start - m.buf.get())));
   deserialize(s, message);
 }
-
 
 // Additional serialization traits
 

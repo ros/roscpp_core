@@ -154,32 +154,32 @@ are fairly light::
   % ldd /opt/ros/fuerte/lib/*.so
 
   /opt/ros/fuerte/lib/libcpp_common.so:
-  	linux-vdso.so.1 =>  (0x00007fff0adc3000)
-  	libstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x00007fbdd1bad000)
-  	libm.so.6 => /lib/libm.so.6 (0x00007fbdd192a000)
-  	libgcc_s.so.1 => /lib/libgcc_s.so.1 (0x00007fbdd1712000)
-  	libc.so.6 => /lib/libc.so.6 (0x00007fbdd138f000)
-  	/lib64/ld-linux-x86-64.so.2 (0x00007fbdd20f5000)
+    linux-vdso.so.1 =>  (0x00007fff0adc3000)
+    libstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x00007fbdd1bad000)
+    libm.so.6 => /lib/libm.so.6 (0x00007fbdd192a000)
+    libgcc_s.so.1 => /lib/libgcc_s.so.1 (0x00007fbdd1712000)
+    libc.so.6 => /lib/libc.so.6 (0x00007fbdd138f000)
+    /lib64/ld-linux-x86-64.so.2 (0x00007fbdd20f5000)
 
   /opt/ros/fuerte/lib/libroscpp_serialization.so:
-  	linux-vdso.so.1 =>  (0x00007fff62ff6000)
-  	libstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x00007f7c21ae9000)
-  	libm.so.6 => /lib/libm.so.6 (0x00007f7c21866000)
-  	libgcc_s.so.1 => /lib/libgcc_s.so.1 (0x00007f7c2164e000)
-  	libc.so.6 => /lib/libc.so.6 (0x00007f7c212cb000)
-  	/lib64/ld-linux-x86-64.so.2 (0x00007f7c2202a000)
+    linux-vdso.so.1 =>  (0x00007fff62ff6000)
+    libstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x00007f7c21ae9000)
+    libm.so.6 => /lib/libm.so.6 (0x00007f7c21866000)
+    libgcc_s.so.1 => /lib/libgcc_s.so.1 (0x00007f7c2164e000)
+    libc.so.6 => /lib/libc.so.6 (0x00007f7c212cb000)
+    /lib64/ld-linux-x86-64.so.2 (0x00007f7c2202a000)
 
   /opt/ros/fuerte/lib/librostime.so:
-  	linux-vdso.so.1 =>  (0x00007fffddb60000)
-  	libboost_date_time.so.1.40.0 => /usr/lib/libboost_date_time.so.1.40.0 (0x00007f0af8ffa000)
-  	libboost_thread.so.1.40.0 => /usr/lib/libboost_thread.so.1.40.0 (0x00007f0af8de4000)
-  	libstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x00007f0af8acf000)
-  	libm.so.6 => /lib/libm.so.6 (0x00007f0af884c000)
-  	libgcc_s.so.1 => /lib/libgcc_s.so.1 (0x00007f0af8635000)
-  	libc.so.6 => /lib/libc.so.6 (0x00007f0af82b1000)
-  	librt.so.1 => /lib/librt.so.1 (0x00007f0af80a9000)
-  	libpthread.so.0 => /lib/libpthread.so.0 (0x00007f0af7e8c000)
-  	/lib64/ld-linux-x86-64.so.2 (0x00007f0af9481000)
+    linux-vdso.so.1 =>  (0x00007fffddb60000)
+    libboost_date_time.so.1.40.0 => /usr/lib/libboost_date_time.so.1.40.0 (0x00007f0af8ffa000)
+    libboost_thread.so.1.40.0 => /usr/lib/libboost_thread.so.1.40.0 (0x00007f0af8de4000)
+    libstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x00007f0af8acf000)
+    libm.so.6 => /lib/libm.so.6 (0x00007f0af884c000)
+    libgcc_s.so.1 => /lib/libgcc_s.so.1 (0x00007f0af8635000)
+    libc.so.6 => /lib/libc.so.6 (0x00007f0af82b1000)
+    librt.so.1 => /lib/librt.so.1 (0x00007f0af80a9000)
+    libpthread.so.0 => /lib/libpthread.so.0 (0x00007f0af7e8c000)
+    /lib64/ld-linux-x86-64.so.2 (0x00007f0af9481000)
 
 i.e. the only additional dependencies are ``boost::thread`` and
 ``boost::date_time``.  This is due to the fact that ros time classes
