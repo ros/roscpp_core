@@ -2,8 +2,8 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.7.1 (2020-01-25)
+------------------
 * only depend on the boost components needed (`#117 <https://github.com/ros/roscpp_core/issues/117>`_)
 
 0.7.0 (2020-01-24)
