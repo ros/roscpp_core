@@ -184,9 +184,9 @@ namespace ros {
   {
     namespace bt = boost::posix_time;
 #if defined(BOOST_DATE_TIME_HAS_NANOSECONDS)
-    return bt::seconds(sec) + bt::nanoseconds(nsec);
+    return bt::seconds(sec) + bt::nanoseconds(long(nsec));
 #else
-    return bt::seconds(sec) + bt::microseconds(nsec/1000);
+    return bt::seconds(sec) + bt::microseconds(long(nsec/1000));
 #endif
   }
 }
