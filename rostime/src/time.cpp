@@ -120,14 +120,13 @@ namespace ros
     nsec = timeofday.tv_usec * 1000;
 #endif
 #else
-      auto n = std::chrono::system_clock::now();
-      uint64_t now_s = 0;
-      uint64_t now_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    uint64_t now_s = 0;
+    uint64_t now_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
-      normalizeSecNSec(now_s, now_ns);
+    normalizeSecNSec(now_s, now_ns);
 
-      sec = (uint32_t)now_s;
-      nsec = (uint32_t)now_ns;
+    sec = (uint32_t)now_s;
+    nsec = (uint32_t)now_ns;
 #endif
   }
 
@@ -151,14 +150,13 @@ namespace ros
     sec  = start.tv_sec;
     nsec = start.tv_nsec;
 #else
-      auto n = std::chrono::steady_clock::now();
-      uint64_t now_s = 0;
-      uint64_t now_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
+    uint64_t now_s = 0;
+    uint64_t now_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
 
-      normalizeSecNSec(now_s, now_ns);
+    normalizeSecNSec(now_s, now_ns);
 
-      sec = (uint32_t)now_s;
-      nsec = (uint32_t)now_ns;
+    sec = (uint32_t)now_s;
+    nsec = (uint32_t)now_ns;
 #endif
   }
 
