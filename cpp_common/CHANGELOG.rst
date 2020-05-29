@@ -2,6 +2,9 @@
 Changelog for package cpp_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.7.1 (2020-01-25)
 ------------------
 * only depend on the boost components needed (`#117 <https://github.com/ros/roscpp_core/issues/117>`_)
