@@ -89,7 +89,7 @@ TEST(Duration, arithmeticExceptions)
   ros::Time::init();
 
   Duration d1(2147483647, 0);
-  Duration d2(2147483647, 999999999);
+  Duration d2(2147483647, NSecInSec - 1);
   EXPECT_THROW(d1 + d2, std::runtime_error);
 
   Duration d3(-2147483648, 0);
@@ -98,7 +98,7 @@ TEST(Duration, arithmeticExceptions)
   EXPECT_THROW(d4 - d3, std::runtime_error);
 
   Duration d5(-2147483647, 1);
-  Duration d6(-2, 999999999);
+  Duration d6(-2, NSecInSec - 1);
   Duration d7;
   EXPECT_NO_THROW(d7 = d5 + d6);
   EXPECT_EQ(-2147483648000000000, d7.toNSec());
@@ -109,7 +109,7 @@ TEST(Duration, negativeSignExceptions)
   ros::Time::init();
 
   Duration d1(2147483647, 0);
-  Duration d2(2147483647, 999999999);
+  Duration d2(2147483647, NSecInSec - 1);
   Duration d3;
   EXPECT_NO_THROW(d3 = -d1);
   EXPECT_EQ(-2147483647000000000, d3.toNSec());
@@ -117,7 +117,7 @@ TEST(Duration, negativeSignExceptions)
   EXPECT_EQ(-2147483647999999999, d3.toNSec());
 
   Duration d4(-2147483647, 0);
-  Duration d5(-2147483648, 999999999);
+  Duration d5(-2147483648, NSecInSec - 1);
   Duration d6(-2147483648, 2);
   Duration d7;
   EXPECT_NO_THROW(d7 = -d4);
@@ -144,11 +144,11 @@ TEST(Duration, rounding)
   EXPECT_EQ(1, d3.nsec);
   Duration d4(-49.0000000006);
   EXPECT_EQ(-50, d4.sec);
-  EXPECT_EQ(999999999, d4.nsec);
+  EXPECT_EQ(NSecInSec - 1, d4.nsec);
 
   Duration d5(49.9999999994);
   EXPECT_EQ(49, d5.sec);
-  EXPECT_EQ(999999999, d5.nsec);
+  EXPECT_EQ(NSecInSec - 1, d5.nsec);
   Duration d6(-49.9999999994);
   EXPECT_EQ(-50, d6.sec);
   EXPECT_EQ(1, d6.nsec);
@@ -159,6 +159,106 @@ TEST(Duration, rounding)
   Duration d8(-49.9999999996);
   EXPECT_EQ(-50, d8.sec);
   EXPECT_EQ(0, d8.nsec);
+}
+
+TEST(Duration, construct)
+{
+  ros::Time::init();
+
+  EXPECT_EQ(Duration().fromSec(2.0), Duration(2, 0));
+  EXPECT_EQ(Duration().fromSec(-2.0), Duration(-2, 0));
+  EXPECT_EQ(Duration().fromSec(2), Duration(2, 0));
+  EXPECT_EQ(Duration().fromSec(-2), Duration(-2, 0));
+  EXPECT_EQ(Duration().fromMSec(2), Duration(0, 2 * NSecInMSec));
+  EXPECT_EQ(Duration().fromMSec(-2), Duration(0, -2 * NSecInMSec));
+  EXPECT_EQ(Duration().fromUSec(2), Duration(0, 2 * NSecInUSec));
+  EXPECT_EQ(Duration().fromUSec(-2), Duration(0, -2 * NSecInUSec));
+
+  EXPECT_EQ(WallDuration().fromSec(2.0), WallDuration(2, 0));
+  EXPECT_EQ(WallDuration().fromSec(-2.0), WallDuration(-2, 0));
+  EXPECT_EQ(WallDuration().fromSec(2), WallDuration(2, 0));
+  EXPECT_EQ(WallDuration().fromSec(-2), WallDuration(-2, 0));
+  EXPECT_EQ(WallDuration().fromMSec(2), WallDuration(0, 2 * NSecInMSec));
+  EXPECT_EQ(WallDuration().fromMSec(-2), WallDuration(0, -2 * NSecInMSec));
+  EXPECT_EQ(WallDuration().fromUSec(2), WallDuration(0, 2 * NSecInUSec));
+  EXPECT_EQ(WallDuration().fromUSec(-2), WallDuration(0, -2 * NSecInUSec));
+}
+
+TEST(Duration, toDouble)
+{
+  ros::Time::init();
+
+  EXPECT_NEAR(Duration(2, 0).toSec(), 2.0, 1e-9);
+  EXPECT_NEAR(Duration(-2, 0).toSec(), -2.0, 1e-9);
+  EXPECT_NEAR(Duration(0, 2 * NSecInMSec).toSec(), 0.002, 1e-9);
+  EXPECT_NEAR(Duration(0, -2 * NSecInMSec).toSec(), -0.002, 1e-9);
+  EXPECT_NEAR(Duration(0, 2 * NSecInUSec).toSec(), 0.000002, 1e-9);
+  EXPECT_NEAR(Duration(0, -2 * NSecInUSec).toSec(), -0.000002, 1e-9);
+  EXPECT_NEAR(Duration(0, 2).toSec(), 0.000000002, 1e-12);
+  EXPECT_NEAR(Duration(0, -2).toSec(), -0.000000002, 1e-12);
+
+  EXPECT_NEAR(Duration(2, 0).toMSec(), 2000.0, 1e-9);
+  EXPECT_NEAR(Duration(-2, 0).toMSec(), -2000.0, 1e-9);
+  EXPECT_NEAR(Duration(0, 2 * NSecInMSec).toMSec(), 2.0, 1e-9);
+  EXPECT_NEAR(Duration(0, -2 * NSecInMSec).toMSec(), -2.0, 1e-9);
+  EXPECT_NEAR(Duration(0, 2 * NSecInUSec).toMSec(), 0.002, 1e-9);
+  EXPECT_NEAR(Duration(0, -2 * NSecInUSec).toMSec(), -0.002, 1e-9);
+  EXPECT_NEAR(Duration(0, 2).toMSec(), 0.000002, 1e-9);
+  EXPECT_NEAR(Duration(0, -2).toMSec(), -0.000002, 1e-9);
+
+  EXPECT_NEAR(Duration(2, 0).toUSec(), 2000000.0, 1e-9);
+  EXPECT_NEAR(Duration(-2, 0).toUSec(), -2000000.0, 1e-9);
+  EXPECT_NEAR(Duration(0, 2 * NSecInMSec).toUSec(), 2000.0, 1e-9);
+  EXPECT_NEAR(Duration(0, -2 * NSecInMSec).toUSec(), -2000.0, 1e-9);
+  EXPECT_NEAR(Duration(0, 2 * NSecInUSec).toUSec(), 2.0, 1e-9);
+  EXPECT_NEAR(Duration(0, -2 * NSecInUSec).toUSec(), -2.0, 1e-9);
+  EXPECT_NEAR(Duration(0, 2).toUSec(), 0.002, 1e-9);
+  EXPECT_NEAR(Duration(0, -2).toUSec(), -0.002, 1e-9);
+
+  EXPECT_EQ(Duration(2, 0).toNSec(), 2000000000LL);
+  EXPECT_EQ(Duration(-2, 0).toNSec(), -2000000000LL);
+  EXPECT_EQ(Duration(0, 2 * NSecInMSec).toNSec(), 2000000LL);
+  EXPECT_EQ(Duration(0, -2 * NSecInMSec).toNSec(), -2000000LL);
+  EXPECT_EQ(Duration(0, 2 * NSecInUSec).toNSec(), 2000LL);
+  EXPECT_EQ(Duration(0, -2 * NSecInUSec).toNSec(), -2000LL);
+  EXPECT_EQ(Duration(0, 2).toNSec(), 2LL);
+  EXPECT_EQ(Duration(0, -2).toNSec(), -2LL);
+
+  EXPECT_NEAR(WallDuration(2, 0).toSec(), 2.0, 1e-9);
+  EXPECT_NEAR(WallDuration(-2, 0).toSec(), -2.0, 1e-9);
+  EXPECT_NEAR(WallDuration(0, 2 * NSecInMSec).toSec(), 0.002, 1e-9);
+  EXPECT_NEAR(WallDuration(0, -2 * NSecInMSec).toSec(), -0.002, 1e-9);
+  EXPECT_NEAR(WallDuration(0, 2 * NSecInUSec).toSec(), 0.000002, 1e-9);
+  EXPECT_NEAR(WallDuration(0, -2 * NSecInUSec).toSec(), -0.000002, 1e-9);
+  EXPECT_NEAR(WallDuration(0, 2).toSec(), 0.000000002, 1e-12);
+  EXPECT_NEAR(WallDuration(0, -2).toSec(), -0.000000002, 1e-12);
+
+  EXPECT_NEAR(WallDuration(2, 0).toMSec(), 2000.0, 1e-9);
+  EXPECT_NEAR(WallDuration(-2, 0).toMSec(), -2000.0, 1e-9);
+  EXPECT_NEAR(WallDuration(0, 2 * NSecInMSec).toMSec(), 2.0, 1e-9);
+  EXPECT_NEAR(WallDuration(0, -2 * NSecInMSec).toMSec(), -2.0, 1e-9);
+  EXPECT_NEAR(WallDuration(0, 2 * NSecInUSec).toMSec(), 0.002, 1e-9);
+  EXPECT_NEAR(WallDuration(0, -2 * NSecInUSec).toMSec(), -0.002, 1e-9);
+  EXPECT_NEAR(WallDuration(0, 2).toMSec(), 0.000002, 1e-9);
+  EXPECT_NEAR(WallDuration(0, -2).toMSec(), -0.000002, 1e-9);
+
+  EXPECT_NEAR(WallDuration(2, 0).toUSec(), 2000000.0, 1e-9);
+  EXPECT_NEAR(WallDuration(-2, 0).toUSec(), -2000000.0, 1e-9);
+  EXPECT_NEAR(WallDuration(0, 2 * NSecInMSec).toUSec(), 2000.0, 1e-9);
+  EXPECT_NEAR(WallDuration(0, -2 * NSecInMSec).toUSec(), -2000.0, 1e-9);
+  EXPECT_NEAR(WallDuration(0, 2 * NSecInUSec).toUSec(), 2.0, 1e-9);
+  EXPECT_NEAR(WallDuration(0, -2 * NSecInUSec).toUSec(), -2.0, 1e-9);
+  EXPECT_NEAR(WallDuration(0, 2).toUSec(), 0.002, 1e-9);
+  EXPECT_NEAR(WallDuration(0, -2).toUSec(), -0.002, 1e-9);
+
+  EXPECT_EQ(WallDuration(2, 0).toNSec(), 2000000000LL);
+  EXPECT_EQ(WallDuration(-2, 0).toNSec(), -2000000000LL);
+  EXPECT_EQ(WallDuration(0, 2 * NSecInMSec).toNSec(), 2000000LL);
+  EXPECT_EQ(WallDuration(0, -2 * NSecInMSec).toNSec(), -2000000LL);
+  EXPECT_EQ(WallDuration(0, 2 * NSecInUSec).toNSec(), 2000LL);
+  EXPECT_EQ(WallDuration(0, -2 * NSecInUSec).toNSec(), -2000LL);
+  EXPECT_EQ(WallDuration(0, 2).toNSec(), 2LL);
+  EXPECT_EQ(WallDuration(0, -2).toNSec(), -2LL);
 }
 
 int main(int argc, char **argv){

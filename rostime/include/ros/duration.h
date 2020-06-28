@@ -102,7 +102,7 @@ public:
   double toSec() const { return static_cast<double>(sec) + 1e-9*static_cast<double>(nsec); };
   double toMSec() const { return static_cast<double>(sec * MSecInSec) + 1e-6*static_cast<double>(nsec); };
   double toUSec() const { return static_cast<double>(sec * USecInSec) + 1e-3*static_cast<double>(nsec); };
-  int64_t toNSec() const {return static_cast<int64_t>(sec)*1000000000ll + static_cast<int64_t>(nsec);  };
+  int64_t toNSec() const {return static_cast<int64_t>(sec)*NSecInSec + static_cast<int64_t>(nsec);  };
   T& fromSec(double t);
   inline T& fromMSec(int64_t milisec) { return fromNSec(milisec * NSecInMSec); }
   inline T& fromUSec(int64_t microsec) { return fromNSec(microsec * NSecInUSec); }

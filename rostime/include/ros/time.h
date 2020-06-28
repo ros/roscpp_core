@@ -159,7 +159,7 @@ namespace ros
     double toUSec() const { return static_cast<double>(sec * USecInSec) + 1e-3*static_cast<double>(nsec); };
     inline T& fromUSec(uint64_t microsec) { return fromNSec(microsec * NSecInUSec); }
 
-    uint64_t toNSec() const {return static_cast<uint64_t>(sec)*1000000000ull + static_cast<uint64_t>(nsec); }
+    uint64_t toNSec() const {return static_cast<uint64_t>(sec)*NSecInSec + static_cast<uint64_t>(nsec); }
     T& fromNSec(uint64_t t);
 
     inline bool isZero() const { return sec == 0 && nsec == 0; }

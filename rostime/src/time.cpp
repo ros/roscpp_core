@@ -80,10 +80,10 @@ namespace ros
    ** Variables
    *********************************************************************/
 
-  const Duration DURATION_MAX(std::numeric_limits<int32_t>::max(), 999999999);
+  const Duration DURATION_MAX(std::numeric_limits<int32_t>::max(), NSecInSec - 1);
   const Duration DURATION_MIN(std::numeric_limits<int32_t>::min(), 0);
 
-  const Time TIME_MAX(std::numeric_limits<uint32_t>::max(), 999999999);
+  const Time TIME_MAX(std::numeric_limits<uint32_t>::max(), NSecInSec - 1);
   const Time TIME_MIN(0, 1);
 
   // This is declared here because it's set from the Time class but read from
@@ -117,7 +117,7 @@ namespace ros
     if (timeofday.tv_sec < 0 || timeofday.tv_sec > std::numeric_limits<uint32_t>::max())
       throw std::runtime_error("Timeofday is out of dual signed 32-bit range");
     sec  = timeofday.tv_sec;
-    nsec = timeofday.tv_usec * 1000;
+    nsec = timeofday.tv_usec * NSecInUSec;
 #endif
 #else
     uint64_t now_s = 0;
@@ -171,7 +171,7 @@ namespace ros
   int ros_nanosleep(const uint32_t &sec, const uint32_t &nsec)
   {
 #if defined(_WIN32)
-    std::this_thread::sleep_for(std::chrono::nanoseconds(static_cast<int64_t>(sec * 1e9 + nsec)));
+    std::this_thread::sleep_for(std::chrono::nanoseconds(static_cast<int64_t>(sec * NSecInSec + nsec)));
     return 0;
 #else
     timespec req = { sec, nsec };
@@ -305,7 +305,7 @@ namespace ros
 #if defined(BOOST_DATE_TIME_HAS_NANOSECONDS)
     t.nsec = d.fractional_seconds();
 #else
-    t.nsec = d.fractional_seconds()*1000;
+    t.nsec = d.fractional_seconds()*NSecInUSec;
 #endif
     return t;
   }
@@ -326,7 +326,7 @@ namespace ros
     }
     else
     {
-      os << (rhs.sec == -1 ? "-" : "") << (rhs.sec + 1) << "." << std::setw(9) << std::setfill('0') << (1000000000 - rhs.nsec);
+      os << (rhs.sec == -1 ? "-" : "") << (rhs.sec + 1) << "." << std::setw(9) << std::setfill('0') << (NSecInSec - rhs.nsec);
     }
     return os;
   }
@@ -348,7 +348,7 @@ namespace ros
       Time start = Time::now();
       while (!g_stopped && (Time::now() < end))
       {
-        ros_nanosleep(0,1000000);
+        ros_nanosleep(0,NSecInMSec);
         if (Time::now() < start)
         {
           return false;
@@ -399,7 +399,7 @@ namespace ros
       bool rc = false;
       while (!g_stopped && (Time::now() < end))
       {
-        ros_wallsleep(0, 1000000);
+        ros_wallsleep(0, NSecInMSec);
         rc = true;
 
         // If we started at time 0 wait for the first actual time to arrive before starting the timer on
@@ -460,7 +460,7 @@ namespace ros
     }
     else
     {
-      os << (rhs.sec == -1 ? "-" : "") << (rhs.sec + 1) << "." << std::setw(9) << std::setfill('0') << (1000000000 - rhs.nsec);
+      os << (rhs.sec == -1 ? "-" : "") << (rhs.sec + 1) << "." << std::setw(9) << std::setfill('0') << (NSecInSec - rhs.nsec);
     }
     return os;
   }
@@ -472,8 +472,8 @@ namespace ros
 
   void normalizeSecNSec(uint64_t& sec, uint64_t& nsec)
   {
-    uint64_t nsec_part = nsec % 1000000000UL;
-    uint64_t sec_part = nsec / 1000000000UL;
+    uint64_t nsec_part = nsec % NSecInSec;
+    uint64_t sec_part = nsec / NSecInSec;
 
     if (sec + sec_part > std::numeric_limits<uint32_t>::max())
       throw std::runtime_error("Time is out of dual 32-bit range");
@@ -495,11 +495,11 @@ namespace ros
 
   void normalizeSecNSecUnsigned(int64_t& sec, int64_t& nsec)
   {
-    int64_t nsec_part = nsec % 1000000000L;
-    int64_t sec_part = sec + nsec / 1000000000L;
+    int64_t nsec_part = nsec % NSecInSec;
+    int64_t sec_part = sec + nsec / NSecInSec;
     if (nsec_part < 0)
       {
-        nsec_part += 1000000000L;
+        nsec_part += NSecInSec;
         --sec_part;
       }
 
