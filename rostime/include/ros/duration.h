@@ -64,6 +64,16 @@ namespace ros
 ROSTIME_DECL void normalizeSecNSecSigned(int64_t& sec, int64_t& nsec);
 ROSTIME_DECL void normalizeSecNSecSigned(int32_t& sec, int32_t& nsec);
 
+// Arithmetic oprations of unsigned 32/64 bit numbers with these signed constants will convert these constants to
+// unsigned numbers according to the C standard. 16 bit unsigned numbers will get implicitly converted to int32_t for
+// the computation.
+constexpr int32_t NSecInUSec = 1000l;  //!< Number of nanoseconds in a microsecond.
+constexpr int32_t NSecInMSec = 1000000l;  //!< Number of nanoseconds in a millisecond.
+constexpr int32_t NSecInSec  = 1000000000l;  //!< Number of nanoseconds in a second.
+constexpr int32_t USecInMSec = 1000l;  //!< Number of microseconds in a millisecond.
+constexpr int32_t USecInSec  = 1000000l;  //!< Number of microseconds in a second.
+constexpr int32_t MSecInSec  = 1000l;  //!< Number of milliseconds in a second.
+
 /**
  * \brief Base class for Duration implementations.  Provides storage, common functions and operator overloads.
  * This should not need to be used directly.
@@ -90,8 +100,12 @@ public:
   bool operator>=(const T &rhs) const;
   bool operator<=(const T &rhs) const;
   double toSec() const { return static_cast<double>(sec) + 1e-9*static_cast<double>(nsec); };
+  double toMSec() const { return static_cast<double>(sec * MSecInSec) + 1e-6*static_cast<double>(nsec); };
+  double toUSec() const { return static_cast<double>(sec * USecInSec) + 1e-3*static_cast<double>(nsec); };
   int64_t toNSec() const {return static_cast<int64_t>(sec)*1000000000ll + static_cast<int64_t>(nsec);  };
   T& fromSec(double t);
+  inline T& fromMSec(int64_t milisec) { return fromNSec(milisec * NSecInMSec); }
+  inline T& fromUSec(int64_t microsec) { return fromNSec(microsec * NSecInUSec); }
   T& fromNSec(int64_t t);
   bool isZero() const;
   boost::posix_time::time_duration toBoost() const;
