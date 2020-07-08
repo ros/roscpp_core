@@ -57,21 +57,21 @@ namespace ros {
     if (sec64 < std::numeric_limits<int32_t>::min() || sec64 > std::numeric_limits<int32_t>::max())
       throw std::runtime_error("Duration is out of dual 32-bit range");
     sec = static_cast<int32_t>(sec64);
-    nsec = static_cast<int32_t>(boost::math::round((d - sec) * NSecInSec));
-    int32_t rollover = nsec / NSecInSec;
+    nsec = static_cast<int32_t>(boost::math::round((d - sec) * SEC_TO_NSEC));
+    int32_t rollover = nsec / SEC_TO_NSEC;
     sec += rollover;
-    nsec %= NSecInSec;
+    nsec %= SEC_TO_NSEC;
     return *static_cast<T*>(this);
   }
 
   template<class T>
   T& DurationBase<T>::fromNSec(int64_t t)
   {
-    int64_t sec64 = t / static_cast<int64_t>(NSecInSec);
+    int64_t sec64 = t / static_cast<int64_t>(SEC_TO_NSEC);
     if (sec64 < std::numeric_limits<int32_t>::min() || sec64 > std::numeric_limits<int32_t>::max())
       throw std::runtime_error("Duration is out of dual 32-bit range");
     sec = static_cast<int32_t>(sec64);
-    nsec = static_cast<int32_t>(t % static_cast<int64_t>(NSecInSec));
+    nsec = static_cast<int32_t>(t % static_cast<int64_t>(SEC_TO_NSEC));
 
     normalizeSecNSecSigned(sec, nsec);
 
@@ -186,7 +186,7 @@ namespace ros {
 #if defined(BOOST_DATE_TIME_HAS_NANOSECONDS)
     return bt::seconds(sec) + bt::nanoseconds(nsec);
 #else
-    return bt::seconds(sec) + bt::microseconds(nsec/NSecInUSec);
+    return bt::seconds(sec) + bt::microseconds(nsec / USEC_TO_NSEC);
 #endif
   }
 }

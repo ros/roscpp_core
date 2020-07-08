@@ -79,10 +79,10 @@ namespace ros
       if (sec64 < 0 || sec64 > std::numeric_limits<uint32_t>::max())
         throw std::runtime_error("Time is out of dual 32-bit range");
       sec = static_cast<uint32_t>(sec64);
-      nsec = static_cast<uint32_t>(boost::math::round((t-sec) * NSecInSec));
+      nsec = static_cast<uint32_t>(boost::math::round((t-sec) * SEC_TO_NSEC));
       // avoid rounding errors
-      sec += (nsec / NSecInSec);
-      nsec %= NSecInSec;
+      sec += (nsec / SEC_TO_NSEC);
+      nsec %= SEC_TO_NSEC;
       return *static_cast<T*>(this);
   }
 
@@ -180,7 +180,7 @@ namespace ros
 #if defined(BOOST_DATE_TIME_HAS_NANOSECONDS)
     return pt::from_time_t(sec) + pt::nanoseconds(nsec);
 #else
-    return pt::from_time_t(sec) + pt::microseconds(nsec/NSecInUSec);
+    return pt::from_time_t(sec) + pt::microseconds(nsec / USEC_TO_NSEC);
 #endif
   }
 }

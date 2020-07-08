@@ -153,18 +153,23 @@ namespace ros
     double toSec()  const { return static_cast<double>(sec) + 1e-9*static_cast<double>(nsec); };
     T& fromSec(double t);
 
-    double toMSec() const { return static_cast<double>(sec * MSecInSec) + 1e-6*static_cast<double>(nsec); };
-    inline T& fromMSec(uint64_t milisec) { return fromNSec(milisec * NSecInMSec); }
+    double toMSec() const { return static_cast<double>(sec * SEC_TO_MSEC) + 1e-6 * static_cast<double>(nsec); };
+    inline T& fromMSec(uint64_t milisec) { return fromNSec(milisec * MSEC_TO_NSEC); }
 
-    double toUSec() const { return static_cast<double>(sec * USecInSec) + 1e-3*static_cast<double>(nsec); };
-    inline T& fromUSec(uint64_t microsec) { return fromNSec(microsec * NSecInUSec); }
+    double toUSec() const { return static_cast<double>(sec * SEC_TO_USEC) + 1e-3 * static_cast<double>(nsec); };
+    inline T& fromUSec(uint64_t microsec) { return fromNSec(microsec * USEC_TO_NSEC); }
 
-    uint64_t toNSec() const {return static_cast<uint64_t>(sec)*NSecInSec + static_cast<uint64_t>(nsec); }
+    uint64_t toNSec() const {return static_cast<uint64_t>(sec) * SEC_TO_NSEC + static_cast<uint64_t>(nsec); }
     T& fromNSec(uint64_t t);
 
     inline bool isZero() const { return sec == 0 && nsec == 0; }
     inline bool is_zero() const { return isZero(); }
     boost::posix_time::ptime toBoost() const;
+
+    static inline T seconds(uint64_t seconds) { return T(seconds, 0); }
+    static inline T milliseconds(uint64_t milliseconds) { return T(0, milliseconds * MSEC_TO_NSEC); }
+    static inline T microseconds(uint64_t microseconds) { return T(0, microseconds * USEC_TO_NSEC); }
+    static inline T nanoseconds(uint64_t nanoseconds) { return T(0, nanoseconds); }
 
   };
 
