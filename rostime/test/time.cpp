@@ -66,8 +66,8 @@ void generate_rand_times(uint32_t range, uint64_t runs, std::vector<ros::Time>& 
   values2.reserve(runs);
   for ( uint32_t i = 0; i < runs ; i++ )
   {
-    values1.push_back(ros::Time( (rand() * range / RAND_MAX), (rand() * 1000000000ULL/RAND_MAX)));
-    values2.push_back(ros::Time( (rand() * range / RAND_MAX), (rand() * 1000000000ULL/RAND_MAX)));
+    values1.push_back(ros::Time( (rand() * range / RAND_MAX), (rand() * SEC_TO_NSEC / RAND_MAX)));
+    values2.push_back(ros::Time( (rand() * range / RAND_MAX), (rand() * SEC_TO_NSEC / RAND_MAX)));
   }
 }
 
@@ -81,26 +81,26 @@ void generate_rand_durations(uint32_t range, uint64_t runs, std::vector<ros::Dur
   for ( uint32_t i = 0; i < runs ; i++ )
   {
     // positive durations
-    values1.push_back(ros::Duration(  (rand() * range / RAND_MAX),  (rand() * 1000000000ULL/RAND_MAX)));
-    values2.push_back(ros::Duration(  (rand() * range / RAND_MAX),  (rand() * 1000000000ULL/RAND_MAX)));
+    values1.push_back(ros::Duration(  (rand() * range / RAND_MAX),  (rand() * SEC_TO_NSEC / RAND_MAX)));
+    values2.push_back(ros::Duration(  (rand() * range / RAND_MAX),  (rand() * SEC_TO_NSEC / RAND_MAX)));
     EXPECT_GE(values1.back(), ros::Duration(0,0));
     EXPECT_GE(values2.back(), ros::Duration(0,0));
 
     // negative durations
-    values1.push_back(ros::Duration( -(rand() * range / RAND_MAX), -(rand() * 1000000000ULL/RAND_MAX)));
-    values2.push_back(ros::Duration( -(rand() * range / RAND_MAX), -(rand() * 1000000000ULL/RAND_MAX)));
+    values1.push_back(ros::Duration( -(rand() * range / RAND_MAX), -(rand() * SEC_TO_NSEC / RAND_MAX)));
+    values2.push_back(ros::Duration( -(rand() * range / RAND_MAX), -(rand() * SEC_TO_NSEC / RAND_MAX)));
     EXPECT_LE(values1.back(), ros::Duration(0,0));
     EXPECT_LE(values2.back(), ros::Duration(0,0));
 
     // positive and negative durations
-    values1.push_back(ros::Duration(  (rand() * range / RAND_MAX),  (rand() * 1000000000ULL/RAND_MAX)));
-    values2.push_back(ros::Duration( -(rand() * range / RAND_MAX), -(rand() * 1000000000ULL/RAND_MAX)));
+    values1.push_back(ros::Duration(  (rand() * range / RAND_MAX),  (rand() * SEC_TO_NSEC / RAND_MAX)));
+    values2.push_back(ros::Duration( -(rand() * range / RAND_MAX), -(rand() * SEC_TO_NSEC / RAND_MAX)));
     EXPECT_GE(values1.back(), ros::Duration(0,0));
     EXPECT_LE(values2.back(), ros::Duration(0,0));
 
     // negative and positive durations
-    values1.push_back(ros::Duration( -(rand() * range / RAND_MAX), -(rand() * 1000000000ULL/RAND_MAX)));
-    values2.push_back(ros::Duration(  (rand() * range / RAND_MAX),  (rand() * 1000000000ULL/RAND_MAX)));
+    values1.push_back(ros::Duration( -(rand() * range / RAND_MAX), -(rand() * SEC_TO_NSEC / RAND_MAX)));
+    values2.push_back(ros::Duration(  (rand() * range / RAND_MAX),  (rand() * SEC_TO_NSEC / RAND_MAX)));
     EXPECT_LE(values1.back(), ros::Duration(0,0));
     EXPECT_GE(values2.back(), ros::Duration(0,0));
   }
@@ -120,15 +120,15 @@ TEST(Time, Comparitors)
 
   for (uint32_t i = 0; i < v1.size(); i++)
   {
-    if (v1[i].sec * 1000000000ULL + v1[i].nsec < v2[i].sec * 1000000000ULL + v2[i].nsec)
+    if (v1[i].sec * SEC_TO_NSEC + v1[i].nsec < v2[i].sec * SEC_TO_NSEC + v2[i].nsec)
     {
       EXPECT_LT(v1[i], v2[i]);
-      //      printf("%f %d ", v1[i].toSec(), v1[i].sec * 1000000000ULL + v1[i].nsec);
-      //printf("vs %f %d\n", v2[i].toSec(), v2[i].sec * 1000000000ULL + v2[i].nsec);
+      //      printf("%f %d ", v1[i].toSec(), v1[i].sec * SEC_TO_NSEC + v1[i].nsec);
+      //printf("vs %f %d\n", v2[i].toSec(), v2[i].sec * SEC_TO_NSEC + v2[i].nsec);
       EXPECT_LE(v1[i], v2[i]);
       EXPECT_NE(v1[i], v2[i]);
     }
-    else if (v1[i].sec * 1000000000ULL + v1[i].nsec > v2[i].sec * 1000000000ULL + v2[i].nsec)
+    else if (v1[i].sec * SEC_TO_NSEC + v1[i].nsec > v2[i].sec * SEC_TO_NSEC + v2[i].nsec)
     {
       EXPECT_GT(v1[i], v2[i]);
       EXPECT_GE(v1[i], v2[i]);
@@ -157,6 +157,108 @@ TEST(Time, ToFromDouble)
 
   }
 
+}
+
+TEST(Time, toDouble)
+{
+  EXPECT_NEAR(Time(2, 0).toSec(), 2.0, 1e-9);
+  EXPECT_NEAR(Time(0, 2 * MSEC_TO_NSEC).toSec(), 0.002, 1e-9);
+  EXPECT_NEAR(Time(0, 2 * USEC_TO_NSEC).toSec(), 0.000002, 1e-9);
+  EXPECT_NEAR(Time(0, 2).toSec(), 0.000000002, 1e-12);
+
+  EXPECT_NEAR(Time(2, 0).toMSec(), 2000.0, 1e-9);
+  EXPECT_NEAR(Time(0, 2 * MSEC_TO_NSEC).toMSec(), 2.0, 1e-9);
+  EXPECT_NEAR(Time(0, 2 * USEC_TO_NSEC).toMSec(), 0.002, 1e-9);
+  EXPECT_NEAR(Time(0, 2).toMSec(), 0.000002, 1e-9);
+
+  EXPECT_NEAR(Time(2, 0).toUSec(), 2000000.0, 1e-9);
+  EXPECT_NEAR(Time(0, 2 * MSEC_TO_NSEC).toUSec(), 2000.0, 1e-9);
+  EXPECT_NEAR(Time(0, 2 * USEC_TO_NSEC).toUSec(), 2.0, 1e-9);
+  EXPECT_NEAR(Time(0, 2).toUSec(), 0.002, 1e-9);
+
+  EXPECT_EQ(Time(2, 0).toNSec(), 2000000000LL);
+  EXPECT_EQ(Time(0, 2 * MSEC_TO_NSEC).toNSec(), 2000000LL);
+  EXPECT_EQ(Time(0, 2 * USEC_TO_NSEC).toNSec(), 2000LL);
+  EXPECT_EQ(Time(0, 2).toNSec(), 2LL);
+
+  EXPECT_NEAR(WallTime(2, 0).toSec(), 2.0, 1e-9);
+  EXPECT_NEAR(WallTime(0, 2 * MSEC_TO_NSEC).toSec(), 0.002, 1e-9);
+  EXPECT_NEAR(WallTime(0, 2 * USEC_TO_NSEC).toSec(), 0.000002, 1e-9);
+  EXPECT_NEAR(WallTime(0, 2).toSec(), 0.000000002, 1e-12);
+
+  EXPECT_NEAR(WallTime(2, 0).toMSec(), 2000.0, 1e-9);
+  EXPECT_NEAR(WallTime(0, 2 * MSEC_TO_NSEC).toMSec(), 2.0, 1e-9);
+  EXPECT_NEAR(WallTime(0, 2 * USEC_TO_NSEC).toMSec(), 0.002, 1e-9);
+  EXPECT_NEAR(WallTime(0, 2).toMSec(), 0.000002, 1e-9);
+
+  EXPECT_NEAR(WallTime(2, 0).toUSec(), 2000000.0, 1e-9);
+  EXPECT_NEAR(WallTime(0, 2 * MSEC_TO_NSEC).toUSec(), 2000.0, 1e-9);
+  EXPECT_NEAR(WallTime(0, 2 * USEC_TO_NSEC).toUSec(), 2.0, 1e-9);
+  EXPECT_NEAR(WallTime(0, 2).toUSec(), 0.002, 1e-9);
+
+  EXPECT_EQ(WallTime(2, 0).toNSec(), 2000000000LL);
+  EXPECT_EQ(WallTime(0, 2 * MSEC_TO_NSEC).toNSec(), 2000000LL);
+  EXPECT_EQ(WallTime(0, 2 * USEC_TO_NSEC).toNSec(), 2000LL);
+  EXPECT_EQ(WallTime(0, 2).toNSec(), 2LL);
+
+  EXPECT_NEAR(SteadyTime(2, 0).toSec(), 2.0, 1e-9);
+  EXPECT_NEAR(SteadyTime(0, 2 * MSEC_TO_NSEC).toSec(), 0.002, 1e-9);
+  EXPECT_NEAR(SteadyTime(0, 2 * USEC_TO_NSEC).toSec(), 0.000002, 1e-9);
+  EXPECT_NEAR(SteadyTime(0, 2).toSec(), 0.000000002, 1e-12);
+
+  EXPECT_NEAR(SteadyTime(2, 0).toMSec(), 2000.0, 1e-9);
+  EXPECT_NEAR(SteadyTime(0, 2 * MSEC_TO_NSEC).toMSec(), 2.0, 1e-9);
+  EXPECT_NEAR(SteadyTime(0, 2 * USEC_TO_NSEC).toMSec(), 0.002, 1e-9);
+  EXPECT_NEAR(SteadyTime(0, 2).toMSec(), 0.000002, 1e-9);
+
+  EXPECT_NEAR(SteadyTime(2, 0).toUSec(), 2000000.0, 1e-9);
+  EXPECT_NEAR(SteadyTime(0, 2 * MSEC_TO_NSEC).toUSec(), 2000.0, 1e-9);
+  EXPECT_NEAR(SteadyTime(0, 2 * USEC_TO_NSEC).toUSec(), 2.0, 1e-9);
+  EXPECT_NEAR(SteadyTime(0, 2).toUSec(), 0.002, 1e-9);
+
+  EXPECT_EQ(SteadyTime(2, 0).toNSec(), 2000000000LL);
+  EXPECT_EQ(SteadyTime(0, 2 * MSEC_TO_NSEC).toNSec(), 2000000LL);
+  EXPECT_EQ(SteadyTime(0, 2 * USEC_TO_NSEC).toNSec(), 2000LL);
+  EXPECT_EQ(SteadyTime(0, 2).toNSec(), 2LL);
+}
+
+TEST(Time, construct)
+{
+  EXPECT_EQ(Time().fromSec(2.0), Time(2, 0));
+  EXPECT_EQ(Time().fromSec(2), Time(2, 0));
+  EXPECT_EQ(Time().fromMSec(2), Time(0, 2 * MSEC_TO_NSEC));
+  EXPECT_EQ(Time().fromUSec(2), Time(0, 2 * USEC_TO_NSEC));
+  EXPECT_EQ(Time().fromNSec(2), Time(0, 2));
+
+  EXPECT_EQ(WallTime().fromSec(2.0), WallTime(2, 0));
+  EXPECT_EQ(WallTime().fromSec(2), WallTime(2, 0));
+  EXPECT_EQ(WallTime().fromMSec(2), WallTime(0, 2 * MSEC_TO_NSEC));
+  EXPECT_EQ(WallTime().fromUSec(2), WallTime(0, 2 * USEC_TO_NSEC));
+  EXPECT_EQ(WallTime().fromNSec(2), WallTime(0, 2));
+
+  EXPECT_EQ(SteadyTime().fromSec(2.0), SteadyTime(2, 0));
+  EXPECT_EQ(SteadyTime().fromSec(2), SteadyTime(2, 0));
+  EXPECT_EQ(SteadyTime().fromMSec(2), SteadyTime(0, 2 * MSEC_TO_NSEC));
+  EXPECT_EQ(SteadyTime().fromUSec(2), SteadyTime(0, 2 * USEC_TO_NSEC));
+  EXPECT_EQ(SteadyTime().fromNSec(2), SteadyTime(0, 2));
+
+  EXPECT_EQ(Time::seconds(2.0), Time(2, 0));
+  EXPECT_EQ(Time::seconds(2), Time(2, 0));
+  EXPECT_EQ(Time::milliseconds(2), Time(0, 2 * MSEC_TO_NSEC));
+  EXPECT_EQ(Time::microseconds(2), Time(0, 2 * USEC_TO_NSEC));
+  EXPECT_EQ(Time::nanoseconds(2), Time(0, 2));
+
+  EXPECT_EQ(WallTime::seconds(2.0), WallTime(2, 0));
+  EXPECT_EQ(WallTime::seconds(2), WallTime(2, 0));
+  EXPECT_EQ(WallTime::milliseconds(2), WallTime(0, 2 * MSEC_TO_NSEC));
+  EXPECT_EQ(WallTime::microseconds(2), WallTime(0, 2 * USEC_TO_NSEC));
+  EXPECT_EQ(WallTime::nanoseconds(2), WallTime(0, 2));
+
+  EXPECT_EQ(SteadyTime::seconds(2.0), SteadyTime(2, 0));
+  EXPECT_EQ(SteadyTime::seconds(2), SteadyTime(2, 0));
+  EXPECT_EQ(SteadyTime::milliseconds(2), SteadyTime(0, 2 * MSEC_TO_NSEC));
+  EXPECT_EQ(SteadyTime::microseconds(2), SteadyTime(0, 2 * USEC_TO_NSEC));
+  EXPECT_EQ(SteadyTime::nanoseconds(2), SteadyTime(0, 2));
 }
 
 TEST(Time, RoundingError)
@@ -189,10 +291,10 @@ TEST(Time, OperatorPlus)
   EXPECT_EQ(r.nsec, 100100UL);
 
   t = Time(0, 0);
-  d = Duration(10, 2000003000UL);
+  d = Duration(10, 2UL * SEC_TO_NSEC + 3UL * USEC_TO_NSEC);
   r = t + d;
   EXPECT_EQ(r.sec, 12UL);
-  EXPECT_EQ(r.nsec, 3000UL);
+  EXPECT_EQ(r.nsec, 3UL * USEC_TO_NSEC);
 }
 
 TEST(Time, OperatorMinus)
@@ -210,10 +312,10 @@ TEST(Time, OperatorMinus)
   EXPECT_EQ(r.nsec, 99900UL);
 
   t = Time(30, 0);
-  d = Duration(10, 2000003000UL);
+  d = Duration(10, 2UL * SEC_TO_NSEC + 3UL * USEC_TO_NSEC);
   r = t - d;
   EXPECT_EQ(r.sec, 17UL);
-  EXPECT_EQ(r.nsec, 999997000ULL);
+  EXPECT_EQ(r.nsec, 999997UL * USEC_TO_NSEC);
 }
 
 TEST(Time, OperatorPlusEquals)
@@ -231,10 +333,10 @@ TEST(Time, OperatorPlusEquals)
   EXPECT_EQ(t.nsec, 100100UL);
 
   t = Time(0, 0);
-  d = Duration(10, 2000003000UL);
+  d = Duration(10, 2UL * SEC_TO_NSEC + 3UL * USEC_TO_NSEC);
   t += d;
   EXPECT_EQ(t.sec, 12UL);
-  EXPECT_EQ(t.nsec, 3000UL);
+  EXPECT_EQ(t.nsec, 3UL * USEC_TO_NSEC);
 }
 
 TEST(Time, OperatorMinusEquals)
@@ -252,15 +354,15 @@ TEST(Time, OperatorMinusEquals)
   EXPECT_EQ(t.nsec, 99900UL);
 
   t = Time(30, 0);
-  d = Duration(10, 2000003000UL);
+  d = Duration(10, 2UL * SEC_TO_NSEC + 3UL * USEC_TO_NSEC);
   t -= d;
   EXPECT_EQ(t.sec, 17UL);
-  EXPECT_EQ(t.nsec, 999997000ULL);
+  EXPECT_EQ(t.nsec, 999997UL * USEC_TO_NSEC);
 }
 
 TEST(Time, SecNSecConstructor)
 {
-  Time t(100, 2000003000UL);
+  Time t(100, 2UL * SEC_TO_NSEC + 3UL * USEC_TO_NSEC);
   EXPECT_EQ(t.sec, 102UL);
   EXPECT_EQ(t.nsec, 3000UL);
 }
@@ -268,7 +370,7 @@ TEST(Time, SecNSecConstructor)
 TEST(Time, DontMungeStreamState)
 {
   std::ostringstream oss;
-  Time t(100, 2000003000UL);
+  Time t(100, 2UL * SEC_TO_NSEC + 3UL * USEC_TO_NSEC);
   oss << std::setfill('N');
   oss << std::setw(13);
   oss << t;
@@ -315,13 +417,13 @@ TEST(Time, OperatorMinusExceptions)
   ros::Time::init();
 
   Time t1(2147483648, 0);
-  Time t2(2147483647, 999999999);
-  Time t3(2147483647, 999999998);
-  Time t4(4294967295, 999999999);
-  Time t5(4294967295, 999999998);
+  Time t2(2147483647, SEC_TO_NSEC - 1);
+  Time t3(2147483647, SEC_TO_NSEC - 2);
+  Time t4(4294967295, SEC_TO_NSEC - 1);
+  Time t5(4294967295, SEC_TO_NSEC - 2);
   Time t6(0, 1);
 
-  Duration d1(2147483647, 999999999);
+  Duration d1(2147483647, SEC_TO_NSEC - 1);
   Duration d2(-2147483648, 0);
   Duration d3(-2147483648, 1);
   Duration d4(0, 1);
@@ -346,11 +448,11 @@ TEST(Time, OperatorPlusExceptions)
   ros::Time::init();
 
   Time t1(2147483648, 0);
-  Time t2(2147483647, 999999999);
-  Time t4(4294967295, 999999999);
-  Time t5(4294967295, 999999998);
+  Time t2(2147483647, SEC_TO_NSEC - 1);
+  Time t4(4294967295, SEC_TO_NSEC - 1);
+  Time t5(4294967295, SEC_TO_NSEC - 2);
 
-  Duration d1(2147483647, 999999999);
+  Duration d1(2147483647, SEC_TO_NSEC - 1);
   Duration d2(-2147483648, 1);
   Duration d3(0, 2);
   Duration d4(0, 1);
@@ -373,7 +475,7 @@ TEST(Duration, Comparitors)
 
   for (uint32_t i = 0; i < v1.size(); i++)
   {
-    if (v1[i].sec * 1000000000LL + v1[i].nsec < v2[i].sec * 1000000000LL + v2[i].nsec)
+    if (v1[i].sec * SEC_TO_NSEC + v1[i].nsec < v2[i].sec * SEC_TO_NSEC + v2[i].nsec)
     {
       EXPECT_LT(v1[i], v2[i]);
 //      printf("%f %lld ", v1[i].toSec(), v1[i].sec * 1000000000LL + v1[i].nsec);
@@ -381,7 +483,7 @@ TEST(Duration, Comparitors)
       EXPECT_LE(v1[i], v2[i]);
       EXPECT_NE(v1[i], v2[i]);
     }
-    else if (v1[i].sec * 1000000000LL + v1[i].nsec > v2[i].sec * 1000000000LL + v2[i].nsec)
+    else if (v1[i].sec * SEC_TO_NSEC + v1[i].nsec > v2[i].sec * SEC_TO_NSEC + v2[i].nsec)
     {
       EXPECT_GT(v1[i], v2[i]);
 //      printf("%f %lld ", v1[i].toSec(), v1[i].sec * 1000000000LL + v1[i].nsec);
@@ -411,23 +513,23 @@ TEST(Duration, ToFromSec)
     EXPECT_GE(ros::Duration(v1[i].toSec()).nsec, 0);
   }
 
-  EXPECT_EQ(ros::Duration(-0.5), ros::Duration(-1LL, 500000000LL));
-  EXPECT_EQ(ros::Duration(-0.5), ros::Duration(0, -500000000LL));
+  EXPECT_EQ(ros::Duration(-0.5), ros::Duration(-1LL, 500LL * MSEC_TO_NSEC));
+  EXPECT_EQ(ros::Duration(-0.5), ros::Duration(0, -500LL * MSEC_TO_NSEC));
 }
 
 TEST(Duration, FromNSec)
 {
   ros::Duration t;
-  t.fromNSec(-500000000LL);
+  t.fromNSec(-500LL * MSEC_TO_NSEC);
   EXPECT_EQ(ros::Duration(-0.5), t);
 
-  t.fromNSec(-1500000000LL);
+  t.fromNSec(-1500LL * MSEC_TO_NSEC);
   EXPECT_EQ(ros::Duration(-1.5), t);
 
-  t.fromNSec(500000000LL);
+  t.fromNSec(500LL * MSEC_TO_NSEC);
   EXPECT_EQ(ros::Duration(0.5), t);
 
-  t.fromNSec(1500000000LL);
+  t.fromNSec(1500LL * MSEC_TO_NSEC);
   EXPECT_EQ(ros::Duration(1.5), t);
 }
 
@@ -503,10 +605,10 @@ TEST(Duration, OperatorPlusEquals)
   EXPECT_EQ(t.nsec, 100100L);
 
   t = Duration(0, 0);
-  d = Duration(10, 2000003000L);
+  d = Duration(10, 2UL * SEC_TO_NSEC + 3UL * USEC_TO_NSEC);
   t += d;
   EXPECT_EQ(t.sec, 12L);
-  EXPECT_EQ(t.nsec, 3000L);
+  EXPECT_EQ(t.nsec, 3L * USEC_TO_NSEC);
 }
 
 TEST(Duration, OperatorMinusEquals)
@@ -524,10 +626,10 @@ TEST(Duration, OperatorMinusEquals)
   EXPECT_EQ(t.nsec, 99900L);
 
   t = Duration(30, 0);
-  d = Duration(10, 2000003000L);
+  d = Duration(10, 2UL * SEC_TO_NSEC + 3UL * USEC_TO_NSEC);
   t -= d;
   EXPECT_EQ(t.sec, 17L);
-  EXPECT_EQ(t.nsec, 999997000L);
+  EXPECT_EQ(t.nsec, 999997L * USEC_TO_NSEC);
 }
 
 void alarmHandler(int sig)
