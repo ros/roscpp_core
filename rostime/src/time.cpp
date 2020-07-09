@@ -83,8 +83,50 @@ namespace ros
   const Duration DURATION_MAX(std::numeric_limits<int32_t>::max(), 999999999);
   const Duration DURATION_MIN(std::numeric_limits<int32_t>::min(), 0);
 
+  template<> const Duration DurationBase<Duration>::MAX = DURATION_MAX;
+  template<> const Duration DurationBase<Duration>::MIN = DURATION_MIN;
+  template<> const Duration DurationBase<Duration>::ZERO = Duration(0, 0);
+  template<> const Duration DurationBase<Duration>::NANOSECOND = Duration(0, 1);
+  template<> const Duration DurationBase<Duration>::MICROSECOND = Duration(0, 1000);
+  template<> const Duration DurationBase<Duration>::MILLISECOND = Duration(0, 1000000);
+  template<> const Duration DurationBase<Duration>::SECOND = Duration(1, 0);
+  template<> const Duration DurationBase<Duration>::MINUTE = Duration(60, 0);
+  template<> const Duration DurationBase<Duration>::HOUR = Duration(60 * 60, 0);
+  template<> const Duration DurationBase<Duration>::DAY = Duration(60 * 60 * 24, 0);
+  template<> const Duration DurationBase<Duration>::WEEK = Duration(60 * 60 * 24 * 7, 0);
+  // 97 leap years and 303 common years in each 400 years cycle, ((97 * 366) + (303 * 365)) / 400 = 365.2425 exactly
+  template<> const Duration DurationBase<Duration>::YEAR = Duration(static_cast<int32_t>(60 * 60 * 24 * 365.2425), 0);
+
+  template<> const WallDuration DurationBase<WallDuration>::MAX = WallDuration(Duration::MAX.sec, Duration::MAX.nsec);
+  template<> const WallDuration DurationBase<WallDuration>::MIN = WallDuration(Duration::MIN.sec, Duration::MIN.nsec);
+  template<> const WallDuration DurationBase<WallDuration>::ZERO = WallDuration(Duration::ZERO.sec, Duration::ZERO.nsec);
+  template<> const WallDuration DurationBase<WallDuration>::YEAR = WallDuration(Duration::YEAR.sec, Duration::YEAR.nsec);
+  template<> const WallDuration DurationBase<WallDuration>::WEEK = WallDuration(Duration::WEEK.sec, Duration::WEEK.nsec);
+  template<> const WallDuration DurationBase<WallDuration>::DAY = WallDuration(Duration::DAY.sec, Duration::DAY.nsec);
+  template<> const WallDuration DurationBase<WallDuration>::HOUR = WallDuration(Duration::HOUR.sec, Duration::HOUR.nsec);
+  template<> const WallDuration DurationBase<WallDuration>::MINUTE = WallDuration(Duration::MINUTE.sec, Duration::MINUTE.nsec);
+  template<> const WallDuration DurationBase<WallDuration>::SECOND = WallDuration(Duration::SECOND.sec, Duration::SECOND.nsec);
+  template<> const WallDuration DurationBase<WallDuration>::MILLISECOND = WallDuration(Duration::MILLISECOND.sec, Duration::MILLISECOND.nsec);
+  template<> const WallDuration DurationBase<WallDuration>::MICROSECOND = WallDuration(Duration::MICROSECOND.sec, Duration::MICROSECOND.nsec);
+  template<> const WallDuration DurationBase<WallDuration>::NANOSECOND = WallDuration(Duration::NANOSECOND.sec, Duration::NANOSECOND.nsec);
+
   const Time TIME_MAX(std::numeric_limits<uint32_t>::max(), 999999999);
   const Time TIME_MIN(0, 1);
+
+  template<> const Time TimeBase<Time, Duration>::MAX = TIME_MAX;
+  template<> const Time TimeBase<Time, Duration>::MIN = TIME_MIN;
+  template<> const Time TimeBase<Time, Duration>::ZERO = Time(0, 0);
+  template<> const Time TimeBase<Time, Duration>::UNINITIALIZED = Time::ZERO;
+
+  template<> const WallTime TimeBase<WallTime, WallDuration>::MAX = WallTime(Time::MAX.sec, Time::MAX.nsec);
+  template<> const WallTime TimeBase<WallTime, WallDuration>::MIN = WallTime(Time::MIN.sec, Time::MIN.nsec);
+  template<> const WallTime TimeBase<WallTime, WallDuration>::ZERO = WallTime(Time::ZERO.sec, Time::ZERO.nsec);
+  template<> const WallTime TimeBase<WallTime, WallDuration>::UNINITIALIZED = WallTime(Time::UNINITIALIZED.sec, Time::UNINITIALIZED.nsec);
+
+  template<> const SteadyTime TimeBase<SteadyTime, WallDuration>::MAX = SteadyTime(Time::MAX.sec, Time::MAX.nsec);
+  template<> const SteadyTime TimeBase<SteadyTime, WallDuration>::MIN = SteadyTime(Time::MIN.sec, Time::MIN.nsec);
+  template<> const SteadyTime TimeBase<SteadyTime, WallDuration>::ZERO = SteadyTime(Time::ZERO.sec, Time::ZERO.nsec);
+  template<> const SteadyTime TimeBase<SteadyTime, WallDuration>::UNINITIALIZED = SteadyTime(Time::UNINITIALIZED.sec, Time::UNINITIALIZED.nsec);
 
   // This is declared here because it's set from the Time class but read from
   // the Duration class, and need not be exported to users of either.
