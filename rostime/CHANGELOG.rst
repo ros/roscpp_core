@@ -2,8 +2,8 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.6.14 (2020-07-24)
+-------------------
 * [Windows] Using C++11 std::chrono for ros_walltime & ros_steadytime (`#121 <https://github.com/ros/roscpp_core/issues/121>`_)
 * various code cleanup (`#116 <https://github.com/ros/roscpp_core/issues/116>`_)
 * Bump CMake version to avoid CMP0048 warning (`#115 <https://github.com/ros/roscpp_core/issues/115>`_)

@@ -1,6 +1,6 @@
 <package>
   <name>rostime</name>
-  <version>0.6.13</version>
+  <version>0.6.14</version>
   <description>
     Time and Duration implementations for C++ libraries, including roscpp.
   </description>
