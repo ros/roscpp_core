@@ -2,6 +2,11 @@
 Changelog for package roscpp_serialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* various code cleanup (`#116 <https://github.com/ros/roscpp_core/issues/116>`_)
+* Bump CMake version to avoid CMP0048 warning (`#115 <https://github.com/ros/roscpp_core/issues/115>`_)
+
 0.6.13 (2019-10-03)
 -------------------
 * added cast to uint32_t in roscpp_serialization to fix -Wconversion warning (`#113 <https://github.com/ros/roscpp_core/issues/113>`_)
