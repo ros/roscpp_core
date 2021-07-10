@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(rostime)
 
-find_package(catkin REQUIRED COMPONENTS cpp_common)
+find_package(catkin REQUIRED COMPONENTS cpp_common tracetools)
 find_package(Boost REQUIRED COMPONENTS date_time system thread)
 catkin_package(
   INCLUDE_DIRS include
@@ -17,7 +17,7 @@ add_library(rostime
   src/rate.cpp
   src/time.cpp)
 
-target_link_libraries(rostime ${Boost_LIBRARIES})
+target_link_libraries(rostime ${Boost_LIBRARIES} ${catkin_LIBRARIES})
 if(NOT APPLE)
   target_link_libraries(rostime ${RT_LIBRARY})
 endif()

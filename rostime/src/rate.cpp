@@ -35,6 +35,7 @@
  * Author: Eitan Marder-Eppstein
  *********************************************************************/
 #include <ros/rate.h>
+#include <tracetools/tracetools.h>
 
 namespace ros
 {
@@ -43,13 +44,19 @@ Rate::Rate(double frequency)
 : start_(Time::now())
 , expected_cycle_time_(1.0 / frequency)
 , actual_cycle_time_(0.0)
-{ }
+{
+	ros::trace::timer_added((const void*)this, "ros::Rate(double)",
+			expected_cycle_time_.sec, expected_cycle_time_.nsec);
+}
 
 Rate::Rate(const Duration& d)
   : start_(Time::now())
   , expected_cycle_time_(d.sec, d.nsec)
   , actual_cycle_time_(0.0)
-{ }
+{
+	ros::trace::timer_added((const void*)this, "ros::Rate(ros::Duration)",
+				expected_cycle_time_.sec, expected_cycle_time_.nsec);
+}
 
 bool Rate::sleep()
 {
@@ -71,6 +78,8 @@ bool Rate::sleep()
 
   //make sure to reset our start time
   start_ = expected_end;
+
+  ros::trace::time_sleep(this, sleep_time.sec, sleep_time.nsec);
 
   //if we've taken too much time we won't sleep
   if(sleep_time <= Duration(0.0))
@@ -102,13 +111,19 @@ WallRate::WallRate(double frequency)
 : start_(WallTime::now())
 , expected_cycle_time_(1.0 / frequency)
 , actual_cycle_time_(0.0)
-{}
+{
+	ros::trace::timer_added((const void*)this, "ros::WallRate(double)",
+				expected_cycle_time_.sec, expected_cycle_time_.nsec);
+}
 
 WallRate::WallRate(const Duration& d)
 : start_(WallTime::now())
 , expected_cycle_time_(d.sec, d.nsec)
 , actual_cycle_time_(0.0)
-{}
+{
+	ros::trace::timer_added((const void*)this, "ros::WallRate(ros::Duration)",
+				expected_cycle_time_.sec, expected_cycle_time_.nsec);
+}
 
 bool WallRate::sleep()
 {
@@ -130,6 +145,8 @@ bool WallRate::sleep()
 
   //make sure to reset our start time
   start_ = expected_end;
+
+  ros::trace::time_sleep(this, sleep_time.sec, sleep_time.nsec);
 
   //if we've taken too much time we won't sleep
   if(sleep_time <= WallDuration(0.0))

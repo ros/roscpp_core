@@ -17,4 +17,5 @@
 
   <run_depend>boost</run_depend>
   <run_depend>cpp_common</run_depend>
+  <run_depend>tracetools</run_depend>
 </package>
