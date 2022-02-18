@@ -34,6 +34,9 @@
 #ifndef ROSTIME_IMPL_DURATION_H_INCLUDED
 #define ROSTIME_IMPL_DURATION_H_INCLUDED
 
+#include <cmath>
+#include <limits>
+
 #include <ros/duration.h>
 #include <ros/rate.h>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
@@ -53,6 +56,12 @@ namespace ros {
   template<class T>
   T& DurationBase<T>::fromSec(double d)
   {
+    if (!std::isfinite(d))
+      throw std::runtime_error("Duration has to be finite.");
+    constexpr double minInt64AsDouble = static_cast<double>(std::numeric_limits<int64_t>::min());
+    constexpr double maxInt64AsDouble = static_cast<double>(std::numeric_limits<int64_t>::max());
+    if (d <= minInt64AsDouble || d >= maxInt64AsDouble)
+      throw std::runtime_error("Duration is out of 64-bit integer range");
     int64_t sec64 = static_cast<int64_t>(floor(d));
     if (sec64 < std::numeric_limits<int32_t>::min() || sec64 > std::numeric_limits<int32_t>::max())
       throw std::runtime_error("Duration is out of dual 32-bit range");
