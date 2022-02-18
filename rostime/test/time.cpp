@@ -27,6 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <limits>
 #include <vector>
 
 #include <gtest/gtest.h>
