@@ -42,6 +42,7 @@
 #include <ros/platform.h>
 #include <iostream>
 #include <cmath>
+#include <limits>
 #include <ros/exception.h>
 #include <ros/time.h>
 #include <boost/date_time/posix_time/posix_time.hpp>
