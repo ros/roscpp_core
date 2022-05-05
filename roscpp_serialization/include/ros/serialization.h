@@ -41,6 +41,7 @@
 
 #include <vector>
 #include <map>
+#include <memory>
 
 #include <boost/array.hpp>
 #include <boost/call_traits.hpp>
@@ -332,7 +333,7 @@ struct VectorSerializer
 template<typename T, class ContainerAllocator>
 struct VectorSerializer<T, ContainerAllocator, typename boost::disable_if<mt::IsFixedSize<T> >::type >
 {
-  typedef std::vector<T, typename ContainerAllocator::template rebind<T>::other> VecType;
+  typedef std::vector<T, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<T>> VecType;
   typedef typename VecType::iterator IteratorType;
   typedef typename VecType::const_iterator ConstIteratorType;
 
@@ -382,7 +383,7 @@ struct VectorSerializer<T, ContainerAllocator, typename boost::disable_if<mt::Is
 template<typename T, class ContainerAllocator>
 struct VectorSerializer<T, ContainerAllocator, typename boost::enable_if<mt::IsSimple<T> >::type >
 {
-  typedef std::vector<T, typename ContainerAllocator::template rebind<T>::other> VecType;
+  typedef std::vector<T, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<T>> VecType;
   typedef typename VecType::iterator IteratorType;
   typedef typename VecType::const_iterator ConstIteratorType;
 
@@ -424,7 +425,7 @@ struct VectorSerializer<T, ContainerAllocator, typename boost::enable_if<mt::IsS
 template<typename T, class ContainerAllocator>
 struct VectorSerializer<T, ContainerAllocator, typename boost::enable_if<mpl::and_<mt::IsFixedSize<T>, mpl::not_<mt::IsSimple<T> > > >::type >
 {
-  typedef std::vector<T, typename ContainerAllocator::template rebind<T>::other> VecType;
+  typedef std::vector<T, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<T>> VecType;
   typedef typename VecType::iterator IteratorType;
   typedef typename VecType::const_iterator ConstIteratorType;
 
