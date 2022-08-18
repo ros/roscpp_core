@@ -99,8 +99,6 @@ public:
   static const T MIN; //!< Minimum representable duration (negative)
   static const T MAX; //!< Maximum representable duration
   static const T ZERO; //!< Zero duration
-  static const T YEAR; //!< One year duration (Gregorian year of 365.2425 days)
-  static const T WEEK; //!< One week duration
   static const T DAY; //!< One day duration
   static const T HOUR; //!< One hour duration
   static const T MINUTE; //!< One minute duration
@@ -142,8 +140,6 @@ extern ROSTIME_DECL const Duration DURATION_MIN;
 template<> const Duration DurationBase<Duration>::MAX;
 template<> const Duration DurationBase<Duration>::MIN;
 template<> const Duration DurationBase<Duration>::ZERO;
-template<> const Duration DurationBase<Duration>::YEAR;
-template<> const Duration DurationBase<Duration>::WEEK;
 template<> const Duration DurationBase<Duration>::DAY;
 template<> const Duration DurationBase<Duration>::HOUR;
 template<> const Duration DurationBase<Duration>::MINUTE;
@@ -180,8 +176,6 @@ public:
 template<> const WallDuration DurationBase<WallDuration>::MAX;
 template<> const WallDuration DurationBase<WallDuration>::MIN;
 template<> const WallDuration DurationBase<WallDuration>::ZERO;
-template<> const WallDuration DurationBase<WallDuration>::YEAR;
-template<> const WallDuration DurationBase<WallDuration>::WEEK;
 template<> const WallDuration DurationBase<WallDuration>::DAY;
 template<> const WallDuration DurationBase<WallDuration>::HOUR;
 template<> const WallDuration DurationBase<WallDuration>::MINUTE;

@@ -93,15 +93,10 @@ namespace ros
   template<> const Duration DurationBase<Duration>::MINUTE = Duration(60, 0);
   template<> const Duration DurationBase<Duration>::HOUR = Duration(60 * 60, 0);
   template<> const Duration DurationBase<Duration>::DAY = Duration(60 * 60 * 24, 0);
-  template<> const Duration DurationBase<Duration>::WEEK = Duration(60 * 60 * 24 * 7, 0);
-  // 97 leap years and 303 common years in each 400 years cycle, ((97 * 366) + (303 * 365)) / 400 = 365.2425 exactly
-  template<> const Duration DurationBase<Duration>::YEAR = Duration(static_cast<int32_t>(60 * 60 * 24 * 365.2425), 0);
 
   template<> const WallDuration DurationBase<WallDuration>::MAX = WallDuration(Duration::MAX.sec, Duration::MAX.nsec);
   template<> const WallDuration DurationBase<WallDuration>::MIN = WallDuration(Duration::MIN.sec, Duration::MIN.nsec);
   template<> const WallDuration DurationBase<WallDuration>::ZERO = WallDuration(Duration::ZERO.sec, Duration::ZERO.nsec);
-  template<> const WallDuration DurationBase<WallDuration>::YEAR = WallDuration(Duration::YEAR.sec, Duration::YEAR.nsec);
-  template<> const WallDuration DurationBase<WallDuration>::WEEK = WallDuration(Duration::WEEK.sec, Duration::WEEK.nsec);
   template<> const WallDuration DurationBase<WallDuration>::DAY = WallDuration(Duration::DAY.sec, Duration::DAY.nsec);
   template<> const WallDuration DurationBase<WallDuration>::HOUR = WallDuration(Duration::HOUR.sec, Duration::HOUR.nsec);
   template<> const WallDuration DurationBase<WallDuration>::MINUTE = WallDuration(Duration::MINUTE.sec, Duration::MINUTE.nsec);

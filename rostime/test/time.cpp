@@ -603,10 +603,6 @@ TEST(Duration, Constants)
   EXPECT_EQ(Duration::HOUR.nsec, 0);
   EXPECT_EQ(Duration::DAY.sec, 60 * 60 * 24);
   EXPECT_EQ(Duration::DAY.nsec, 0);
-  EXPECT_EQ(Duration::WEEK.sec, 60 * 60 * 24 * 7);
-  EXPECT_EQ(Duration::WEEK.nsec, 0);
-  EXPECT_EQ(Duration::YEAR.sec, static_cast<int32_t>(60 * 60 * 24 * 365.2425));
-  EXPECT_EQ(Duration::YEAR.nsec, 0);
 
   EXPECT_EQ(WallDuration::MAX.sec, std::numeric_limits<int32_t>::max());
   EXPECT_EQ(WallDuration::MAX.nsec, 999999999);
@@ -628,10 +624,6 @@ TEST(Duration, Constants)
   EXPECT_EQ(WallDuration::HOUR.nsec, 0);
   EXPECT_EQ(WallDuration::DAY.sec, 60 * 60 * 24);
   EXPECT_EQ(WallDuration::DAY.nsec, 0);
-  EXPECT_EQ(WallDuration::WEEK.sec, 60 * 60 * 24 * 7);
-  EXPECT_EQ(WallDuration::WEEK.nsec, 0);
-  EXPECT_EQ(WallDuration::YEAR.sec, static_cast<int32_t>(60 * 60 * 24 * 365.2425));
-  EXPECT_EQ(WallDuration::YEAR.nsec, 0);
 }
 
 TEST(Rate, constructFromDuration){
