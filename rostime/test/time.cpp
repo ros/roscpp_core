@@ -363,6 +363,36 @@ TEST(Time, OperatorPlusExceptions)
   EXPECT_THROW(t5 + d3, std::runtime_error);
 }
 
+TEST(Time, Constants)
+{
+  EXPECT_EQ(Time::MAX.sec, static_cast<uint32_t>(-1));
+  EXPECT_EQ(Time::MAX.nsec, 999999999);
+  EXPECT_EQ(Time::MIN.sec, 0);
+  EXPECT_EQ(Time::MIN.nsec, 1);
+  EXPECT_EQ(Time::ZERO.sec, 0);
+  EXPECT_EQ(Time::ZERO.nsec, 0);
+  EXPECT_EQ(Time::UNINITIALIZED.sec, 0);
+  EXPECT_EQ(Time::UNINITIALIZED.nsec, 0);
+
+  EXPECT_EQ(WallTime::MAX.sec, static_cast<uint32_t>(-1));
+  EXPECT_EQ(WallTime::MAX.nsec, 999999999);
+  EXPECT_EQ(WallTime::MIN.sec, 0);
+  EXPECT_EQ(WallTime::MIN.nsec, 1);
+  EXPECT_EQ(WallTime::ZERO.sec, 0);
+  EXPECT_EQ(WallTime::ZERO.nsec, 0);
+  EXPECT_EQ(WallTime::UNINITIALIZED.sec, 0);
+  EXPECT_EQ(WallTime::UNINITIALIZED.nsec, 0);
+
+  EXPECT_EQ(SteadyTime::MAX.sec, static_cast<uint32_t>(-1));
+  EXPECT_EQ(SteadyTime::MAX.nsec, 999999999);
+  EXPECT_EQ(SteadyTime::MIN.sec, 0);
+  EXPECT_EQ(SteadyTime::MIN.nsec, 1);
+  EXPECT_EQ(SteadyTime::ZERO.sec, 0);
+  EXPECT_EQ(SteadyTime::ZERO.nsec, 0);
+  EXPECT_EQ(SteadyTime::UNINITIALIZED.sec, 0);
+  EXPECT_EQ(SteadyTime::UNINITIALIZED.nsec, 0);
+}
+
 /************************************* Duration Tests *****************/
 
 TEST(Duration, Comparitors)
@@ -549,6 +579,51 @@ TEST(Duration, sleepWithSignal)
 
   ASSERT_GT(end - start, d);
   ASSERT_TRUE(rc);
+}
+
+TEST(Duration, Constants)
+{
+  EXPECT_EQ(Duration::MAX.sec, std::numeric_limits<int32_t>::max());
+  EXPECT_EQ(Duration::MAX.nsec, 999999999);
+  EXPECT_EQ(Duration::MIN.sec, std::numeric_limits<int32_t>::min());
+  EXPECT_EQ(Duration::MIN.nsec, 0);
+  EXPECT_EQ(Duration::ZERO.sec, 0);
+  EXPECT_EQ(Duration::ZERO.nsec, 0);
+  EXPECT_EQ(Duration::NANOSECOND.sec, 0);
+  EXPECT_EQ(Duration::NANOSECOND.nsec, 1);
+  EXPECT_EQ(Duration::MICROSECOND.sec, 0);
+  EXPECT_EQ(Duration::MICROSECOND.nsec, 1000);
+  EXPECT_EQ(Duration::MILLISECOND.sec, 0);
+  EXPECT_EQ(Duration::MILLISECOND.nsec, 1000000);
+  EXPECT_EQ(Duration::SECOND.sec, 1);
+  EXPECT_EQ(Duration::SECOND.nsec, 0);
+  EXPECT_EQ(Duration::MINUTE.sec, 60);
+  EXPECT_EQ(Duration::MINUTE.nsec, 0);
+  EXPECT_EQ(Duration::HOUR.sec, 60 * 60);
+  EXPECT_EQ(Duration::HOUR.nsec, 0);
+  EXPECT_EQ(Duration::DAY.sec, 60 * 60 * 24);
+  EXPECT_EQ(Duration::DAY.nsec, 0);
+
+  EXPECT_EQ(WallDuration::MAX.sec, std::numeric_limits<int32_t>::max());
+  EXPECT_EQ(WallDuration::MAX.nsec, 999999999);
+  EXPECT_EQ(WallDuration::MIN.sec, std::numeric_limits<int32_t>::min());
+  EXPECT_EQ(WallDuration::MIN.nsec, 0);
+  EXPECT_EQ(WallDuration::ZERO.sec, 0);
+  EXPECT_EQ(WallDuration::ZERO.nsec, 0);
+  EXPECT_EQ(WallDuration::NANOSECOND.sec, 0);
+  EXPECT_EQ(WallDuration::NANOSECOND.nsec, 1);
+  EXPECT_EQ(WallDuration::MICROSECOND.sec, 0);
+  EXPECT_EQ(WallDuration::MICROSECOND.nsec, 1000);
+  EXPECT_EQ(WallDuration::MILLISECOND.sec, 0);
+  EXPECT_EQ(WallDuration::MILLISECOND.nsec, 1000000);
+  EXPECT_EQ(WallDuration::SECOND.sec, 1);
+  EXPECT_EQ(WallDuration::SECOND.nsec, 0);
+  EXPECT_EQ(WallDuration::MINUTE.sec, 60);
+  EXPECT_EQ(WallDuration::MINUTE.nsec, 0);
+  EXPECT_EQ(WallDuration::HOUR.sec, 60 * 60);
+  EXPECT_EQ(WallDuration::HOUR.nsec, 0);
+  EXPECT_EQ(WallDuration::DAY.sec, 60 * 60 * 24);
+  EXPECT_EQ(WallDuration::DAY.nsec, 0);
 }
 
 TEST(Rate, constructFromDuration){
