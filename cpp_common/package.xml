@@ -9,11 +9,12 @@
 
     This package is a component of <a href="http://www.ros.org/wiki/roscpp">roscpp</a>.
   </description>
-  <maintainer email="dthomas@osrfoundation.org">Dirk Thomas</maintainer>
+  <maintainer email="peckama2@fel.cvut.cz">Martin Pecka</maintainer>
   <license>BSD</license>
 
   <url>http://www.ros.org/wiki/cpp_common</url>
   <author>John Faust</author>
+  <author>Dirk Thomas</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
