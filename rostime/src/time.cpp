@@ -434,9 +434,11 @@ namespace ros
       }
 
       bool rc = false;
+      // This allows sim time to run up to 10x real-time even for very short sleep durations.
+      const uint32_t sleep_nsec = (sec != 0) ? 1000000 : (min)(1000000, nsec/10);
       while (!g_stopped && (Time::now() < end))
       {
-        ros_wallsleep(0, 1000000);
+        ros_wallsleep(0, sleep_nsec);
         rc = true;
 
         // If we started at time 0 wait for the first actual time to arrive before starting the timer on
