@@ -848,6 +848,10 @@ inline SerializedMessage serializeServiceResponse(bool ok, const M& message)
     m.num_bytes = len + 1;
     m.buf.reset(new uint8_t[m.num_bytes]);
 
+    // The intended use for failure is serializeServiceResponse<uint32_t>(false, 0);
+    // The 0 written here as a message is read as message length in the deserialization
+    // code in ServiceServerLink::onResponseOkAndLength(). Although this is a little
+    // misuse of the API, it works.
     OStream s(m.buf.get(), static_cast<uint32_t>(m.num_bytes));
     serialize(s, static_cast<uint8_t>(ok));
     serialize(s, message);
