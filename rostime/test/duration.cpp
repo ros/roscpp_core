@@ -27,6 +27,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <limits>
+
 #include <gtest/gtest.h>
 #include <ros/duration.h>
 #include <ros/time.h>
@@ -52,7 +54,7 @@ TEST(Duration, castFromDoubleExceptions)
 {
   ros::Time::init();
 
-  Duration d1, d2, d3, d4;
+  Duration d1, d2, d3, d4, d5, d6, d7, d8, d9;
   // Valid values to cast, must not throw exceptions
   EXPECT_NO_THROW(d1.fromSec(-2147483648.0));
   EXPECT_NO_THROW(d2.fromSec(-2147483647.999999));
@@ -64,6 +66,12 @@ TEST(Duration, castFromDoubleExceptions)
   EXPECT_THROW(d2.fromSec(6442450943.0), std::runtime_error);  // It's 2^31 - 1 + 2^32, and it could pass the test.
   EXPECT_THROW(d3.fromSec(-2147483648.001), std::runtime_error);
   EXPECT_THROW(d4.fromSec(-6442450943.0), std::runtime_error);
+  EXPECT_THROW(d5.fromSec(std::numeric_limits<double>::infinity()), std::runtime_error);
+  EXPECT_THROW(d6.fromSec(-std::numeric_limits<double>::infinity()), std::runtime_error);
+  EXPECT_THROW(d7.fromSec(std::numeric_limits<double>::quiet_NaN()), std::runtime_error);
+  // max int64 value is 9223372036854775807
+  EXPECT_THROW(d8.fromSec(9223372036854775808.0), std::runtime_error); 
+  EXPECT_THROW(d9.fromSec(-9223372036854775809.0), std::runtime_error);
 }
 
 TEST(Duration, castFromInt64Exceptions)

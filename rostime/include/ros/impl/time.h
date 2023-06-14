@@ -42,6 +42,7 @@
 #include <ros/platform.h>
 #include <iostream>
 #include <cmath>
+#include <limits>
 #include <ros/exception.h>
 #include <ros/time.h>
 #include <boost/date_time/posix_time/posix_time.hpp>
@@ -75,8 +76,15 @@ namespace ros
 
   template<class T, class D>
   T& TimeBase<T, D>::fromSec(double t) {
+      if (t < 0)
+        throw std::runtime_error("Time cannot be negative.");
+      if (!std::isfinite(t))
+        throw std::runtime_error("Time has to be finite.");
+      constexpr double maxInt64AsDouble = static_cast<double>(std::numeric_limits<int64_t>::max());
+      if (t >= maxInt64AsDouble)
+        throw std::runtime_error("Time is out of 64-bit integer range");
       int64_t sec64 = static_cast<int64_t>(floor(t));
-      if (sec64 < 0 || sec64 > std::numeric_limits<uint32_t>::max())
+      if (sec64 > std::numeric_limits<uint32_t>::max())
         throw std::runtime_error("Time is out of dual 32-bit range");
       sec = static_cast<uint32_t>(sec64);
       nsec = static_cast<uint32_t>(boost::math::round((t-sec) * 1e9));
