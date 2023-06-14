@@ -163,11 +163,18 @@ inline void deserialize(Stream& stream, T& t)
   Serializer<T>::read(stream, t);
 }
 
+// Circumvent bug https://github.com/ros/roscpp_core/issues/130 which manifests only on ARM GCC 9.3
+#if defined(__aarch64__) && __GNUC__ == 9 && __GNUC_MINOR__ == 3
+#define ROS_SERIALIZATION_GCC_9_3_DISABLE_VECTORIZE __attribute__((optimize("no-tree-vectorize")))
+#else
+#define ROS_SERIALIZATION_GCC_9_3_DISABLE_VECTORIZE
+#endif
+  
 /**
  * \brief Determine the serialized length of an object
  */
 template<typename T>
-inline uint32_t serializationLength(const T& t)
+inline uint32_t ROS_SERIALIZATION_GCC_9_3_DISABLE_VECTORIZE serializationLength(const T& t)
 {
   return Serializer<T>::serializedLength(t);
 }
