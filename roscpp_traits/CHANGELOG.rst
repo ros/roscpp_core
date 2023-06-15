@@ -2,6 +2,11 @@
 Changelog for package roscpp_traits
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Changed maintainer to Martin Pecka
+* Contributors: Martin Pecka
+
 0.7.2 (2020-05-28)
 ------------------
 

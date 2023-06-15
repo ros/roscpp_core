@@ -2,6 +2,17 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix min() usage
+* Use shorter wall sleeps in sim time for very short durations
+* Changed maintainer to Martin Pecka
+* Removed constants for WEEK and YEAR as they might be ambiguous.
+* rostime: Added <limits> headers wherever std::numeric_limits are used.
+* Fixed handling of infinite or >int64 doubles in Time and Duration constructors. Added tests for Rate(double) constructor, verified Rate(inf) works and Rate(0) does not.
+* rostime: Added useful time and duration constants.
+* Contributors: Martin Pecka
+
 0.7.2 (2020-05-28)
 ------------------
 * [Windows] Using C++11 std::chrono for ros_walltime & ros_steadytime (`#121 <https://github.com/ros/roscpp_core/issues/121>`_)
