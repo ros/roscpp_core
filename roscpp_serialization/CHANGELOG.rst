@@ -2,8 +2,8 @@
 Changelog for package roscpp_serialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.7.3 (2023-06-15)
+------------------
 * Documented the API misuse in serializeServiceResponse
 * Fixed wrong serialization of messages on ARM with GCC 9.3 and -O3 optimizations
 * Changed maintainer to Martin Pecka

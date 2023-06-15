@@ -2,8 +2,8 @@
 Changelog for package rostime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.7.3 (2023-06-15)
+------------------
 * Fix min() usage
 * Use shorter wall sleeps in sim time for very short durations
 * Changed maintainer to Martin Pecka
