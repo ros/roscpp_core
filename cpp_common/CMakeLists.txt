@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.10.2)
 project(cpp_common)
 
 find_package(Boost REQUIRED COMPONENTS system thread)

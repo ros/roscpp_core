@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.10.2)
 project(roscpp_serialization)
 find_package(catkin REQUIRED COMPONENTS cpp_common roscpp_traits rostime)
 catkin_package(
